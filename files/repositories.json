@@ -1,0 +1,56 @@
+{
+    "groups": [
+        {
+            "name": "Development Environment",
+            "items": [
+                {
+                    "title": "linux-developer-vm",
+                    "url": "https://github.com/Zuehlke/linux-developer-vm",
+                    "description": "Minimal template project for a minimal Chef-managed Linux developer VM.",
+                    "logo": ""
+                },
+                {
+                    "title": "cookbook-windev",
+                    "url": "https://github.com/Zuehlke/cookbook-windev",
+                    "description": "One cookbook with resources for setting up a Windows development environment.",
+                    "logo": ""
+                },
+                {
+                    "title": "windev-example",
+                    "url": "https://github.com/Zuehlke/windev-example",
+                    "description": "An example utilizing the windev cookbook.",
+                    "logo": ""
+                }
+            ]
+        },
+        {
+
+            "name": "Build Tools",
+            "items": [
+                {
+                    "title": "cookbooks-jenkins-simple-app",
+                    "url": "https://github.com/Zuehlke/cookbooks-jenkins-simple-app",
+                    "description": "An example cookbook for settingup Jenkins CI.",
+                    "logo": ""
+                }
+            ]
+        },
+        {
+            "name": "Web & Mobile",
+            "items": [
+                {
+                    "title": "MvvmCross",
+                    "url": "https://github.com/lothrop/MvvmCross",
+                    "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
+                    "logo": ""
+                },
+                {
+                    "title": "quickstarts-angular",
+                    "url": "https://github.com/Zuehlke/quickstarts-angular",
+                    "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
+                    "logo": ""
+                }
+            ]
+        }
+    ]
+}

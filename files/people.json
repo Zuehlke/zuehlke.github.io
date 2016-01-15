@@ -1,0 +1,51 @@
+{    
+    "groups": [
+            {
+            "name": "",
+            "items": [
+                {
+                    "title": "bruderol",
+                    "url": "https://github.com/bruderol",
+                    "name": "Rolf Bruderer",
+                    "logo": "people/bruderol.png",
+					"description": ""
+                },
+                {
+                    "title": "carstenkind",
+                    "url": "https://github.com/carstenkind",
+                    "name": "Carsten Kind",
+                    "logo": "people/carstenkind.jpg",
+					"description": ""
+                },
+                {
+                    "title": "damphyr",
+                    "url": "https://github.com/damphyr",
+                    "name": "Vassilis Rizopoulos",
+                    "logo": "people/damphyr.jpg",
+					"description": ""
+                },
+                {
+                    "title": "lothrop",
+                    "url": "https: //github.com/Zuehlke/swagger-codegen",
+                    "name": "Kerry W. Lothrop",
+                    "logo": "people/lothrop.jpg",
+					"description": ""
+                },
+                {
+                    "title": "tknerr",
+                    "url": "https://github.com/tknerr",
+                    "name": "Torben Knerr",
+                    "logo": "people/tknerr.jpg",
+					"description": ""
+                },
+                {
+                    "title": "vslepakov",
+                    "url": "https://github.com/vslepakov",
+                    "name": "Vitaliy Slepakov",
+                    "logo": "people/vslepakov.png",
+					"description": ""
+                }
+            ]
+        }
+    ]
+}
