@@ -51,6 +51,17 @@
                     "logo": ""
                 }
             ]
+        },
+        {
+            "name": "UI Testing & Continuous Documentation",
+            "items": [
+                {
+                    "title": "Scenarioo",
+                    "url": "https://scenarioo.github.io",
+                    "description": "Open Source Tool for Software Documentation through UI Tests",
+                    "logo": ""
+                }
+            ]
         }
     ]
 }
