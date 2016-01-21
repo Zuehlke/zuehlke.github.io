@@ -1,6 +1,34 @@
 {
     "groups": [
         {
+            "name": "UI Testing & Continuous Documentation",
+            "items": [
+                {
+                    "title": "Scenarioo",
+                    "url": "https://scenarioo.github.io",
+                    "description": "Documentation tool to leverage the power of user interface tests by making them visible, understandable and useful for all (also non-technical) colleagues, that are invollved in the software development process. Founded, driven and developed by a team of Zühlke engineers in collaboration with our customers and their needs.",
+                    "logo": ""
+                }
+            ]
+        },
+        {
+            "name": "Web & Mobile",
+            "items": [
+                {
+                    "title": "quickstarts-angular",
+                    "url": "https://github.com/Zuehlke/quickstarts-angular",
+                    "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
+                    "logo": ""
+                },
+                {
+                    "title": "MvvmCross",
+                    "url": "https://github.com/lothrop/MvvmCross",
+                    "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
+                    "logo": ""
+                }
+            ]
+        },
+        {
             "name": "Development Environment",
             "items": [
                 {
@@ -24,41 +52,12 @@
             ]
         },
         {
-
             "name": "Build Tools",
             "items": [
                 {
                     "title": "cookbooks-jenkins-simple-app",
                     "url": "https://github.com/Zuehlke/cookbooks-jenkins-simple-app",
                     "description": "An example cookbook for settingup Jenkins CI.",
-                    "logo": ""
-                }
-            ]
-        },
-        {
-            "name": "Web & Mobile",
-            "items": [
-                {
-                    "title": "MvvmCross",
-                    "url": "https://github.com/lothrop/MvvmCross",
-                    "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
-                    "logo": ""
-                },
-                {
-                    "title": "quickstarts-angular",
-                    "url": "https://github.com/Zuehlke/quickstarts-angular",
-                    "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
-                    "logo": ""
-                }
-            ]
-        },
-        {
-            "name": "UI Testing & Continuous Documentation",
-            "items": [
-                {
-                    "title": "Scenarioo",
-                    "url": "https://scenarioo.github.io",
-                    "description": "Documentation tool to leverage the power of user interface tests by making them visible, understandable and useful for all (also non-technical) colleagues, that are invollved in the software development process. Founded, driven and developed by a team of Zühlke engineers in collaboration with our customers and their needs.",
                     "logo": ""
                 }
             ]
