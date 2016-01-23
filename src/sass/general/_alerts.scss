@@ -1,0 +1,11 @@
+/* ALERTS
+##################################################################################################################### */
+
+%alert-base {
+	margin-bottom: 0; padding: .5em 1em; color: $white;
+	> *:last-child { margin-bottom: 0; }
+}
+
+.alert-warning { @extend %alert-base; background: $warning-color; }
+.alert-success { @extend %alert-base; background: $success-color; }
+.alert-info { @extend %alert-base; background: $info-color; }

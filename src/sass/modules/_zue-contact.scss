@@ -1,0 +1,13 @@
+iframe {
+    display: block;
+}
+
+.map iframe {
+    margin-bottom: 3px;
+}
+
+@media #{$small-only} {
+    .map iframe {
+        margin: 1em;
+    }
+}

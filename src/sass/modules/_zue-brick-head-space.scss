@@ -1,0 +1,13 @@
+.zue-head-space {
+    padding: $column-gutter*2 0 0;
+
+    @media #{$medium-up} {
+        padding: $column-gutter*4 0 0;
+    }
+
+    @media #{$large-up} {
+        height: 18vh;
+    }
+}
+
+

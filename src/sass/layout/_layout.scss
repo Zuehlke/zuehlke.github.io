@@ -1,0 +1,47 @@
+/* LAYOUT
+##################################################################################################################### */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100%;
+}
+
+// Here we overwirte all foundation row widths if the viewport is >= 1600px
+@include breakpoint-min(1600px) {
+    .row {
+        max-width: 1200px !important;
+    }
+}
+
+ #site-content {
+    @media #{$medium-up} {
+        min-height: 600px;
+    }
+}
+
+.subsite {
+    #site-content {
+        margin: 2rem 0;
+        @media #{$medium-up} {
+            margin: 8rem 0;
+        }
+    }
+}
+
+.site-404,
+.site-500 {
+    #site-content {
+        padding-top: $column-gutter;
+
+        @media #{$medium-up} {
+            padding-top: 120px;
+        }
+    }
+}

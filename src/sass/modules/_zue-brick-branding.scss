@@ -1,0 +1,59 @@
+.zue-branding {
+    position: relative;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-color: $c-light;
+    min-height: 280px;
+
+    .zue-branding-inner {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    h2 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        min-width: 50%;
+        padding: $column-gutter/2;
+        background: rgba(240, 240, 240, .75);
+    }
+    
+    @media only screen and (min-width: 40.0625em) {
+        .zue-branding {
+            height: 400px;
+        }
+    }
+
+    @media #{$medium-up} {
+        h2 {
+            padding: $column-gutter/2 $column-gutter;
+        }
+    }
+
+    @media #{$large-up} {
+        height: 400px;
+        height: 47vh;
+
+        .zue-branding-inner {
+            left: 50%;
+            max-width: $row-width;
+            margin-left: -$row-width/2;
+        }
+        
+        h2 {
+            padding: $column-gutter/2 $column-gutter*2;
+        }
+    }
+
+    @include breakpoint-min(1600px) {
+        .zue-branding-inner {
+            max-width: 1200px !important;
+            margin-left: -600px;
+        }
+    }
+}
+

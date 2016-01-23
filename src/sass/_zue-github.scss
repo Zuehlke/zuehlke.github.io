@@ -1,0 +1,77 @@
+
+.small {
+    font-size: 14px;
+}
+
+.smaller {
+    font-size: 12px;
+}
+
+.small-icon {
+    height: 50px;
+}
+
+.github-content {
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.list-item {
+  //  padding: 0.9375rem;
+    margin: 0px;
+    min-height: 150px;
+    &.odd-class {
+        @extend .box-darker;
+    }
+    &.even-class {
+        @extend .box-dark;
+    }
+}
+
+.group-filter {
+    overflow: hidden;
+    .filter-area {
+        float: left;
+        width: 90%;
+        div {
+            float: left;
+        }
+    }
+    .filter-item {
+        padding: 0px 15px 5px 0px;
+        cursor: pointer;
+        &.selected {
+            @extend .color-primary;
+            font-weight: bold;
+        }
+    }
+    .switch-area {
+        float: right;
+        .all-item {
+            float: left;
+            cursor: pointer;
+            padding: 5px 7px 0px 0px;
+        }
+        view-switch {
+            float: right;
+        }
+    }
+}
+
+#carousel {
+    width: 498px;
+    float: right;
+}
+
+.zue-oss-header {
+    padding-top: 1.5rem;   
+}
+
+.zue-oss-text {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    text-rendering: optimizeLegibility;   
+}

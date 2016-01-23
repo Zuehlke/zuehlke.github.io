@@ -1,0 +1,56 @@
+.zue-contacts-container {
+    background-color: $c-light;
+}
+
+.zue-box-contact {
+    background-color: $c-white;
+
+    .col-1 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .contact-portrait img {
+//        width: 100%;
+    }
+
+    .contact-details {
+
+    }
+
+    .contact-name {
+
+    }
+
+    .contact-function {
+
+    }
+
+    .contact-dept {
+
+    }
+
+    .contact-links .button{
+        margin: 0 auto rem-calc(20px);
+        display: block;
+        width: 100%;
+
+        @media #{$large-up} {
+            width: 76%;
+        }
+    }
+
+    .contact-social-links {
+        padding-bottom: rem-calc(20px);
+        text-align: center;
+
+        .round-icon {
+            margin:0 2px
+        }
+    }
+}
+
+.bg-contact {
+    background-color: #fff;
+}
+

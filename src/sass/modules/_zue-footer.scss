@@ -1,0 +1,74 @@
+footer {
+    padding: rem-calc(65) 0;
+    background: $c-dark-grey-dark;
+    color: darken($c-light-grey-dark, 30%);
+	font-size: rem-calc(11);
+	line-height: 2.36;
+	a {
+		color: rgb(255,255,255);
+	}
+	h6 {
+		@extend %fs-small;
+		margin-bottom: 1em;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		color: darken($c-light-grey-dark, 30%);
+		@media #{$medium-up} {
+			margin-bottom: 2em;
+			line-height: 2.36;
+		}
+	}
+    @media #{$medium-up} {
+        .column-first {
+            padding-left: 0 !important;
+        }
+    }
+}
+
+a.zue-logo-foot-wrap {
+    display: inline-block;
+}
+
+.zue-logo-foot {
+    margin-bottom: 1rem;
+    width: 100%;
+
+    @media #{$medium-up} {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+.zue-footer-list {
+    margin: 0 0 1rem 0;
+    padding: 0;
+    list-style: none;
+    @extend %fs-small;
+
+    @media #{$medium-up} {
+		line-height: 2.36;
+    }
+}
+
+.zue-footer-address {
+    margin: 0 0 1rem 0;
+    p {
+        @extend %fs-small;
+		@media #{$medium-up} {
+			line-height: 2.36;
+		}
+    }
+}
+
+.zue-social-list {
+    margin: 0 0 1rem 0;
+    padding: 0;
+    li {
+        @include inline-block();
+        margin-right: 20px;
+    }
+
+    [class^="icon-"] {
+        font-size: rem-calc(30);
+        font-style: normal;
+    }
+}

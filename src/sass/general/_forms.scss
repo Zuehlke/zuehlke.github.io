@@ -1,0 +1,74 @@
+/* FORMS
+##################################################################################################################### */
+
+.search-box {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    .main-search-input {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        padding: 0 3.5rem 0 $column-gutter/2;
+        @include box-shadow(none);
+        color: $white;
+        background: $c-dark-grey-dark;
+        outline: none;
+
+        @include input-placeholder {
+            color: $white;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            outline: none;
+            color: $white;
+            background: $c-dark-grey-dark;
+            @include box-shadow(none);
+        }
+    }
+
+    .main-search-submit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        width: 60px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        color: $white;
+        outline: none;
+        font-size: rem-calc(30);
+        background: transparent;
+
+        &:hover {
+            background: rgb(120,120,120);
+        }
+    }
+}
+
+input[type="checkbox"], input[type="radio"] {
+    margin-right: .5rem;
+    &.left {
+        margin-top: .5rem;
+    }
+}
+
+// foundation overrides
+[data-abide] .error small.error, span.error, small.error {
+    background-color: $c-dark-grey;
+}
+
+.form-error .error {
+    margin-top: -1.7em;
+}
+form {
+    margin: 2em 0;
+    p {
+        margin-bottom: 0;
+    }
+}

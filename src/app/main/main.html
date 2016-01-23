@@ -1,0 +1,102 @@
+    <div class="container id="outer"">
+        <header id="site-header" role="banner">
+
+            <div class="grid-contain">
+                <a href="http://www.zuehlke.com/" class="zue-logo-head"></a>
+                <div id="mob-nav-toggler" data-offcanvas-trigger-class="sl_offcanvas-open-right" ng-click="showSidebar()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <nav class="zue-meta-nav" role="navigation">
+                <ul>      
+                    <li>
+						<a href="http://www.zuehlke.com/" target="_blank">Zühlke Website</a>
+                    </li>
+
+                    <li>
+						<a href="http://www.zuehlke.com/jobs/" target="_blank">Jobs</a>
+                    </li>
+
+                    <li>
+                        <a href="http://blog.zuehlke.com/en/" target="_blank">Blog</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="top-bar" ng-include="'components/navbar/navbar.html'"> </div>
+
+        </header>
+
+        <style>
+            .zue-branding-image {
+				background-image: url(./assets/images/wide/header_4_code.jpg);
+            }
+        </style>
+        <div class="zue-brick zue-branding zue-branding-image">
+            <div class="zue-branding-inner">
+                <h2 class="headersize-1 no-margin color-primary">Open Source Software</h2>
+            </div>
+        </div>
+        
+        <div class="zue-brick zue-col-area bg-gray-light zue-oss-header">
+            <div class="row">
+                <div>
+                    <h5 class="font-opensans"></h5>
+                    <div class="columns">
+                        <p class="headersize-6"><span>Zühlke is a </span> <strong> service provider for innovation projects</strong>. By combining both <strong>business and technology expertise</strong>, we create solutions that satisfy our customers. We develop <strong>financially successful products, services and business models</strong> for today’s digital world – from coming up with the initial idea through to the implementation and operation. </p>
+                        
+                        <span class="zue-oss-text">
+                            Producing cool, innovative solutions and solving tough technical problems is what Zühlke lives for and has been successful at over several decades. Open Source Software has been evolving for many years and is still getting more and more important, even in our projects. Information exchange and knowledge sharing is something we cultivate and we strongly believe in the power of the Open Source Software communities. This is the place where we want to share our open source projects and our contributions to other open source projects with the community.
+                        </span>
+
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div id="pagecontent" ui-view="pagecontent"></div>
+        
+        <footer>
+            <div ng-include="'components/footer/footer.html'" class="row"> </div>
+        </footer>
+        
+        <a id="sl_offcanvas-overlay"></a>
+    </div>
+
+    <div id="offcanvas-container">
+        <nav id="side-nav" role="navigation">
+            <ul>
+                <br>
+                <br>
+
+                <li class="child sibling">
+                    <a ui-sref="main.repository" href="#/main/repository">Repositories</a>
+                </li>
+
+                <li class="child sibling">
+                    <a ui-sref="main.people" href="#/main/people">People</a>
+                </li>
+
+            </ul>
+        </nav>
+        <nav id="side-meta-nav" role="navigation">
+            <ul>                
+                <li>
+					<a href="http://www.zuehlke.com/" target="_blank">Zühlke Website</a>
+                </li>
+
+                <li>
+					<a href="http://www.zuehlke.com/jobs/" target="_blank">Jobs</a>
+                </li>
+
+                <li>
+					<a href="http://blog.zuehlke.com/en/" target="_blank" target="_blank">Blog</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+

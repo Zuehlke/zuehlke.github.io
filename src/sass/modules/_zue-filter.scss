@@ -1,0 +1,162 @@
+.zue-filter {
+	padding-top: rem-calc(25);
+	background-color: $gray-225;
+//	background: rgb(232, 232, 232) url(../images/teaser-bg-right.jpg) no-repeat right bottom;
+	form {
+		margin-bottom: rem-calc(100);
+	}
+	input, select {
+		margin-bottom: rem-calc(20);
+		padding: 0 rem-calc(79) 0 rem-calc(15);
+		height: rem-calc(45);
+		border: 0;
+		color: $body-font-color;
+		box-shadow: none;
+	}
+}
+
+.zue-filter-tags {
+	position: relative;
+	overflow: hidden;
+	max-height: 240px;
+	margin-bottom: rem-calc(95);
+
+	@media #{$medium-up} {
+		max-height: 135px;
+	}
+}
+.is-tablet, .is-desktop-tablet {
+	.zue-filter-tags {
+		max-height: 125px !important;
+	}
+}
+
+.is-phone {
+	.zue-filter-tags {
+		max-height: 215px !important;
+	}
+}
+
+
+.zue-filter-tag {
+	display: inline-block;
+	margin: 0 rem-calc(4) rem-calc(4) 0;
+	padding: 0 1em;
+	height: rem-calc(42);
+	line-height: rem-calc(42);
+	font-size: rem-calc(18);
+	overflow-x: hidden;
+	overflow-y: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: $white;
+	background-color: $gray-200;
+	&:hover {
+		color: $white;
+	}
+	&.is-active {
+		background-color: $gray-150;
+	}
+}
+
+.zue-filter-clear {
+	@extend .zue-filter-tag;
+	background: transparent;
+	border: 1px dashed $gray-150;
+	color: $gray-150;
+	&:hover {
+		color: $white;
+		background: $c-primary;
+		border: 1px solid $c-primary;
+	}
+}
+
+.zue-input-dropdown {
+	&::before {
+		// Dropdown triangle background
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: block;
+		content: ' ';
+		width: rem-calc(45);
+		height: rem-calc(45);
+		background: $gray-240;
+		pointer-events: none;
+	}
+	&::after {
+		// Dropdown triangle
+		position: absolute;
+		top: 20px;
+		right: 14px;
+		display: block;
+		content: ' ';
+
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 10px solid $gray-220;
+		pointer-events: none;
+	}
+}
+
+.zue-input-search {
+	.icon-Search {
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: block;
+		margin: 0;
+		padding: 0;
+		width: rem-calc(45);
+		height: rem-calc(45);
+		line-height: rem-calc(64);
+		background: transparent;
+		text-align: center;
+		font-size: rem-calc(30);
+		color: $gray-220;
+		background-color: $gray-240;
+
+		&:before {
+			position: relative;
+			top: rem-calc(-8);
+		}
+	}
+}
+
+@media #{$medium-up} {
+	.zue-filter-tag {
+		margin: 0 rem-calc(4) rem-calc(4) 0;
+		padding: 0 1em;
+		height: rem-calc(42);
+		line-height: rem-calc(42);
+		font-size: rem-calc(18);
+		cursor: pointer;
+		&:hover {
+			background: darken($gray-200, 8%);
+		}
+		&.is-active {
+			&:hover {
+				background: darken($gray-150, 8%);
+			}
+		}
+	}
+
+	.zue-filter-clear {
+		border: 2px dashed $gray-150;
+		&:hover {
+			color: $white;
+			background: $c-primary;
+			border: 2px solid $c-primary;
+		}
+	}
+
+	.zue-filter-results {
+		padding-bottom: rem-calc(300);
+	}
+}
+
+@media #{$large-up} {
+
+}

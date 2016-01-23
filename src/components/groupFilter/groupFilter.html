@@ -1,0 +1,13 @@
+<div class="group-filter">
+    <div class="filter-area">
+       <div ng-repeat="item in groups">
+           <div ng-class="{'selected' : item.selected}" class="smaller filter-item" ng-click="toggleItem(item)">{{item.name}}</div>
+       </div>
+    </div>
+
+    <div class="switch-area">
+        <span class="smaller filter-item all-item" ng-class="{'selected' : selectAll}" ng-click="toggleAll()">ALL</span>
+        <view-switch>
+        </view-switch>
+    </div>
+</div>

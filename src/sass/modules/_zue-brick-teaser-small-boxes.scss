@@ -1,0 +1,115 @@
+.zue-box-outer {
+    @extend .box-hover;
+    height: 100%;
+}
+
+.zue-teaser-small-boxes {
+    background-color: $c-light;
+    
+
+   
+    &.bg-right {
+        @media #{$large-up} {
+            background-image: url(../images/teaser-bg-right.jpg);
+            background-position: top right;
+            background-repeat: no-repeat;
+        }
+
+    }
+
+    &.bg-left {
+        @media #{$large-up} {
+            background-image: url(../images/teaser-bg-left.jpg);
+            background-position: top left;
+            background-repeat: no-repeat;
+        }
+    }
+
+    .zue-teaser-boxes {
+        padding: 0;
+    }
+
+    @media #{$medium-up} {
+        .zue-box-outer {
+            width: 50%;
+        }
+    }
+    @media #{$large-up} {
+        .tile-content {
+            font-size: .75rem;
+        }
+    }
+    @include breakpoint-min(1600px) {
+        .tile-content {
+            font-size: 1rem;
+        }
+    }
+
+    .fixed-title-box {
+        background-color: #484e54 !important;
+        pointer-events: none;
+    }
+}
+
+
+.zue-boxes-container .zue-box-outer {
+    @extend .box-darker;
+
+    &:nth-of-type(2n) {
+        @extend .box-dark;
+    }
+}
+
+/*
+
+.blog {
+    .zue-boxes-container .zue-box-outer {
+        @extend .box-light-darker;
+
+        &:nth-of-type(2n) {
+            @extend .box-light;
+        }
+    }
+}
+
+
+// is Tablet
+.is-tablet, .is-desktop {
+    .zue-boxes-container .zue-box-outer {
+        @extend .box-darker;
+
+        &:nth-child(3n - 2){
+            @extend .box-dark;
+        }
+    }
+
+    .blog {
+        .zue-boxes-container .zue-box-outer {
+            @extend .box-light-darker;
+
+            &:nth-child(3n - 2) {
+                @extend .box-light;
+            }
+        }
+    }
+
+    // styles only needed for draft mode in django-cms
+    .zue-boxes-container .cms_plugin .zue-box-outer {
+        @extend .box-darker;
+    }
+
+    .zue-boxes-container .cms_plugin:nth-child(3n - 2) .zue-box-outer {
+        @extend .box-dark;
+    }
+
+    .blog {
+        .zue-boxes-container .cms_plugin .zue-box-outer {
+            @extend .box-light-darker;
+        }
+
+        .zue-boxes-container .cms_plugin:nth-child(3n - 2) .zue-box-outer {
+            @extend .box-light;
+        }
+    }
+
+}*/

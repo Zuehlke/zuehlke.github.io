@@ -1,0 +1,85 @@
+.zue-box-outer {
+    display: block;
+    width: 100%;
+//	This is temporary for visual presentation only!!!
+//	TODO: Clickable boxes should be anchor elements (also in box grid)
+	cursor: pointer;
+}
+
+.zue-blog-date {
+    display: inline-block;
+    color: $c-dark-grey;
+}
+
+.zue-box-cta {
+    color: $c-primary;
+}
+
+.zue-box-intro {
+    background: $primary-color !important;
+}
+
+@media #{$medium-up} {
+    .zue-box-outer {
+        float: left;
+    }
+
+    .zue-box-inner {
+        position: relative;
+        min-height: 1px;
+
+        &.darker {
+            background-color: darken($c-light-grey-medium, 5%);
+        }
+    }
+}
+
+@media #{$large-up} { // was 641px for testing
+    .zue-box-outer {
+        float: left;
+    }
+
+    .zue-box-inner {
+        position: relative;
+        padding-top: 100%;
+    }
+
+    .zue-box-content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+    }
+}
+
+// Box styles
+.box-dark {
+    @include box-style($c-dark-grey-medium, $c-white);
+}
+
+.box-darker {
+    @include box-style(darken($c-dark-grey-medium, 5%), $c-white);
+}
+
+.box-light {
+    @include box-style($c-light-grey-medium, $c-text-on-light);
+}
+
+.box-light-darker {
+    @include box-style(darken($c-light-grey-medium, 5%), $c-text-on-light);
+}
+
+.box-hover:hover {
+    background-color: $c-primary !important;
+    color: $c-white !important;
+
+    h1, h2, h3, h4, h5, a, .zue-box-cta, .zue-blog-date {
+        color: $c-white !important;
+    }
+    
+    .color-primary {
+        color: black !important;   
+    }
+}
