@@ -8,14 +8,14 @@
                     "url": "https://github.com/bruderol",
                     "name": "Rolf Bruderer",
                     "logo": "people/bruderol.png",
-	            "description": "Lead Software Architect and Trainer. Founder, Lead and Developer of the Scenarioo open source initiative."
+					          "description": "Lead Software Architect and Trainer. Founder, Lead and Developer of the Scenarioo open source initiative."
                 },
                 {
                     "title": "carstenkind",
                     "url": "https://github.com/carstenkind",
                     "name": "Carsten Kind",
                     "logo": "people/carstenkind.jpg",
-		    "description": ""
+					"description": ""
                 },
                 {
                     "title": "damphyr",
@@ -26,7 +26,7 @@
                 },
                 {
                     "title": "lothrop",
-                    "url": "https: //github.com/Zuehlke/swagger-codegen",
+                    "url": "https://github.com/lothrop",
                     "name": "Kerry W. Lothrop",
                     "logo": "people/lothrop.jpg",
 					"description": ""
