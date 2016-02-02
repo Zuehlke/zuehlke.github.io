@@ -75,3 +75,24 @@
     margin-bottom: 1.25rem;
     text-rendering: optimizeLegibility;   
 }
+
+.zue-branding h2 {
+    font-size: 16px;
+    line-height: 1.0;
+}
+
+
+
+@media only screen and (min-width: 40.063em) {
+    .zue-branding h2 {
+        font-size: 20px !important;
+        line-height: 1.2 !important;
+    }
+}
+
+@media only screen and (min-width: 64.063em){
+    .zue-branding h2 {
+        font-size: 28px !important;
+        line-height: 1.2 !important;
+    }
+}

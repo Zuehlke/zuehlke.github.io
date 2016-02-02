@@ -45,16 +45,14 @@ module zuehlkepage {
 			$urlRouterProvider.otherwise('/main/repository');
 		}])
 		.run(['$rootScope', ($rootScope: ng.IScope) => {
-			var targetOffset, currentPosition,
+			var targetOffset = 580,
+                currentPosition = 0,
 				body = document.getElementById('scroll-anchor'),
 				animateTime = 900;
 
 				$rootScope.$on('$stateChangeSuccess', (event: any, toState: any, toParams: any, fromState: any, fromParams: any) => {
 				
-				if(fromState.name !== ""){
-
-					targetOffset = 470;
-					currentPosition = 0;
+                if(fromState.name !== "" && document.getElementsByTagName('body')[0].className != 'sl_offcanvas-open-right'){
 
 					body.classList.add('in-transition');
 					body.style.transform = "translate(0, -"+targetOffset+"px)";
