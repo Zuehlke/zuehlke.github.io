@@ -33,3 +33,6 @@ If you want to make your **substantial** contributions to Open-source Projects v
 2. Clone the repo, change to **develop** branch, adapt the people.json and repositories.json files under "files", add your Picture under "assets\images\people" and send a pull request.
 3. Your changes will be public after someone accepted your pull-request and merged the changes into the master branch (no automatized build yet)
 
+
+##Questions?##
+Write an E-Mail to github@zuehlke.com or get in touch with var, cmk, bmi or kaba.
