@@ -31,5 +31,5 @@ If you want to make your **substantial** contributions to Open-source Projects v
 
 1. Make sure that you are a public member of the Zühlke Open Source Community (https://github.com/Zuehlke/core/issues/6)
 2. Clone the repo, change to **develop** branch, adapt the people.json and repositories.json files under "files", add your Picture under "assets\images\people" and send a pull request.
-3. You´re changes will be public after someone accepted your pull-request and merged the changes into the master branch (no automatized build yet)
+3. Your changes will be public after someone accepted your pull-request and merged the changes into the master branch (no automatized build yet)
 
