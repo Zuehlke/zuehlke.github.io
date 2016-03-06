@@ -6,16 +6,17 @@ module zuehlkepage {
         toggleItem: (item: Group)  => void;
         toggleAll: ()  => void;
         groups: Group[];
-        selectAll: boolean;
+        allSelected: boolean;
     }
 
     export function groupFilterFactory(): ng.IDirective {
         return {
 			scope: {
-				groups: '='  
+				groups: '=',
+                allSelected: '='
 			},
 			link:  function (scope: IGroupFilterScope) {
-							new GroupFilter(scope);
+				new GroupFilter(scope);
 			},
             templateUrl: 'components/groupFilter/groupFilter.html'
         };
@@ -24,22 +25,18 @@ module zuehlkepage {
     
     class GroupFilter {
         constructor(private $scope : IGroupFilterScope) {
-            $scope.selectAll = true;
-            
+            $scope.allSelected = true;
+           
             $scope.toggleAll = () => {
-                $scope.selectAll = !$scope.selectAll;
-               
+                $scope.allSelected = !$scope.allSelected;
                 angular.forEach($scope.groups, (group) => {
-                    if($scope.selectAll){
-                        group.selected =  true;
-                    }else {
-                        group.selected = false; 
-                    }
+                    group.selected = false;
                 });
             }
             
             $scope.toggleItem = (item: Group) => {
                 item.selected = !item.selected;
+                $scope.allSelected = false;
             }
         }  
     }

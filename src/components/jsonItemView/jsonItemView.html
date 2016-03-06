@@ -3,7 +3,7 @@
     <div ng-hide="showList">
         <div >
             <ul class="medium-block-grid-2 large-block-grid-3">
-                <li ng-repeat="item in flatList" class="zue-box-outer" ng-if="isGroupSelected(item.groupname)">
+                <li ng-repeat="item in flatList" class="zue-box-outer" ng-if="isGroupSelected(item.groupname) || allSelected">
                     <div>
 						<a class="track track-cta track-tile" ng-href="{{item.item.url}}" target="_blank">
                             <div class="zue-box-inner">
@@ -25,7 +25,7 @@
 
     <div ng-show="showList">
         <div ng-repeat="group in groups" >
-            <div ng-if=" group.selected" style="margin-bottom: 25px">
+            <div ng-if="group.selected || allSelected" style="margin-bottom: 25px">
                 <h3 class="headersize-3 color-primary"  style="margin: 25px 0px 15px">{{group.name}}</h3>
                 <div ng-repeat="groupItem in group.items"  ng-class-even="'odd-class'" ng-class-odd="'even-class'" class="list-item" style="padding: 25px">
 					<a class="track track-cta track-tile" ng-href="{{groupItem.url}}" target="_blank">

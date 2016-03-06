@@ -13,7 +13,7 @@ module zuehlkepage {
 
     export class Group {
         constructor(public name: string, public items: Array<GroupItem>, public selected?: boolean){
-            this.selected = true;
+            this.selected = false;
         }
     }
     

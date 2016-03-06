@@ -9,12 +9,14 @@ module zuehlkepage {
         fileName: string;
         flatList: Array<any>;
         isGroupSelected:(string) => boolean;
+        allSelected: boolean;
     }
     
     export function jsonItemViewFactory(): ng.IDirective {
         return {
 			scope : {
-				groups: '='
+				groups: '=',
+                allSelected: '='
 			},
 			controller: ['$scope', function ($scope:IJsonItemViewScope) {
                 new JsonItemView($scope);
