@@ -4,11 +4,18 @@
             "name": "",
             "items": [
                 {
+                    "title": "adiherzog",
+                    "url": "https://github.com/adiherzog",
+                    "name": "Adrian Herzog",
+                    "logo": "people/adiherzog.jpg",
+                    "description": "Co-lead of Scenarioo"
+                },
+                {
                     "title": "bruderol",
                     "url": "https://github.com/bruderol",
                     "name": "Rolf Bruderer",
                     "logo": "people/bruderol.png",
-					          "description": "Lead Software Architect and Trainer. Founder, Lead and Developer of the Scenarioo open source initiative."
+                    "description": "Lead Software Architect and Trainer. Founder, Lead and Developer of the Scenarioo open source initiative."
                 },
                 {
                     "title": "damphyr",
