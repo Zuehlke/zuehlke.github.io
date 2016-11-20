@@ -9,7 +9,7 @@ Everybody of the Zühlke Open Source Community that did relevant contributions t
 
 ## Branches
 
-* 'develop': You find all source files here.
+* `develop`: You find all source files here.
 * `master`: is only for distribution and contains the builded and minified files.
 
 ## How to get listed under "People" and/or "Repositories"
