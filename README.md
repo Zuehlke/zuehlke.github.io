@@ -5,7 +5,7 @@ This are the sources for the zuehlke.github.io repository.
 
 This Site is where we present our contributions to the Open-source community.
 
-Everybody of the Zühlke Open Source Community that did relevant contributions to open source projects should be listed here and also all the repositories where Zühlke people did relevant substantial contributions (no matter whether owned by Zühlke or not).
+Everybody of the Zühlke Open Source Community who did relevant contributions to open source projects should be listed here and also all the repositories where Zühlke people did relevant substantial contributions (no matter whether owned by Zühlke or not).
 
 ## Branches
 
@@ -18,7 +18,7 @@ If you want to make your contributions to Open-source Projects visible on the Z�
 
 1. Become a Member of the Zühlke Open Source Community (if not yet):
   * Check it: Zühlke badge is publicly visible on your github profile (also when you sign out!)
-  * If not yet: please follow instructuons under https://github.com/Zuehlke/core/issues/6
+  * If not yet: please follow instructions under https://github.com/Zuehlke/core/issues/6
 
 2. Add yourself to `people` as follows (can be done in github web frontend easily):
     * Choose branch `develop`
@@ -29,7 +29,7 @@ If you want to make your contributions to Open-source Projects visible on the Z�
     * Select `Propose file change`
     
 3. Add repositories you did substantial contributions to under `repositories` (if not yet listed):    
-    * if you allready opened a pull request for getting listed under people, just choose that same opened feature branch for doing the change and directly edit and commit on this same feature branch (gets added to the pull request you allready opened)
+    * if you already opened a pull request for getting listed under people, just choose that same opened feature branch for doing the change and directly edit and commit on this same feature branch (gets added to the pull request you allready opened)
     * otherwise proceed in the same way as described above for people
     * propose a change for the file [src/files/repositories.json](src/files/repositories.json).
 
