@@ -29,8 +29,8 @@
                 <h3 class="headersize-3 color-primary"  style="margin: 25px 0px 15px">{{group.name}}</h3>
                 <div ng-repeat="groupItem in group.items"  ng-class-even="'odd-class'" ng-class-odd="'even-class'" class="list-item" style="padding: 25px">
 					<a class="track track-cta track-tile" ng-href="{{groupItem.url}}" target="_blank">
-                        <div class="tile-content">
-                            <img class="right small-icon" ng-src="assets/images/{{groupItem.logo}}" alt="{{groupItem.title}}" ng-if="groupItem.logo">
+                        <div class="tile-content">                          
+                            <img ng-if="groupItem.logo" class="right small-icon" ng-src="{{groupItem.logoUrl ? groupItem.logoUrl : 'assets/images/' + groupItem.logo}}" alt="{{groupItem.title}}" ng-if="groupItem.logo">
                             <h4 class="font-opensans " >{{groupItem.title}}</h4>
                             <p class="font-opensans color-white" ng-if="item.item.name">{{item.item.name}}</p>
                             <p  class="teaser-text text-medium-up color-white" >{{groupItem.description}}</p>
