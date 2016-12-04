@@ -12,7 +12,7 @@ Everybody of the Zühlke Open Source Community who did relevant contributions to
 * `develop`: You find all source files here.
 * `master`: is only for distribution and contains the builded and minified files.
 
-## How to get listed under "People" and/or "Repositories"
+## How to get listed under "People" and/or "Contributions"
 
 If you want to make your contributions to Open-source Projects visible on the Zühlke github page, then just follow the following very easy steps (you do not have to checkout the repo, everything can be done in github web frontend easily!).
 
@@ -28,10 +28,10 @@ If you want to make your contributions to Open-source Projects visible on the Z�
     * Choose a branch name with your Zühlke username
     * Select `Propose file change`
     
-3. Add repositories you did substantial contributions to under `repositories` (if not yet listed):    
+3. Add repositories you did substantial contributions to under `contributions` (if not yet listed):    
     * if you already opened a pull request for getting listed under people, just choose that same opened feature branch for doing the change and directly edit and commit on this same feature branch (gets added to the pull request you allready opened)
     * otherwise proceed in the same way as described above for people
-    * propose a change for the file [src/files/repositories.json](src/files/repositories.json).
+    * propose a change for the file [src/files/contributions.json](src/files/contributions.json).
 
 4. Your changes will become public after someone accepted your pull-request and merged the changes into the master branch (no automatized build yet). Currently @kabaehr is doing that.
 
