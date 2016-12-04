@@ -9,7 +9,7 @@
                             <div class="zue-box-inner">
                                 <div class="zue-box-content box-padding-medium" >
                                     <span class="font-opensans color-primary small" >{{item.groupname}}</span>
-                                    <img class="right small-icon" ng-src="assets/images/{{item.item.logo}}" alt="{{item.item.title}}" ng-if="item.item.logo">
+                                    <img class="right small-icon" ng-src="{{item.item.logoUrl ? item.item.logoUrl : 'assets/images/' + item.item.logo}}" alt="{{item.item.title}}" ng-if="item.item.logo || item.item.logoUrl">
                                     <h4 class="font-opensans color-white">{{item.item.title}}</h4>
                                     <p class="font-opensans" ng-if="item.item.name">{{item.item.name}}</p>
                                     <p  class="teaser-text tile-content tile-content-medium color-white">{{item.item.description}}</p>
@@ -24,13 +24,13 @@
     </div>
 
     <div ng-show="showList">
-        <div ng-repeat="group in groups" >
+        <div ng-repeat="group in groups">
             <div ng-if="group.selected || allSelected" style="margin-bottom: 25px">
                 <h3 class="headersize-3 color-primary"  style="margin: 25px 0px 15px">{{group.name}}</h3>
                 <div ng-repeat="groupItem in group.items"  ng-class-even="'odd-class'" ng-class-odd="'even-class'" class="list-item" style="padding: 25px">
 					<a class="track track-cta track-tile" ng-href="{{groupItem.url}}" target="_blank">
                         <div class="tile-content">                          
-                            <img class="right small-icon" ng-src="{{groupItem.logoUrl ? groupItem.logoUrl : 'assets/images/' + groupItem.logo}}" alt="{{groupItem.title}}" ng-if="groupItem.logo">
+                            <img class="right small-icon" ng-src="{{groupItem.logoUrl ? groupItem.logoUrl : 'assets/images/' + groupItem.logo}}" alt="{{groupItem.title}}" ng-if="groupItem.logo || groupItem.logoUrl">
                             <h4 class="font-opensans " >{{groupItem.title}}</h4>
                             <p class="font-opensans color-white" ng-if="item.item.name">{{item.item.name}}</p>
                             <p  class="teaser-text text-medium-up color-white" >{{groupItem.description}}</p>
