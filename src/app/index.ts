@@ -5,7 +5,7 @@
 
 module zuehlkepage {
     angular.module('zuehlkepage', ['ngTouch', 'ui.router', 'ui.bootstrap'])
-		.controller('RepositoryCtrl',  ['$scope', 'DataService', RepositoryCtrl])
+		.controller('ContributionCtrl',  ['$scope', 'DataService', ContributionCtrl])
 		.controller('MainCtrl', ['$scope', MainCtrl])
 		.controller('NavbarCtrl', ['$scope', NavbarCtrl])
 		.service('DataService', ['$http', '$q', DataService])
@@ -23,12 +23,12 @@ module zuehlkepage {
 					templateUrl: 'app/main/main.html',
 					controller: 'MainCtrl'
 			  })
-			  .state('main.repository', {
-				url: '/repository',
+			  .state('main.contributions', {
+				url: '/contributions',
 				views: {
 					'pagecontent' : {
-						templateUrl: 'app/repository/repository.html',
-						controller: 'RepositoryCtrl'
+						templateUrl: 'app/contribution/contribution.html',
+						controller: 'ContributionCtrl'
 					}
 				}
 			  })
@@ -42,7 +42,7 @@ module zuehlkepage {
 				  }
 			  });
 
-			$urlRouterProvider.otherwise('/main/repository');
+			$urlRouterProvider.otherwise('/main/contributions');
 		}])
 		.run(['$rootScope', ($rootScope: ng.IScope) => {
 			var targetOffset = 580,
