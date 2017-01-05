@@ -61,6 +61,17 @@
                     "logo": ""
                 }
             ]
+        },
+        {
+            "name": "???",
+            "items": [
+                {
+                    "title": "nerves_system_rpi",
+                    "url": "https://github.com/alfert/nerves_system_rpi",
+                    "description": "A base Nerves System configuration for the Raspberry Pi A+, B, B+ and Zero",
+                    "logo": ""
+                }
+            ]
         }
     ]
 }
