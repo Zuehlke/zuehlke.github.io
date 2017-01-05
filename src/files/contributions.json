@@ -12,18 +12,12 @@
             ]
         },
         {
-            "name": "Web & Mobile",
+            "name": "Web",
             "items": [
                 {
                     "title": "quickstarts-angular",
                     "url": "https://github.com/Zuehlke/quickstarts-angular",
                     "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
-                    "logo": ""
-                },
-                {
-                    "title": "MvvmCross",
-                    "url": "https://github.com/lothrop/MvvmCross",
-                    "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
                     "logo": ""
                 }
             ]
@@ -58,6 +52,23 @@
                     "title": "cookbooks-jenkins-simple-app",
                     "url": "https://github.com/Zuehlke/cookbooks-jenkins-simple-app",
                     "description": "An example cookbook for settingup Jenkins CI.",
+                    "logo": ""
+                }
+            ]
+        },
+        {
+            "name": "Mobile",
+            "items": [
+                {
+                    "title": "xamarin-bluetooth-le",
+                    "url": "https://github.com/xabre/xamarin-bluetooth-le",
+                    "description": "Xamarin and MvvMCross plugin for accessing the bluetooth functionality.",
+                    "logo": ""
+                },
+                {
+                    "title": "MvvmCross",
+                    "url": "https://github.com/lothrop/MvvmCross",
+                    "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for MonoTouch.Dialog.",
                     "logo": ""
                 }
             ]
