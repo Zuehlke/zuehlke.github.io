@@ -12,18 +12,29 @@
             ]
         },
         {
-            "name": "Web & Mobile",
+            "name": "Web",
             "items": [
                 {
                     "title": "quickstarts-angular",
                     "url": "https://github.com/Zuehlke/quickstarts-angular",
                     "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
                     "logo": ""
-                },
+                }
+            ]
+        },
+        {
+            "name": "Mobile",
+            "items": [
                 {
                     "title": "MvvmCross",
                     "url": "https://github.com/lothrop/MvvmCross",
                     "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
+                    "logo": ""
+                },
+                 {
+                    "title": "xamarin-fingerprint",
+                    "url": "https://github.com/smstuebe/xamarin-fingerprint",
+                    "description": "Xamarin and MvvMCross plugin for accessing the fingerprint sensor.",
                     "logo": ""
                 }
             ]
