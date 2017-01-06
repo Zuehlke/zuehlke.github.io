@@ -57,20 +57,27 @@
                 {
                     "title": "cookbooks-jenkins-simple-app",
                     "url": "https://github.com/Zuehlke/cookbooks-jenkins-simple-app",
-                    "description": "An example cookbook for settingup Jenkins CI.",
+                    "description": "An example cookbook for setting up Jenkins CI.",
                     "logo": ""
                 }
             ]
         },
         {
-            "name": "???",
+            "name": "Functional Programming",
             "items": [
                 {
-                    "title": "nerves_system_rpi",
-                    "url": "https://github.com/alfert/nerves_system_rpi",
-                    "description": "A base Nerves System configuration for the Raspberry Pi A+, B, B+ and Zero",
+                    "title": "propcheck",
+                    "url": "https://github.com/alfert/propcheck",
+                    "description": "Property based Testing for Elixir (based upon PropEr)",
+                    "logo": ""
+                },
+                {
+                    "title": "coverex",
+                    "url": "https://github.com/alfert/coverex",
+                    "description": "Coverage Reports for Elixir",
                     "logo": ""
                 }
+
             ]
         }
     ]
