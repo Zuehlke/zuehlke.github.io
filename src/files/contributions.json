@@ -34,7 +34,7 @@
                 {
                     "title": "linux-developer-vm",
                     "url": "https://github.com/Zuehlke/linux-developer-vm",
-                    "description": "Minimal template project for a minimal Chef-managed Linux developer VM.",
+                    "description": "Template project for a minimal Chef-managed Linux developer VM.",
                     "logo": ""
                 },
                 {
