@@ -38,6 +38,18 @@
                     "logo": ""
                 },
                 {
+                    "title": "java-developer-vm",
+                    "url": "https://github.com/Zuehlke/java-developer-vm",
+                    "description": "A Chef-managed developer VM for Java / Maven / Eclipse development on an Ubuntu Desktop.",
+                    "logo": ""
+                },
+                {
+                    "title": "linus-kitchen",
+                    "url": "https://github.com/tknerr/linus-kitchen",
+                    "description": "An Ubuntu-based development box for hacking with Chef, Vagrant, Docker & Co.",
+                    "logo": ""
+                },
+                {
                     "title": "cookbook-windev",
                     "url": "https://github.com/Zuehlke/cookbook-windev",
                     "description": "One cookbook with resources for setting up a Windows development environment.",
