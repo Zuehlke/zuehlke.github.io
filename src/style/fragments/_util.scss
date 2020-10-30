@@ -1,0 +1,47 @@
+@import "../mixins/fonts";
+@import "../vars/colors";
+
+.f-opensans-regular {
+  @include font-open-sans-regular;
+}
+
+.f-opensans-bold {
+  @include font-open-sans-bold;
+}
+
+.f-zue-regular {
+  @include font-zue-regular;
+}
+
+.f-zue-medium {
+  @include font-zue-medium;
+}
+
+.f-zue-italic {
+  @include font-zue-italic;
+}
+
+.f-zue-medium-italic {
+  @include font-zue-medium-italic;
+}
+
+.color-black {
+  color: black;
+}
+
+.color-almost-black {
+  color: $gray-35;
+}
+
+.color-primary {
+  color: $c-primary
+}
+
+.color-white {
+  color: $white;
+}
+
+.nomargin {
+  margin: 0;
+  padding: 0;
+}

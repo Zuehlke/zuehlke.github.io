@@ -1,0 +1,19 @@
+@import "../vars/media";
+
+/* A collection of re-usable style fragments such as containers, font styles, etc. */
+
+/* Core building block for responsive-width center content */
+.responsive-container {
+  width: 1200px;
+  background-color: lightgreen;
+
+  /* For large (but not xlarge) screens */
+  @media (max-width: $max-screen-width-large) {
+    width: 1000px;
+  }
+
+  /* For medium and small screens */
+  @media (max-width: $max-screen-width-medium) {
+    width: 100%;
+  }
+}

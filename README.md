@@ -1,61 +1,46 @@
+# Getting Started with Create React App
 
-# Welcome to our Zühlke Github.io Site
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This are the sources for the zuehlke.github.io repository.
+## Available Scripts
 
-This Site is where we present our contributions to the Open-source community.
+In the project directory, you can run:
 
-Everybody of the Zühlke Open Source Community who did relevant contributions to open source projects should be listed here and also all the repositories where Zühlke people did relevant substantial contributions (no matter whether owned by Zühlke or not).
+### `npm start`
 
-## Branches
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-* `develop`: You find all source files here.
-* `master`: is only for distribution and contains the builded and minified files.
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-## How to get listed under "People" and/or "Contributions"
+### `npm test`
 
-If you want to make your contributions to Open-source Projects visible on the Zühlke github page, then just follow the following very easy steps (you do not have to checkout the repo, everything can be done in github web frontend easily!).
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-1. Become a Member of the Zühlke Open Source Community (if not yet):
-  * Check it: Zühlke badge is publicly visible on your github profile (also when you sign out!)
-  * If not yet: please follow instructions under https://github.com/Zuehlke/core/issues/6
+### `npm run build`
 
-2. Add yourself to `people` as follows (can be done in github web frontend easily):
-    * Choose branch `develop`
-    * Choose to edit the file [src/files/people.json](src/files/people.json) 
-    * Add a json block for yourself, with the image URL of your github profile picture
-    * In commit block at the bottom choose to `Create new branch and start pull request`
-    * Choose a branch name with your Zühlke username
-    * Select `Propose file change`
-    
-3. Add repositories you did substantial contributions to under `contributions` (if not yet listed):    
-    * if you already opened a pull request for getting listed under people, just choose that same opened feature branch for doing the change and directly edit and commit on this same feature branch (gets added to the pull request you allready opened)
-    * otherwise proceed in the same way as described above for people
-    * propose a change for the file [src/files/contributions.json](src/files/contributions.json).
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-4. Your changes will become public after someone accepted your pull-request and merged the changes into the master branch (no automatized build yet). Currently @kabaehr is doing that.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## How to build and run
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-To run the application you have to install npm first
+### `npm run eject`
 
-In project directory (where package.json lays) execute on console: 
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-```
-npm install
-bower install
-tsd reinstall
-```
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-check console logs for missing packages and try to install them with npm or bower.
-If you got errors when executing "bower install" try to change to an less restrictive network (zred)
-and try again.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-If everything looks fine you can build and start the application (on console again) with:
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-1. gulp or gulp build
-2. gulp serve
+## Learn More
 
-## Questions?
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Write an E-Mail to github@zuehlke.com or get in touch with var, cmk, bmi or kaba.
+To learn React, check out the [React documentation](https://reactjs.org/).

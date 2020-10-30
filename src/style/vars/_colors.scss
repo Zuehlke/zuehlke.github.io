@@ -1,0 +1,82 @@
+/* Colors
+##################################################################################################################### */
+
+// Zühlke colors
+$c-brand:               rgb(147,95,167);
+$c-primary:             rgb(255,130,10);
+$c-white:               rgb(255,255,255);
+$c-light:               rgb(232,232,232);
+$c-light-grey-medium:   rgb(224,224,224);
+$c-light-grey-dark:     rgb(213,213,213);
+$c-dark-grey:           rgb(126, 136, 147);
+$c-dark-grey-medium:    rgb(87,93,98);
+$c-dark-grey-dark:      rgb(72,78,84);
+$c-text-on-light:       $c-dark-grey-dark;
+$c-text-on-dark:        rgb(255,255,255);
+
+// Base colors
+$black: 				rgb(0,0,0);
+$white: 				rgb(255,255,255);
+
+$red: 					rgb(255,0,0);
+$green: 				rgb(0,255,0);
+$blue: 					rgb(0,0,255);
+$cyan: 					rgb(0,255,255);
+$magenta: 				rgb(255,0,255);
+$yellow: 				rgb(255,255,0);
+
+$gray-250: 				rgb(250,250,250);
+$gray-245: 				rgb(245,245,245);
+$gray-240: 				rgb(240,240,240);
+$gray-235: 				rgb(235,235,235);
+$gray-230: 				rgb(230,230,230);
+$gray-225: 				rgb(225,225,225);
+$gray-220: 				rgb(220,220,220);
+$gray-215: 				rgb(215,215,215);
+$gray-210: 				rgb(210,210,210);
+$gray-205: 				rgb(205,205,205);
+$gray-200: 				rgb(200,200,200);
+$gray-195: 				rgb(195,195,195);
+$gray-190: 				rgb(190,190,190);
+$gray-185: 				rgb(185,185,185);
+$gray-180: 				rgb(180,180,180);
+$gray-175: 				rgb(175,175,175);
+$gray-170: 				rgb(170,170,170);
+$gray-165: 				rgb(165,165,165);
+$gray-160: 				rgb(160,160,160);
+$gray-155: 				rgb(155,155,155);
+$gray-150: 				rgb(150,150,150);
+$gray-145: 				rgb(145,145,145);
+$gray-140: 				rgb(140,140,140);
+$gray-135: 				rgb(135,135,135);
+$gray-130: 				rgb(130,130,130);
+$gray-125: 				rgb(125,125,125);
+$gray-120: 				rgb(120,120,120);
+$gray-115: 				rgb(115,115,115);
+$gray-110: 				rgb(110,110,110);
+$gray-105: 				rgb(105,105,105);
+$gray-100: 				rgb(100,100,100);
+$gray-95: 				rgb(95,95,95);
+$gray-90: 				rgb(90,90,90);
+$gray-85: 				rgb(85,85,85);
+$gray-80: 				rgb(80,80,80);
+$gray-75: 				rgb(75,75,75);
+$gray-70: 				rgb(70,70,70);
+$gray-65: 				rgb(65,65,65);
+$gray-60: 				rgb(60,60,60);
+$gray-55: 				rgb(55,55,55);
+$gray-50: 				rgb(50,50,50);
+$gray-45: 				rgb(45,45,45);
+$gray-40: 				rgb(40,40,40);
+$gray-35: 				rgb(35,35,35);
+$gray-30: 				rgb(30,30,30);
+$gray-25: 				rgb(25,25,25);
+$gray-20: 				rgb(20,20,20);
+$gray-15: 				rgb(15,15,15);
+$gray-10: 				rgb(10,10,10);
+$gray-5: 				rgb(5,5,5);
+
+// Alert colors
+$warning-color:         $red;
+$success-color:         $green;
+$info-color:            $blue;
