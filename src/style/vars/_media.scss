@@ -19,3 +19,20 @@ $max-screen-width-small: 640px;
 $min-screen-width-xlarge: $max-screen-width-large + 1;
 $min-screen-width-large: $max-screen-width-medium + 1;
 $min-screen-width-medium: $max-screen-width-small + 1;
+
+/* Width query conditionals */
+/* "at most" matchers */
+$w-am-large: (max-width: $max-screen-width-large);
+$w-am-medium: (max-width: $max-screen-width-medium);
+$w-am-small: (max-width: $max-screen-width-small);
+
+/* "at least" matchers */
+$w-al-xlarge: (min-width: $min-screen-width-xlarge);
+$w-al-large: (min-width: $min-screen-width-large);
+$w-al-medium: (min-width: $min-screen-width-medium);
+
+/* Exact matchers */
+$w-xlarge: #{$w-al-xlarge};
+$w-large: #{$w-al-large} and #{$w-am-large};
+$w-medium: #{$w-al-medium} and #{$w-am-medium};
+$w-small: #{$w-am-small};

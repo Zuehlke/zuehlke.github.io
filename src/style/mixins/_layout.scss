@@ -1,0 +1,17 @@
+@import "../mixins/fonts";
+@import "../vars/colors";
+@import "../vars/media";
+
+@mixin container-responsive-width {
+  width: 100%;
+
+  /* Large screens or larger */
+  @media #{$w-al-large} {
+    width: 1000px;
+  }
+
+  /* XLarge screens */
+  @media #{$w-al-xlarge} {
+    width: 1200px;
+  }
+}

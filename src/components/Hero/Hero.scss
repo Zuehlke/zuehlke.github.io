@@ -1,0 +1,50 @@
+@import "../../style/vars/media";
+@import "../../style/mixins/layout";
+@import "../../style/mixins/functions";
+@import "../../style/vars/misc";
+
+$min-height: 280px;
+
+.Hero {
+  /* Background image */
+  background-image: url("../../assets/images/wide/header_4_code.png");
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+
+  /* General layout */
+  width: 100%;
+  position: relative;
+  @include _flex(column, center, flex-end);
+
+  /* Height */
+  height: 47vh;
+  min-height: $min-height;
+
+  /* Medium screens or smaller */
+  @media #{$w-am-medium} {
+    height: $min-height;
+  }
+
+  & .inner {
+    @include container-responsive-width;
+    @include font-zue-regular;
+
+    background: rgba(240, 240, 240, .75);
+    font-size: $fs-lg;
+    padding: 1rem 3.75rem;
+
+    /* Medium screens or smaller */
+    @media #{$w-am-medium} {
+      font-size: $fs-md;
+      padding: 0.95rem 1.9rem;
+    }
+
+    /* Small screens */
+    @media #{$w-am-small} {
+      font-size: $fs-base;
+      line-height: 1;
+      padding: 0.95rem;
+    }
+  }
+}

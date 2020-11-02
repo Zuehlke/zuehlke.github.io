@@ -1,11 +1,6 @@
 /* Global imports */
-@import "style/imports/fonts";
-@import "style/fragments/util";
-@import "style/fragments/layout";
-
-/* Local dependencies */
-@import "style/vars/colors";
-@import "style/mixins/fonts";
+@import "style/global/fonts";
+@import "style/global/globals";
 
 * {
   box-sizing: border-box;
@@ -15,29 +10,4 @@ html,
 body {
   margin: 0;
   padding: 0;
-}
-
-body {
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-h1 {
-  @include font-zue-regular;
-  color: $gray-35;
-  font-size: 2.5rem;
-}
-
-h2 {
-  @include font-open-sans-regular;
-  color: $white;
 }
