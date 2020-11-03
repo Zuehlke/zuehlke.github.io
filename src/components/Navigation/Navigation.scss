@@ -1,0 +1,91 @@
+@import "../../style/mixins/layout";
+@import "../../style/mixins/functions";
+@import "../../style/vars/media";
+@import "../../style/vars/spacing";
+@import "../../style/vars/colors";
+@import "../../style/vars/font-size";
+
+$height-regular: 100px;
+$height-smaller-screens: 55px;
+
+.Navigation {
+  @include center-container-wrapper;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: rgba(222, 240, 241, 0.8);
+  width: 100%;
+  height: $height-regular;
+
+  /* Medium and smaller screens */
+  @media #{$w-am-medium} {
+    height: $height-smaller-screens;
+  }
+
+  & .content {
+    @include container-responsive-width;
+    @include _flex(row, center, space-between);
+
+    & .branding-container {
+      padding-left: $pad-rem-sm;
+    }
+
+    & .branding {
+      background-image: url("../../assets/images/logo/logo-zuehlke-big.png");
+      height: $height-regular;
+      width: $height-regular;
+      background-size: cover;
+
+      @media #{$w-am-medium} {
+        height: $height-smaller-screens;
+        width: $height-smaller-screens;
+      }
+    }
+
+    & .nav-links {
+      @include _flex(column, stretch, stretch);
+      height: 100%;
+      flex-grow: 1;
+
+      a {
+        text-decoration: none;
+        padding-right: 0.9rem;
+      }
+
+      & .meta-nav {
+        flex-grow: 1;
+
+        & a {
+          color: $c-softer-text-on-light;
+        }
+      }
+
+      & .main-nav {
+        flex-grow: 1;
+
+        & a {
+          color: $c-softer-text-on-light;
+          font-weight: bold;
+          font-size: $fs-md;
+        }
+      }
+
+      @media #{$w-am-medium} {
+        display: none;
+      }
+    }
+
+    & .hamburger-container {
+      @include _flex(row, center, center);
+      width: 100px;
+      background-color: turquoise;
+      height: 100%;
+
+      @media #{$w-al-large} {
+        display: none;
+      }
+    }
+  }
+}
