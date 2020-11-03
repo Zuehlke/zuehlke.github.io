@@ -1,6 +1,7 @@
 @import "../../style/mixins/layout";
 @import "../../style/vars/colors";
 @import "../../style/vars/font-size";
+@import "../../style/vars/spacing";
 
 .Footer {
   @include center-container-wrapper;
@@ -9,7 +10,7 @@
   .content {
     @include container-responsive-width;
     @include _flex(row, flex-start, stretch);
-    padding: 3rem 0 4rem 0;
+    padding: $pad-rem-lg 0 $pad-rem-xl 0;
   }
 
   .logo {
@@ -23,9 +24,6 @@
 
   .links {
     @include flex-col-center-start;
-    padding-top: 0px;
-    color: $c-text-on-dark;
-    font-size: $fs-md;
 
     ul {
         margin-top: 0px;
@@ -33,7 +31,7 @@
 
         li {
             font-size: $fs-sm;
-            margin-bottom: 10px;
+            padding-bottom: $pad-rem-sm;
 
             a {
                 color: $c-text-on-dark;
@@ -60,8 +58,8 @@
     a {
         color: $c-softer-text-on-dark;
         font-size: $fs-lg;
-        margin-right: 1.5rem;
-        margin-top: 0.5rem;
+        margin-right: $pad-rem-md;
+        margin-top: $pad-rem-xs;
     }
   }
 
