@@ -1,0 +1,50 @@
+@import "../../style/mixins/layout";
+@import "../../style/vars/colors";
+@import "../../style/vars/font-size";
+
+.Footer {
+  @include center-container-wrapper;
+  background-color: $c-dark-grey-dark;
+
+  .content {
+    @include container-responsive-width;
+    @include _flex(row, flex-start, stretch);
+    padding: 3rem 0 4rem 0;
+  }
+
+  .logo {
+    @include flex-col-center-start;
+
+    img {
+        height: 80px;
+        width: 80px;
+    }
+  }
+
+  .links {
+    @include flex-col-center-start;
+    padding-top: 0px;
+    color: $c-text-on-dark;
+    font-size: $fs-md;
+
+    ul {
+        margin-top: 0px;
+        list-style: None;
+
+        li {
+            font-size: $fs-sm;
+            margin-bottom: 10px;
+
+            a {
+                color: $c-text-on-dark;
+                text-decoration: none;
+            }
+        }
+    }
+  }
+
+  .text {
+    color: $c-text-on-dark;
+    font-size: $fs-base;
+  }
+}
