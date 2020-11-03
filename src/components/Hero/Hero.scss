@@ -3,6 +3,7 @@
 @import "../../style/mixins/functions";
 @import "../../style/vars/font-size";
 @import "../../style/vars/colors";
+@import "../../style/vars/spacing";
 
 $min-height: 280px;
 
@@ -33,20 +34,20 @@ $min-height: 280px;
 
     background: $c-gray-opacity-md;
     font-size: $fs-lg;
-    padding: 1rem 3.75rem;
+    padding: $pad-rem-sm $pad-rem-xl;
     color: $c-off-black;
 
     /* Medium screens or smaller */
     @media #{$w-am-medium} {
       font-size: $fs-md;
-      padding: 0.95rem 1.9rem;
+      padding: $pad-rem-sm $pad-rem-md;
     }
 
     /* Small screens */
     @media #{$w-am-small} {
       font-size: $fs-base;
       line-height: 1;
-      padding: 0.95rem;
+      padding: $pad-rem-sm;
     }
   }
 }

@@ -1,6 +1,7 @@
 @import "../../style/mixins/layout";
 @import "../../style/vars/colors";
 @import "../../style/vars/font-size";
+@import "../../style/vars/spacing";
 
 .ZueBanner {
   @include center-container-wrapper;
@@ -8,7 +9,7 @@
 
   .content {
     @include container-responsive-width;
-    padding: 3rem 0 4rem 0;
+    padding: $pad-rem-lg 0 $pad-rem-xl 0;
   }
 
   .text {
