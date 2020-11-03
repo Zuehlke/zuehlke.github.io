@@ -43,6 +43,28 @@
     }
   }
 
+  .stay-in-touch {
+    @include _flex(column, start, flex-end);
+    margin-left: auto;
+    font-size: $fs-sm;
+    color: $c-softer-text-on-dark;
+
+    & .row {
+        @include _flex(row, start, flex-end);
+
+        .col {
+            @include _flex(column, center, flex-end);
+        }
+    }
+
+    a {
+        color: $c-softer-text-on-dark;
+        font-size: $fs-lg;
+        margin-right: 1.5rem;
+        margin-top: 0.5rem;
+    }
+  }
+
   .text {
     color: $c-text-on-dark;
     font-size: $fs-base;
