@@ -1,7 +1,8 @@
 @import "../../style/vars/media";
 @import "../../style/mixins/layout";
 @import "../../style/mixins/functions";
-@import "../../style/vars/misc";
+@import "../../style/vars/font-size";
+@import "../../style/vars/colors";
 
 $min-height: 280px;
 
@@ -30,9 +31,10 @@ $min-height: 280px;
     @include container-responsive-width;
     @include font-zue-regular;
 
-    background: rgba(240, 240, 240, .75);
+    background: $c-gray-opacity-md;
     font-size: $fs-lg;
     padding: 1rem 3.75rem;
+    color: $c-off-black;
 
     /* Medium screens or smaller */
     @media #{$w-am-medium} {

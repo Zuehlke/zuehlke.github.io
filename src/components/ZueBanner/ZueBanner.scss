@@ -1,0 +1,18 @@
+@import "../../style/mixins/layout";
+@import "../../style/vars/colors";
+@import "../../style/vars/font-size";
+
+.ZueBanner {
+  @include center-container-wrapper;
+  background-color: $c-off-white;
+
+  .content {
+    @include container-responsive-width;
+    padding: 3rem 0 4rem 0;
+  }
+
+  .text {
+    color: $c-softer-text-on-light;
+    font-size: $fs-md;
+  }
+}

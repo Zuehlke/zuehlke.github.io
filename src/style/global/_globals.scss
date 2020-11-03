@@ -1,5 +1,5 @@
 @import "../../style/vars/colors";
-@import "../../style/vars/misc";
+@import "../vars/font-size";
 @import "../../style/mixins/fonts";
 
 body {
@@ -18,4 +18,8 @@ h2 {
   @include font-open-sans-regular;
   font-size: $fs-lg;
   margin: 30px 0 20px 0;
+}
+
+strong {
+  font-weight: bold;
 }

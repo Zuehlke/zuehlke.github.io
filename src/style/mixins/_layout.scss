@@ -1,6 +1,12 @@
+@import "../mixins/functions";
 @import "../mixins/fonts";
 @import "../vars/colors";
 @import "../vars/media";
+
+@mixin center-container-wrapper {
+  width: 100%;
+  @include _flex(column, center, flex-start);
+}
 
 @mixin container-responsive-width {
   width: 100%;
@@ -14,4 +20,28 @@
   @media #{$w-al-xlarge} {
     width: 1200px;
   }
+}
+
+@mixin flex-col-center-start {
+  @include _flex(column, center, flex-start);
+}
+
+@mixin flex-col-center-center {
+  @include _flex(column, center, center);
+}
+
+@mixin flex-col-center-end {
+  @include _flex(column, center, flex-end);
+}
+
+@mixin flex-row-center-start {
+  @include _flex(row, center, flex-start);
+}
+
+@mixin flex-row-center-center {
+  @include _flex(row, center, center);
+}
+
+@mixin flex-row-center-end {
+  @include _flex(row, center, flex-end)
 }
