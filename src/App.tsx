@@ -11,7 +11,7 @@ import {MetaLinkSpec, RouteSpec} from "./common/types";
 
 function App() {
 
-  const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
+  const [sidebarVisible, setSidebarVisible] = useState<boolean>(true);
 
   const routes = [
     {
@@ -38,11 +38,22 @@ function App() {
     setSidebarVisible(!sidebarVisible)
   };
 
+  const handleHideSidebar = () => {
+    setSidebarVisible(false);
+  };
+
   return (
     <div className="App">
       <Router>
-        <Navigation routes={routes} metaLinks={metaLinks} onHamburgerClicked={handleHamburgerClicked}/>
-        <SidebarNavigation visible={sidebarVisible}/>
+        <Navigation
+          routes={routes}
+          metaLinks={metaLinks}
+          onHamburgerClicked={handleHamburgerClicked}/>
+        <SidebarNavigation
+          routes={routes}
+          metaLinks={metaLinks}
+          visible={sidebarVisible}
+          onHideSidebar={handleHideSidebar}/>
         <Hero/>
 
         {/* Routable content */}

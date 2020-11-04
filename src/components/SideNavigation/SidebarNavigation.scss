@@ -1,14 +1,65 @@
+@import "../../style/vars/colors";
+@import "../../style/vars/media";
+@import "../../style/vars/spacing";
+@import "../../style/vars/font-size";
+@import "../../style/mixins/functions";
+
 .SidebarNavigation {
-  width: 300px;
+  width: 100vw;
   height: calc(100vh - var(--header-height));
   position: fixed;
-  right: -300px;
+  right: -100vw;
   top: var(--header-height);
-  background-color: magenta;
+  background-color: $c-navigation-bg;
   z-index: 200;
   transition: right 0.5s;
 
+  @media #{$w-al-medium} {
+    display: none;
+  }
+
   &.visible {
     right: 0;
+  }
+
+  & .content {
+    @include _flex(column, flex-start, flex-start);
+    padding: $pad-rem-lg;
+
+    & .nav-links {
+
+      a {
+        text-decoration: none;
+      }
+
+      & .main-nav {
+        @include _flex(column, flex-start, flex-start);
+
+        & .link-container {
+          margin-bottom: $pad-rem-sm;
+
+          & a {
+            color: $c-softer-text-on-light;
+            font-weight: bold;
+            font-size: $fs-xl;
+          }
+        }
+      }
+
+      & .meta-nav {
+        @include _flex(column, flex-start, flex-start);
+        padding-top: $pad-rem-sm;
+        padding-bottom: 0.6rem;
+
+        & .link-container {
+          margin-bottom: $pad-rem-xs;
+
+          & a {
+            color: $c-softer-text-on-light;
+            font-size: $fs-lg;
+          }
+        }
+      }
+    }
   }
 }
