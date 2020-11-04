@@ -9,6 +9,7 @@ $height-regular: 100px;
 $height-smaller-screens: 55px;
 
 .Navigation {
+  --header-height: #{$height-regular};
   @include center-container-wrapper;
   justify-content: space-between;
   position: fixed;
@@ -17,11 +18,11 @@ $height-smaller-screens: 55px;
   left: 0;
   background-color: rgba(222, 240, 241, 0.8);
   width: 100%;
-  height: $height-regular;
+  height: var(--header-height);
 
   /* Medium and smaller screens */
   @media #{$w-am-medium} {
-    height: $height-smaller-screens;
+    --header-height: $height-smaller-screens;
   }
 
   & .content {
@@ -34,19 +35,15 @@ $height-smaller-screens: 55px;
 
     & .branding {
       background-image: url("../../assets/images/logo/logo-zuehlke-big.png");
-      height: $height-regular;
-      width: $height-regular;
+      height: var(--header-height);
+      width: var(--header-height);
       background-size: cover;
-
-      @media #{$w-am-medium} {
-        height: $height-smaller-screens;
-        width: $height-smaller-screens;
-      }
     }
 
     & .nav-links {
       @include _flex(column, stretch, stretch);
       height: 100%;
+      padding-left: $pad-rem-lg;
       flex-grow: 1;
 
       a {
@@ -56,6 +53,9 @@ $height-smaller-screens: 55px;
 
       & .meta-nav {
         flex-grow: 1;
+        flex-basis: 100%;
+        @include _flex(row, flex-end, flex-start);
+        padding-bottom: $pad-rem-sm;
 
         & a {
           color: $c-softer-text-on-light;
@@ -64,6 +64,8 @@ $height-smaller-screens: 55px;
 
       & .main-nav {
         flex-grow: 1;
+        flex-basis: 100%;
+        @include _flex(row, flex-start, flex-start);
 
         & a {
           color: $c-softer-text-on-light;

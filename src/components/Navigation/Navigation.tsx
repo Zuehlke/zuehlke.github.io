@@ -9,7 +9,7 @@ type Props = {
 
 const Navigation = (props: Props) => {
   return (
-    <div className="Navigation">
+    <header className="Navigation">
       <div className="content">
         <div className="branding-container">
           <div className="branding"/>
@@ -32,7 +32,7 @@ const Navigation = (props: Props) => {
           <button>Burger</button>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
