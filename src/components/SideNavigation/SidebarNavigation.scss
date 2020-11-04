@@ -2,6 +2,7 @@
 @import "../../style/vars/media";
 @import "../../style/vars/spacing";
 @import "../../style/vars/font-size";
+@import "../../style/vars/transitions";
 @import "../../style/mixins/functions";
 
 .SidebarNavigation {
@@ -12,7 +13,7 @@
   top: var(--header-height);
   background-color: $c-navigation-bg;
   z-index: 200;
-  transition: right 0.5s;
+  transition: right $transition-default;
 
   @media #{$w-al-medium} {
     display: none;

@@ -11,7 +11,7 @@ import {MetaLinkSpec, RouteSpec} from "./common/types";
 
 function App() {
 
-  const [sidebarVisible, setSidebarVisible] = useState<boolean>(true);
+  const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
 
   const routes = [
     {
