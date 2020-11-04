@@ -39,7 +39,7 @@ const Navigation = (props: Props) => {
   }
 
   return (
-    <header className="Navigation">
+    <header className={`Navigation ${sidebarVisible ? "opaque" : ""}`}>
       <div className="content">
         <div className="branding-container">
           <div className="branding"/>

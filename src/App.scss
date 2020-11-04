@@ -1,4 +1,5 @@
 @import "style/vars/colors";
+@import "style/vars/transitions";
 @import "style/global/fonts";
 
 .App {
@@ -7,4 +8,9 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+
+  .blur {
+    filter: blur(4px);
+    transition: filter 0s $transition-fast;
+  }
 }

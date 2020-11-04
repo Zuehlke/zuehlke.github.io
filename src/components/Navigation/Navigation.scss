@@ -3,9 +3,8 @@
 @import "../../style/vars/media";
 @import "../../style/vars/spacing";
 @import "../../style/vars/colors";
+@import "../../style/vars/transitions";
 @import "../../style/vars/font-size";
-
-
 
 .Navigation {
   @include center-container-wrapper;
@@ -17,6 +16,11 @@
   background-color: $c-navigation-bg;
   width: 100%;
   height: var(--header-height);
+  transition: background-color $transition-default;
+
+  &.opaque {
+    background-color: $c-navigation-bg-blur;
+  }
 
   & .content {
     @include container-responsive-width;

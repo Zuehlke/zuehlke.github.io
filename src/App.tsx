@@ -8,8 +8,12 @@ import Footer from "./components/Footer/Footer";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
+import {useSelector} from "react-redux";
+import {SystemState} from "./store/reducer";
 
 function App() {
+
+  const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
 
   const routes = [
     {
@@ -41,22 +45,27 @@ function App() {
         <SidebarNavigation
           routes={routes}
           metaLinks={metaLinks}/>
-        <Hero/>
 
-        {/* Routable content */}
-        <Switch>
-          {routes.map((route) => (
-            <Route path={route.to} exact>
-              {route.component}
+        <div className={sidebarVisible ? "blur" : ""}>
+          <Hero/>
+
+          {/* Routable content */}
+          <Switch>
+            {routes.map((route) => (
+              <Route path={route.to} exact>
+                {route.component}
+              </Route>
+            ))}
+            <Route path="/" exact>
+              {defaultRoute.component}
             </Route>
-          ))}
-          <Route path="/" exact>
-            {defaultRoute.component}
-          </Route>
-        </Switch>
+          </Switch>
 
-        <ZueBanner/>
-        <Footer/>
+          <ZueBanner/>
+          <Footer/>
+        </div>
+
+
       </Router>
     </div>
   );
@@ -65,11 +74,11 @@ function App() {
 // Placeholders for routable components
 // TODO: Remove these when replaced with actual components.
 const Contributions = () => {
-  return <h1>Contributions</h1>
+  return <div style={{height: "400px"}}><h1>Contributions</h1></div>
 }
 
 const People = () => {
-  return <h1>People</h1>
+  return <div style={{height: "400px"}}><h1>People</h1></div>
 }
 
 export default App;

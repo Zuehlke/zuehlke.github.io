@@ -13,15 +13,15 @@ $c-off-black:              rgb(25,25,25);
 
 // Transparency
 $c-gray-opacity-md:        rgba(240,240,240,.75);
-$c-gray-opacity-lw:        rgba(240,240,240,0.9);
-$c-white-opacity-lw:       rgba(255,255,255,0.85);
+$c-gray-opacity-hg:        rgba(240,240,240,0.9);
 
 // Semantic colors
 $c-text-on-light:          $c-off-black;
 $c-softer-text-on-light:   $c-dark-grey-very-dark;
 $c-text-on-dark:           $c-white;
 $c-softer-text-on-dark:    $c-light-grey-medium;
-$c-navigation-bg:          $c-white-opacity-lw;
+$c-navigation-bg:          rgba(255,255,255,0.85);
+$c-navigation-bg-blur:     rgba(255,255,255,0.60);
 
 // Base colors
 $black: 				   rgb(0,0,0);
