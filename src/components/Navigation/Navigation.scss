@@ -16,7 +16,7 @@ $height-smaller-screens: 55px;
   z-index: 100;
   top: 0;
   left: 0;
-  background-color: rgba(222, 240, 241, 0.8);
+  background-color: rgba(222, 240, 241, 0.9);
   width: 100%;
   height: var(--header-height);
 
@@ -41,21 +41,24 @@ $height-smaller-screens: 55px;
     }
 
     & .nav-links {
-      @include _flex(column, stretch, stretch);
+      @include _flex(column, stretch, flex-start);
       height: 100%;
       padding-left: $pad-rem-lg;
       flex-grow: 1;
 
       a {
         text-decoration: none;
-        padding-right: 0.9rem;
+
+      }
+
+      .link-container {
+        margin-right: 1rem;
       }
 
       & .meta-nav {
-        flex-grow: 1;
-        flex-basis: 100%;
         @include _flex(row, flex-end, flex-start);
-        padding-bottom: $pad-rem-sm;
+        padding-top: $pad-rem-sm;
+        padding-bottom: 0.6rem;
 
         & a {
           color: $c-softer-text-on-light;
@@ -63,8 +66,6 @@ $height-smaller-screens: 55px;
       }
 
       & .main-nav {
-        flex-grow: 1;
-        flex-basis: 100%;
         @include _flex(row, flex-start, flex-start);
 
         & a {

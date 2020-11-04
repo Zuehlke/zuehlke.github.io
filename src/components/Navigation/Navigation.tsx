@@ -8,6 +8,19 @@ type Props = {
 }
 
 const Navigation = (props: Props) => {
+
+  const metaNavLink = (spec: NavLinkSpec) => {
+    return (
+      <div className="link-container">
+        <a href={spec.href} target="_blank" rel="noreferrer">{spec.display}</a>
+      </div>
+    );
+  }
+
+  const mainNavLink = (spec: NavLinkSpec) => {
+    return <div className="link-container"><a href={spec.href}>{spec.display}</a></div>;
+  }
+
   return (
     <header className="Navigation">
       <div className="content">
@@ -18,13 +31,13 @@ const Navigation = (props: Props) => {
           <div className="meta-nav">
             {
               props.metaNavLinks
-                .map((link: NavLinkSpec) => <a href={link.target}>{link.value}</a>)
+                .map((spec: NavLinkSpec) => metaNavLink(spec))
             }
           </div>
           <nav className="main-nav">
             {
               props.mainNavLinks
-                .map((link: NavLinkSpec) => <a href={link.target}>{link.value}</a>)
+                .map((spec: NavLinkSpec) => mainNavLink(spec))
             }
           </nav>
         </div>

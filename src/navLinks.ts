@@ -1,20 +1,20 @@
 export type NavLinkSpec = {
-  target: string;
-  value: string;
+  href: string;
+  display: string;
 };
 
 const navLinks = {
   /* Main page navigation */
   main: [
-    {target: "/contributions", value: "Contributions"},
-    {target: "/people", value: "People"}
+    {href: "/contributions", display: "Contributions"},
+    {href: "/people", display: "People"}
   ] as NavLinkSpec[],
 
   /* Meta-navigation, external links */
   meta: [
-    {target: "https://www.zuehlke.com", value: "Zühlke Website"},
-    {target: "https://www.zuehlke.com/careers", value: "Careers"},
-    {target: "https://www.zuehlke.com/insights", value: "Insights"}
+    {href: "https://www.zuehlke.com", display: "Zühlke Website"},
+    {href: "https://www.zuehlke.com/careers", display: "Careers"},
+    {href: "https://www.zuehlke.com/insights", display: "Insights"}
   ] as NavLinkSpec[]
 };
 
