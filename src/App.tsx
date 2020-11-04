@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.scss';
 import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
-import Navigation, {RouteSpec} from "./components/Navigation/Navigation";
+import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-library.add(fab, faBars);
+import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
+import {MetaLinkSpec, RouteSpec} from "./common/types";
 
 function App() {
+
+  const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
 
   const routes = [
     {
@@ -28,10 +28,21 @@ function App() {
 
   const defaultRoute = routes[0];
 
+  const metaLinks = [
+    {href: "https://www.zuehlke.com", display: "Zühlke Website"},
+    {href: "https://www.zuehlke.com/careers", display: "Careers"},
+    {href: "https://www.zuehlke.com/insights", display: "Insights"}
+  ] as MetaLinkSpec[]
+
+  const handleHamburgerClicked = () => {
+    setSidebarVisible(!sidebarVisible)
+  };
+
   return (
     <div className="App">
       <Router>
-        <Navigation routes={routes}/>
+        <Navigation routes={routes} metaLinks={metaLinks} onHamburgerClicked={handleHamburgerClicked}/>
+        <SidebarNavigation visible={sidebarVisible}/>
         <Hero/>
 
         {/* Routable content */}

@@ -1,0 +1,14 @@
+.SidebarNavigation {
+  width: 300px;
+  height: calc(100vh - var(--header-height));
+  position: fixed;
+  right: -300px;
+  top: var(--header-height);
+  background-color: magenta;
+  z-index: 200;
+  transition: right 0.5s;
+
+  &.visible {
+    right: 0;
+  }
+}

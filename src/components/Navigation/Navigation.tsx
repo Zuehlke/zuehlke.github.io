@@ -1,30 +1,18 @@
 import './Navigation.scss';
-import React, {ReactNode} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-export type RouteSpec = {
-  to: string,
-  component: ReactNode,
-  display: string;
-};
-
-type MetaLinkSpec = {
-  href: string;
-  display: string;
-};
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {MetaLinkSpec, RouteSpec} from "../../common/types";
 
 type Props = {
   routes: RouteSpec[];
+  metaLinks: MetaLinkSpec[]
+  onHamburgerClicked: () => void;
 }
 
 const Navigation = (props: Props) => {
 
-  const metaLinks = [
-    {href: "https://www.zuehlke.com", display: "Zühlke Website"},
-    {href: "https://www.zuehlke.com/careers", display: "Careers"},
-    {href: "https://www.zuehlke.com/insights", display: "Insights"}
-  ] as MetaLinkSpec[]
+  const [hamburgerActive, setHamburgerActive] = useState<boolean>(false);
 
   const metaNavLink = (link: MetaLinkSpec) => {
     return (
@@ -42,6 +30,11 @@ const Navigation = (props: Props) => {
     );
   }
 
+  const handleHamburgerClick = () => {
+    setHamburgerActive(!hamburgerActive);
+    props.onHamburgerClicked();
+  }
+
   return (
     <header className="Navigation">
       <div className="content">
@@ -50,15 +43,17 @@ const Navigation = (props: Props) => {
         </div>
         <div className="nav-links">
           <div className="meta-nav">
-            { metaLinks.map((link: MetaLinkSpec) => metaNavLink(link)) }
+            {props.metaLinks.map((link: MetaLinkSpec) => metaNavLink(link))}
           </div>
           <nav className="main-nav">
-              { props.routes.map((route: RouteSpec) => routeLink(route)) }
+            {props.routes.map((route: RouteSpec) => routeLink(route))}
           </nav>
         </div>
         <div className="hamburger-container">
-          <button className="hamburger">
-            <FontAwesomeIcon icon={["fas", "bars"]}/>
+          <button onClick={handleHamburgerClick} className="hamburger">
+            {hamburgerActive ?
+              <FontAwesomeIcon icon={["fas", "times"]}/> :
+              <FontAwesomeIcon icon={["fas", "bars"]}/>}
           </button>
         </div>
       </div>
