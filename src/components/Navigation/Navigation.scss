@@ -5,25 +5,18 @@
 @import "../../style/vars/colors";
 @import "../../style/vars/font-size";
 
-$height-regular: 100px;
-$height-smaller-screens: 55px;
+
 
 .Navigation {
-  --header-height: #{$height-regular};
   @include center-container-wrapper;
   justify-content: space-between;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
-  background-color: rgba(222, 240, 241, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
   height: var(--header-height);
-
-  /* Medium and smaller screens */
-  @media #{$w-am-medium} {
-    --header-height: #{$height-smaller-screens};
-  }
 
   & .content {
     @include container-responsive-width;
@@ -75,7 +68,7 @@ $height-smaller-screens: 55px;
         }
       }
 
-      @media #{$w-am-medium} {
+      @media #{$w-am-small} {
         display: none;
       }
     }
@@ -83,10 +76,15 @@ $height-smaller-screens: 55px;
     & .hamburger-container {
       @include _flex(row, center, center);
       width: 100px;
-      background-color: turquoise;
       height: 100%;
 
-      @media #{$w-al-large} {
+      & button.hamburger {
+        background: none;
+        border: none;
+        font-size: $fs-lg;
+      }
+
+      @media #{$w-al-medium} {
         display: none;
       }
     }

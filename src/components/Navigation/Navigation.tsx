@@ -1,6 +1,7 @@
 import './Navigation.scss';
 import React, {ReactNode} from 'react';
 import {Link} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export type RouteSpec = {
   to: string,
@@ -56,7 +57,9 @@ const Navigation = (props: Props) => {
           </nav>
         </div>
         <div className="hamburger-container">
-          <button>Burger</button>
+          <button className="hamburger">
+            <FontAwesomeIcon icon={["fas", "bars"]}/>
+          </button>
         </div>
       </div>
     </header>
