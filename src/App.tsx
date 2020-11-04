@@ -1,18 +1,59 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.scss';
 import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
-import Navigation from "./components/Navigation/Navigation";
-import navLinks from "./navLinks";
+import Navigation, {RouteSpec} from "./components/Navigation/Navigation";
 
 function App() {
+
+  const routes = [
+    {
+      to: "/contributions",
+      component: <Contributions/>,
+      display: "Contributions"
+    },
+    {
+      to: "/people",
+      component: <People/>,
+      display: "People"
+    },
+  ] as RouteSpec[];
+
+  const defaultRoute = routes[0];
+
   return (
     <div className="App">
-      <Navigation mainNavLinks={navLinks.main} metaNavLinks={navLinks.meta}/>
-      <Hero/>
-      <ZueBanner/>
+      <Router>
+        <Navigation routes={routes}/>
+        <Hero/>
+
+        {/* Routable content */}
+        <Switch>
+          {routes.map((route) => (
+            <Route path={route.to} exact>
+              {route.component}
+            </Route>
+          ))}
+          <Route path="/" exact>
+            {defaultRoute.component}
+          </Route>
+        </Switch>
+
+        <ZueBanner/>
+      </Router>
     </div>
   );
+}
+
+// Placeholders for routable components
+// TODO: Remove these when replaced with actual components.
+const Contributions = () => {
+  return <h1>Contributions</h1>
+}
+
+const People = () => {
+  return <h1>People</h1>
 }
 
 export default App;

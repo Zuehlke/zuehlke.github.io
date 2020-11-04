@@ -1,24 +1,44 @@
 import './Navigation.scss';
-import React from 'react';
-import {NavLinkSpec} from "../../navLinks";
+import React, {ReactNode} from 'react';
+import {Link} from "react-router-dom";
+
+export type RouteSpec = {
+  to: string,
+  component: ReactNode,
+  display: string;
+};
+
+type MetaLinkSpec = {
+  href: string;
+  display: string;
+};
 
 type Props = {
-  metaNavLinks: NavLinkSpec[];
-  mainNavLinks: NavLinkSpec[];
+  routes: RouteSpec[];
 }
 
 const Navigation = (props: Props) => {
 
-  const metaNavLink = (spec: NavLinkSpec) => {
+  const metaLinks = [
+    {href: "https://www.zuehlke.com", display: "Zühlke Website"},
+    {href: "https://www.zuehlke.com/careers", display: "Careers"},
+    {href: "https://www.zuehlke.com/insights", display: "Insights"}
+  ] as MetaLinkSpec[]
+
+  const metaNavLink = (link: MetaLinkSpec) => {
     return (
       <div className="link-container">
-        <a href={spec.href} target="_blank" rel="noreferrer">{spec.display}</a>
+        <a href={link.href} target="_blank" rel="noreferrer">{link.display}</a>
       </div>
     );
   }
 
-  const mainNavLink = (spec: NavLinkSpec) => {
-    return <div className="link-container"><a href={spec.href}>{spec.display}</a></div>;
+  const routeLink = (route: RouteSpec) => {
+    return (
+      <div className="link-container">
+        <Link to={route.to}>{route.display}</Link>
+      </div>
+    );
   }
 
   return (
@@ -29,16 +49,10 @@ const Navigation = (props: Props) => {
         </div>
         <div className="nav-links">
           <div className="meta-nav">
-            {
-              props.metaNavLinks
-                .map((spec: NavLinkSpec) => metaNavLink(spec))
-            }
+            { metaLinks.map((link: MetaLinkSpec) => metaNavLink(link)) }
           </div>
           <nav className="main-nav">
-            {
-              props.mainNavLinks
-                .map((spec: NavLinkSpec) => mainNavLink(spec))
-            }
+              { props.routes.map((route: RouteSpec) => routeLink(route)) }
           </nav>
         </div>
         <div className="hamburger-container">
