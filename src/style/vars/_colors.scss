@@ -17,7 +17,8 @@ $c-gray-opacity-md:        rgba(240,240,240,.75);
 // Semantic colors
 $c-text-on-light:          $c-off-black;
 $c-softer-text-on-light:   $c-dark-grey-very-dark;
-$c-text-on-dark:           rgb(255,255,255);
+$c-text-on-dark:           $c-white;
+$c-softer-text-on-dark:    $c-light-grey-medium;
 
 // Base colors
 $black: 				   rgb(0,0,0);

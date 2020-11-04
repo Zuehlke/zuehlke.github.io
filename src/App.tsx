@@ -4,6 +4,11 @@ import './App.scss';
 import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
 import Navigation, {RouteSpec} from "./components/Navigation/Navigation";
+import Footer from "./components/Footer/Footer";
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+library.add(fab)
 
 function App() {
 
@@ -41,6 +46,7 @@ function App() {
         </Switch>
 
         <ZueBanner/>
+        <Footer/>
       </Router>
     </div>
   );
