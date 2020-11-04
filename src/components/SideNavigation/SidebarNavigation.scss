@@ -5,6 +5,15 @@
 @import "../../style/vars/transitions";
 @import "../../style/mixins/functions";
 
+/* Slide in from the right */
+$right-transition: right $transition-default ease-out;
+
+/* Delay visibility transition when hiding sidebar */
+$visibility-transition-out: visibility 0s $transition-default;
+
+/* Don't delay visibility transition when showing sidebar */
+$visibility-transition-in: visibility 0s 0s;
+
 .SidebarNavigation {
   width: 100vw;
   height: calc(100vh - var(--header-height));
@@ -13,7 +22,8 @@
   top: var(--header-height);
   background-color: $c-navigation-bg;
   z-index: 200;
-  transition: right $transition-default;
+  visibility: hidden;
+  transition: #{$right-transition}, #{$visibility-transition-out};
 
   @media #{$w-al-medium} {
     display: none;
@@ -21,6 +31,8 @@
 
   &.visible {
     right: 0;
+    visibility: visible;
+    transition: #{$right-transition}, #{$visibility-transition-in};
   }
 
   & .content {
