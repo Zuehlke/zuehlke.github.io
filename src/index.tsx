@@ -4,12 +4,21 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import initFaLibrary from './common/faLibrary';
+import {createStore} from 'redux';
+import reducer from "./store/reducer";
+import {Provider} from "react-redux";
 
+// Font Awesome library
 initFaLibrary();
+
+// Redux
+const reduxStore = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={reduxStore}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

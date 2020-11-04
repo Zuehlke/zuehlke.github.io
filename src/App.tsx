@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.scss';
 import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
@@ -10,8 +10,6 @@ import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
 
 function App() {
-
-  const [sidebarVisible, setSidebarVisible] = useState<boolean>(false);
 
   const routes = [
     {
@@ -34,26 +32,15 @@ function App() {
     {href: "https://www.zuehlke.com/insights", display: "Insights"}
   ] as MetaLinkSpec[]
 
-  const handleHamburgerClicked = () => {
-    setSidebarVisible(!sidebarVisible)
-  };
-
-  const handleHideSidebar = () => {
-    setSidebarVisible(false);
-  };
-
   return (
     <div className="App">
       <Router>
         <Navigation
           routes={routes}
-          metaLinks={metaLinks}
-          onHamburgerClicked={handleHamburgerClicked}/>
+          metaLinks={metaLinks}/>
         <SidebarNavigation
           routes={routes}
-          metaLinks={metaLinks}
-          visible={sidebarVisible}
-          onHideSidebar={handleHideSidebar}/>
+          metaLinks={metaLinks}/>
         <Hero/>
 
         {/* Routable content */}

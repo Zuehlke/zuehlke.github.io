@@ -2,15 +2,19 @@ import './SidebarNavigation.scss';
 import React from 'react';
 import {Link} from "react-router-dom";
 import {MetaLinkSpec, RouteSpec} from "../../common/types";
+import {useDispatch, useSelector} from "react-redux";
+import {SystemState} from "../../store/reducer";
+import {StateActionFactory} from "../../store/actions";
 
 type Props = {
   routes: RouteSpec[];
   metaLinks: MetaLinkSpec[];
-  visible: boolean;
-  onHideSidebar: () => void;
 }
 
 const SidebarNavigation = (props: Props) => {
+
+  const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
+  const dispatch = useDispatch();
 
   const routeLink = (route: RouteSpec) => {
     return (
@@ -30,11 +34,11 @@ const SidebarNavigation = (props: Props) => {
 
   // Custom code in addition to route change.
   const handleLinkClicked = () => {
-    props.onHideSidebar();
+    dispatch(StateActionFactory.hideSidebarNav());
   };
 
   return (
-    <div className={`SidebarNavigation ${props.visible ? "visible" : ""}`}>
+    <div className={`SidebarNavigation ${sidebarVisible ? "visible" : ""}`}>
       <div className="content">
         <div className="nav-links">
           <nav className="main-nav">

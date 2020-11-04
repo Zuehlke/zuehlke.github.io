@@ -1,18 +1,22 @@
 import './Navigation.scss';
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {MetaLinkSpec, RouteSpec} from "../../common/types";
+import {useDispatch, useSelector} from "react-redux";
+import {StateActionFactory} from "../../store/actions";
+import {SystemState} from "../../store/reducer";
 
 type Props = {
   routes: RouteSpec[];
   metaLinks: MetaLinkSpec[]
-  onHamburgerClicked: () => void;
 }
 
 const Navigation = (props: Props) => {
 
-  const [hamburgerActive, setHamburgerActive] = useState<boolean>(false);
+  // Global state
+  const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
+  const dispatch = useDispatch();
 
   const metaNavLink = (link: MetaLinkSpec) => {
     return (
@@ -31,8 +35,7 @@ const Navigation = (props: Props) => {
   }
 
   const handleHamburgerClick = () => {
-    setHamburgerActive(!hamburgerActive);
-    props.onHamburgerClicked();
+    dispatch(StateActionFactory.toggleSidebarNav());
   }
 
   return (
@@ -51,7 +54,7 @@ const Navigation = (props: Props) => {
         </div>
         <div className="hamburger-container">
           <button onClick={handleHamburgerClick} className="hamburger">
-            {hamburgerActive ?
+            {sidebarVisible ?
               <FontAwesomeIcon icon={["fas", "times"]}/> :
               <FontAwesomeIcon icon={["fas", "bars"]}/>}
           </button>
