@@ -22,7 +22,7 @@ $height-smaller-screens: 55px;
 
   /* Medium and smaller screens */
   @media #{$w-am-medium} {
-    --header-height: $height-smaller-screens;
+    --header-height: #{$height-smaller-screens};
   }
 
   & .content {
