@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.scss';
 import Hero from "./components/Hero/Hero";
@@ -14,6 +14,7 @@ import {SystemState} from "./store/reducer";
 function App() {
 
   const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
+  const pageContentRef = useRef<HTMLDivElement>(null);
 
   const routes = [
     {
@@ -36,30 +37,51 @@ function App() {
     {href: "https://www.zuehlke.com/insights", display: "Insights"}
   ] as MetaLinkSpec[]
 
+  const scrollToPageContent = () => {
+    // Reset scroll to 0.
+    window.scrollTo(0, 0);
+
+    // If header or page element doesn't exist, abort here.
+    const element = pageContentRef.current;
+    const header = document.querySelector("header");
+    if (!(element && header)) {
+      return;
+    }
+
+    // Find y position of page content and height of header, scroll to
+    // computed position.
+    const pageY = element.getBoundingClientRect().y;
+    const paddingTop: number = header.getBoundingClientRect().height;
+    window.scrollTo(0, pageY - paddingTop);
+  };
+
   return (
     <div className="App">
       <Router>
         <Navigation
           routes={routes}
-          metaLinks={metaLinks}/>
+          metaLinks={metaLinks}
+          onNavigateCallback={scrollToPageContent}/>
         <SidebarNavigation
           routes={routes}
-          metaLinks={metaLinks}/>
+          metaLinks={metaLinks}
+          onNavigateCallback={scrollToPageContent}/>
 
         <div className={sidebarVisible ? "blur" : ""}>
           <Hero/>
 
-          {/* Routable content */}
-          <Switch>
-            {routes.map((route) => (
-              <Route path={route.to} exact>
-                {route.component}
+          <div ref={pageContentRef}>
+            <Switch>
+              {routes.map((route) => (
+                <Route path={route.to} exact>
+                  {route.component}
+                </Route>
+              ))}
+              <Route path="/" exact>
+                {defaultRoute.component}
               </Route>
-            ))}
-            <Route path="/" exact>
-              {defaultRoute.component}
-            </Route>
-          </Switch>
+            </Switch>
+          </div>
 
           <ZueBanner/>
           <Footer/>

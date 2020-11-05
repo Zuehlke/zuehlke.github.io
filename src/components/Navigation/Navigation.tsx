@@ -2,14 +2,15 @@ import './Navigation.scss';
 import React from 'react';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {MetaLinkSpec, RouteSpec} from "../../common/types";
+import {MetaLinkSpec, RouteSpec, Runnable} from "../../common/types";
 import {useDispatch, useSelector} from "react-redux";
 import {StateActionFactory} from "../../store/actions";
 import {SystemState} from "../../store/reducer";
 
 type Props = {
   routes: RouteSpec[];
-  metaLinks: MetaLinkSpec[]
+  metaLinks: MetaLinkSpec[],
+  onNavigateCallback: Runnable,
 }
 
 const Navigation = (props: Props) => {
@@ -28,7 +29,7 @@ const Navigation = (props: Props) => {
 
   const routeLink = (route: RouteSpec) => {
     return (
-      <div className="link-container">
+      <div className="link-container" onClick={handleNavigate}>
         <Link to={route.to}>{route.display}</Link>
       </div>
     );
@@ -37,6 +38,10 @@ const Navigation = (props: Props) => {
   const handleHamburgerClick = () => {
     dispatch(StateActionFactory.toggleSidebarNav());
   }
+
+  const handleNavigate = () => {
+    props.onNavigateCallback();
+  };
 
   return (
     <header className={`Navigation ${sidebarVisible ? "opaque" : ""}`}>

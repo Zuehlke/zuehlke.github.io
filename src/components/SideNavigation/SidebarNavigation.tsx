@@ -1,7 +1,7 @@
 import './SidebarNavigation.scss';
 import React from 'react';
 import {Link} from "react-router-dom";
-import {MetaLinkSpec, RouteSpec} from "../../common/types";
+import {MetaLinkSpec, RouteSpec, Runnable} from "../../common/types";
 import {useDispatch, useSelector} from "react-redux";
 import {SystemState} from "../../store/reducer";
 import {StateActionFactory} from "../../store/actions";
@@ -9,6 +9,7 @@ import {StateActionFactory} from "../../store/actions";
 type Props = {
   routes: RouteSpec[];
   metaLinks: MetaLinkSpec[];
+  onNavigateCallback: Runnable;
 }
 
 const SidebarNavigation = (props: Props) => {
@@ -18,7 +19,7 @@ const SidebarNavigation = (props: Props) => {
 
   const routeLink = (route: RouteSpec) => {
     return (
-      <div className="link-container" onClick={handleLinkClicked}>
+      <div className="link-container" onClick={() => handleLinkClicked(true)}>
         <Link to={route.to}>{route.display}</Link>
       </div>
     );
@@ -26,15 +27,18 @@ const SidebarNavigation = (props: Props) => {
 
   const metaNavLink = (link: MetaLinkSpec) => {
     return (
-      <div className="link-container" onClick={handleLinkClicked}>
+      <div className="link-container" onClick={() => handleLinkClicked(false)}>
         <a href={link.href} target="_blank" rel="noreferrer">{link.display}</a>
       </div>
     );
   }
 
   // Custom code in addition to route change.
-  const handleLinkClicked = () => {
+  const handleLinkClicked = (mainNav: boolean) => {
     dispatch(StateActionFactory.hideSidebarNav());
+    if (mainNav) {
+      props.onNavigateCallback();
+    }
   };
 
   return (
