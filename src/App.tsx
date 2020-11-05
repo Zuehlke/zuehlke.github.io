@@ -110,7 +110,13 @@ const Contributions = () => {
 }
 
 const People = () => {
-  return <div style={{height: "400px"}}><h1>People</h1></div>
+  return (
+    <div className="placeholder">
+      <div className="content">
+        <h1>People</h1>
+      </div>
+    </div>
+  )
 }
 
 export default App;

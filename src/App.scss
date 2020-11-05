@@ -1,5 +1,6 @@
 @import "style/vars/colors";
 @import "style/vars/transitions";
+@import "style/vars/spacing";
 @import "style/mixins/layout";
 @import "style/mixins/functions";
 
@@ -26,6 +27,8 @@
     &>.content {
       @include container-responsive-width;
       @include _flex(column, flex-start, flex-start);
+      height: 800px;
+      padding: 0 $pad-rem-sm;
     }
   }
 }
