@@ -67,9 +67,10 @@ function App() {
           metaLinks={metaLinks}
           onNavigateCallback={scrollToPageContent}/>
 
+        { /* Content, blurred out when nav is open. */}
         <div className={sidebarVisible ? "blur" : ""}>
           <Hero/>
-
+          { /* Main routable page content */}
           <div ref={pageContentRef}>
             <Switch>
               {routes.map((route) => (
@@ -82,11 +83,9 @@ function App() {
               </Route>
             </Switch>
           </div>
-
           <ZueBanner/>
           <Footer/>
         </div>
-
 
       </Router>
     </div>
