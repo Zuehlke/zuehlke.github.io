@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.scss';
 import Hero from "./components/Hero/Hero";
@@ -8,13 +8,16 @@ import Footer from "./components/Footer/Footer";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
-import {useSelector} from "react-redux";
-import {SystemState} from "./store/reducer";
+import OverlayStateContext, {OverlayState} from "./context/overlayState";
 
 function App() {
 
-  const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
   const pageContentRef = useRef<HTMLDivElement>(null);
+
+  // Set up state for overlay context
+  const [overlayState, setOverlayState] = useState<OverlayState>({
+    sidebarNavVisible: false
+  });
 
   const routes = [
     {
@@ -58,17 +61,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation
-          routes={routes}
-          metaLinks={metaLinks}
-          onNavigateCallback={scrollToPageContent}/>
-        <SidebarNavigation
-          routes={routes}
-          metaLinks={metaLinks}
-          onNavigateCallback={scrollToPageContent}/>
+        <OverlayStateContext.Provider value={{overlayState, setOverlayState}}>
+          <Navigation
+            routes={routes}
+            metaLinks={metaLinks}
+            onNavigateCallback={scrollToPageContent}/>
+          <SidebarNavigation
+            routes={routes}
+            metaLinks={metaLinks}
+            onNavigateCallback={scrollToPageContent}/>
+        </OverlayStateContext.Provider>
 
         { /* Content, blurred out when nav is open. */}
-        <div className={sidebarVisible ? "blur" : ""}>
+        <div className={overlayState.sidebarNavVisible ? "blur" : ""}>
           <Hero/>
           { /* Main routable page content */}
           <div ref={pageContentRef}>

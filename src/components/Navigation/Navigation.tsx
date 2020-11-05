@@ -1,11 +1,9 @@
 import './Navigation.scss';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {MetaLinkSpec, RouteSpec, Runnable} from "../../common/types";
-import {useDispatch, useSelector} from "react-redux";
-import {StateActionFactory} from "../../store/actions";
-import {SystemState} from "../../store/reducer";
+import OverlayStateContext from "../../context/overlayState";
 
 type Props = {
   routes: RouteSpec[];
@@ -16,8 +14,7 @@ type Props = {
 const Navigation = (props: Props) => {
 
   // Global state
-  const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
-  const dispatch = useDispatch();
+  const {overlayState, setOverlayState} = useContext(OverlayStateContext);
 
   const metaNavLink = (link: MetaLinkSpec) => {
     return (
@@ -36,7 +33,10 @@ const Navigation = (props: Props) => {
   }
 
   const handleHamburgerClick = () => {
-    dispatch(StateActionFactory.toggleSidebarNav());
+    setOverlayState({
+      ...overlayState,
+      sidebarNavVisible: !overlayState.sidebarNavVisible
+    })
   }
 
   const handleNavigate = () => {
@@ -44,7 +44,7 @@ const Navigation = (props: Props) => {
   };
 
   return (
-    <header className={`Navigation ${sidebarVisible ? "opaque" : ""}`}>
+    <header className={`Navigation ${overlayState.sidebarNavVisible ? "opaque" : ""}`}>
       <div className="content">
         <div className="branding-container">
           <div className="branding"/>
@@ -59,7 +59,7 @@ const Navigation = (props: Props) => {
         </div>
         <div className="hamburger-container">
           <button onClick={handleHamburgerClick} className="hamburger">
-            {sidebarVisible ?
+            {overlayState.sidebarNavVisible ?
               <FontAwesomeIcon icon={["fas", "times"]}/> :
               <FontAwesomeIcon icon={["fas", "bars"]}/>}
           </button>

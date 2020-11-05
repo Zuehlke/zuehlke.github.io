@@ -1,10 +1,8 @@
 import './SidebarNavigation.scss';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import {MetaLinkSpec, RouteSpec, Runnable} from "../../common/types";
-import {useDispatch, useSelector} from "react-redux";
-import {SystemState} from "../../store/reducer";
-import {StateActionFactory} from "../../store/actions";
+import OverlayStateContext from "../../context/overlayState";
 
 type Props = {
   routes: RouteSpec[];
@@ -14,8 +12,7 @@ type Props = {
 
 const SidebarNavigation = (props: Props) => {
 
-  const sidebarVisible = useSelector((state: SystemState) => state.sidebarNavVisible);
-  const dispatch = useDispatch();
+  const {overlayState, setOverlayState} = useContext(OverlayStateContext);
 
   const routeLink = (route: RouteSpec) => {
     return (
@@ -35,14 +32,17 @@ const SidebarNavigation = (props: Props) => {
 
   // Custom code in addition to route change.
   const handleLinkClicked = (mainNav: boolean) => {
-    dispatch(StateActionFactory.hideSidebarNav());
+    setOverlayState({
+      ...overlayState,
+      sidebarNavVisible: false
+    })
     if (mainNav) {
       props.onNavigateCallback();
     }
   };
 
   return (
-    <div className={`SidebarNavigation ${sidebarVisible ? "visible" : ""}`}>
+    <div className={`SidebarNavigation ${overlayState.sidebarNavVisible ? "visible" : ""}`}>
       <div className="content">
         <div className="nav-links">
           <nav className="main-nav">
