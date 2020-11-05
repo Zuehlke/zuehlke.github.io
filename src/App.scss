@@ -1,6 +1,7 @@
 @import "style/vars/colors";
 @import "style/vars/transitions";
-@import "style/global/fonts";
+@import "style/mixins/layout";
+@import "style/mixins/functions";
 
 .App {
   display: flex;
@@ -9,8 +10,22 @@
   justify-content: flex-start;
   width: 100%;
 
+  .blurable {
+    width: 100%;
+  }
+
   .blur {
     filter: blur(4px);
     transition: filter 0s $transition-fast;
+  }
+
+  /* TODO: Remove once we have proper page components. */
+  .placeholder {
+    @include center-container-wrapper;
+
+    &>.content {
+      @include container-responsive-width;
+      @include _flex(column, flex-start, flex-start);
+    }
   }
 }

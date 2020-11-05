@@ -73,7 +73,7 @@ function App() {
         </OverlayStateContext.Provider>
 
         { /* Content, blurred out when nav is open. */}
-        <div className={overlayState.sidebarNavVisible ? "blur" : ""}>
+        <div className={`blurable ${overlayState.sidebarNavVisible ? "blur": ""}`}>
           <Hero/>
           { /* Main routable page content */}
           <div ref={pageContentRef}>
@@ -100,7 +100,13 @@ function App() {
 // Placeholders for routable components
 // TODO: Remove these when replaced with actual components.
 const Contributions = () => {
-  return <div style={{height: "400px"}}><h1>Contributions</h1></div>
+  return (
+    <div className="placeholder">
+      <div className="content">
+        <h1>Contributions</h1>
+      </div>
+    </div>
+  )
 }
 
 const People = () => {
