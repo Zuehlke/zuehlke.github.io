@@ -27,7 +27,7 @@
     &>.content {
       @include container-responsive-width;
       @include _flex(column, flex-start, flex-start);
-      height: 800px;
+      height: 600px;
       padding: 0 $pad-rem-sm;
     }
   }

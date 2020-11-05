@@ -20,8 +20,9 @@ $min-height: 350px;
   @include _flex(column, center, flex-end);
 
   /* Height */
-  height: 55vh;
+  height: 600px;
   min-height: $min-height;
+  max-height: 55vh;
 
   @media #{$w-am-medium} {
     height: 40vh;
