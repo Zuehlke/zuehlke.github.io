@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
 import OverlayStateContext, {OverlayState} from "./context/overlayState";
+import TileGrid from "./components/TileGrid/TileGrid";
 
 function App() {
 
@@ -104,6 +105,7 @@ const Contributions = () => {
     <div className="placeholder">
       <div className="content">
         <h1>Contributions</h1>
+        <TileGrid />
       </div>
     </div>
   )

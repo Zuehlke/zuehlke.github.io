@@ -1,0 +1,72 @@
+@import "../../style/mixins/layout";
+@import "../../style/mixins/fonts";
+@import "../../style/mixins/functions";
+@import "../../style/vars/colors";
+@import "../../style/vars/spacing";
+@import "../../style/vars/media";
+@import "../../style/vars/transitions";
+
+.TileGrid {
+  @include center-container-wrapper;
+
+  & .content {
+    @include container-responsive-width;
+    margin-bottom: $pad-rem-lg;
+
+    --num-cols: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    justify-items: center;
+    align-items: center;
+
+    @media #{$w-medium} {
+      --num-cols: 2;
+    }
+
+    @media #{$w-am-small} {
+      --num-cols: 1;
+    }
+
+    .tile {
+      $color-primary: lightgreen;
+      $color-secondary: lightblue;
+      $transition-duration: $transition-fast;
+
+      height: 100%;
+      width: 100%;
+      transition: width $transition-duration, height $transition-duration;
+
+      /*&:hover {
+        width: 95%;
+        height: 95%;
+      }*/
+
+      background-color: $color-primary;
+
+      &:nth-child(even) {
+        background-color: $color-secondary;
+      }
+
+      @media #{$w-medium} {
+        &:nth-child(3n + 1) {
+          background-color: $color-primary;
+        }
+
+        &:nth-child(3n + 2) {
+          background-color: $color-secondary;
+        }
+
+        &:nth-child(3n + 3) {
+          background-color: $color-secondary;
+        }
+      }
+
+      &::before {
+        content: "";
+        padding-bottom: 100%;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+  }
+}
