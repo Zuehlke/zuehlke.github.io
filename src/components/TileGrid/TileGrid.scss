@@ -9,7 +9,7 @@
 .TileGrid {
   @include center-container-wrapper;
 
-  & .content {
+  & .grid {
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
 
@@ -26,47 +26,50 @@
     @media #{$w-am-small} {
       --num-cols: 1;
     }
+  }
 
-    .tile {
-      $color-primary: lightgreen;
-      $color-secondary: lightblue;
-      $transition-duration: $transition-fast;
+  & .grid > .grid-cell {
+    @include grid-square-cell;
 
-      height: 100%;
-      width: 100%;
-      transition: width $transition-duration, height $transition-duration;
+    $color-a: #e0e0e0;
+    $color-b: #ccc;
+    $transition-duration: $transition-fast;
 
-      /*&:hover {
-        width: 95%;
-        height: 95%;
-      }*/
+    --background-col: #{$color-a};
+    &:nth-child(even) {
+      --background-col: #{$color-b};
+    }
+  }
 
-      background-color: $color-primary;
+  & .grid-cell > .grid-cell-inner {
+    @include grid-square-cell-inner;
+    @include flex-row-center-center;
+  }
 
-      &:nth-child(even) {
-        background-color: $color-secondary;
-      }
+  & .grid-cell-inner > .tile {
+    --dim-regular: 90%;
+    --dim-zoom: 95%;
+    box-shadow: 0 4px 4px rgba(0,0,0,.1);
+    $transition-duration: $transition-fast;
 
-      @media #{$w-medium} {
-        &:nth-child(3n + 1) {
-          background-color: $color-primary;
-        }
+    width: var(--dim-regular);
+    height: var(--dim-regular);
+    transition: width $transition-duration,
+                height $transition-duration,
+                background-color $transition-duration;
 
-        &:nth-child(3n + 2) {
-          background-color: $color-secondary;
-        }
+    background-color: var(--background-col);
 
-        &:nth-child(3n + 3) {
-          background-color: $color-secondary;
-        }
-      }
+    &:hover {
+      width: var(--dim-zoom);
+      height: var(--dim-zoom);
+      background-color: $c-primary;
+    }
 
-      &::before {
-        content: "";
-        padding-bottom: 100%;
-        display: inline-block;
-        vertical-align: top;
-      }
+    @media #{$w-am-medium} {
+      --dim-regular: 100%;
+      --dim-zoom: 100%;
+      box-shadow: none;
     }
   }
 }

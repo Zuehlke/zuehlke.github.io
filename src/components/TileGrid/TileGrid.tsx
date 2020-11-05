@@ -4,14 +4,26 @@ import React from 'react';
 type Props = {}
 
 const TileGrid = (props: Props) => {
+
+  const numTiles = 10;
+  const tiles = Array.from(Array(numTiles).keys()).map((idx) => `Repo ${idx+1}`);
+
+  const tile = (text: string) => {
+    return (
+      <div className="grid-cell">
+        <div className="grid-cell-inner">
+          <div className="tile">
+            <span>{text}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="TileGrid">
-      <div className="content">
-        <div className="tile">Repo 1</div>
-        <div className="tile">Repo 2</div>
-        <div className="tile">Repo 3</div>
-        <div className="tile">Repo 4</div>
-        <div className="tile">Repo 5</div>
+      <div className="grid">
+        {tiles.map((text: string) => tile(text))}
       </div>
     </div>
   );
