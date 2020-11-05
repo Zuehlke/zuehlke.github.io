@@ -9,7 +9,7 @@
 
   .content {
     @include container-responsive-width;
-    padding: $pad-rem-lg 0 $pad-rem-xl 0;
+    padding: $pad-rem-lg $pad-rem-sm $pad-rem-xl $pad-rem-sm;
   }
 
   .text {

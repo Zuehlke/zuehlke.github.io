@@ -5,11 +5,11 @@
 @import "../../style/vars/colors";
 @import "../../style/vars/spacing";
 
-$min-height: 280px;
+$min-height: 350px;
 
 .Hero {
   /* Background image */
-  background-image: url("../../assets/images/wide/header_4_code.png");
+  background-image: url("../../assets/images/wide/header_zue_bg.jpg");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -20,11 +20,15 @@ $min-height: 280px;
   @include _flex(column, center, flex-end);
 
   /* Height */
-  height: 47vh;
+  height: 600px;
   min-height: $min-height;
+  max-height: 55vh;
 
-  /* Medium screens or smaller */
   @media #{$w-am-medium} {
+    height: 40vh;
+  }
+
+  @media #{$w-am-small} {
     height: $min-height;
   }
 

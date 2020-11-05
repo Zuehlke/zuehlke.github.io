@@ -1,6 +1,18 @@
 @import "../../style/vars/colors";
 @import "../vars/font-size";
 @import "../../style/mixins/fonts";
+@import "../../style/vars/media";
+
+$height-regular: 100px;
+$height-smaller-screens: 55px;
+
+:root {
+  --header-height: #{$height-regular};
+
+  @media #{$w-am-small} {
+    --header-height: #{$height-smaller-screens};
+  }
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -22,4 +34,8 @@ h2 {
 
 strong {
   font-weight: bold;
+}
+
+button {
+  cursor: pointer;
 }
