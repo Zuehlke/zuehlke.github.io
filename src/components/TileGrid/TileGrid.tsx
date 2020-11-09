@@ -10,13 +10,13 @@ const TileGrid = (props: Props) => {
 
   const tile = (text: string) => {
     return (
-      <div className="grid-cell">
+      <a className="grid-cell" href="http://www.zuehlke.com" target="_blank" rel="noreferrer">
         <div className="grid-cell-inner">
           <div className="tile">
             <span>{text}</span>
           </div>
         </div>
-      </div>
+      </a>
     );
   }
 
