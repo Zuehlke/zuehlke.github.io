@@ -1,29 +1,28 @@
 import './TileGrid.scss';
-import React from 'react';
+import React, {ReactNode} from 'react';
 
-type Props = {}
+type Props = {
+  children: ReactNode[]
+}
 
 const TileGrid = (props: Props) => {
 
-  const numTiles = 10;
-  const tiles = Array.from(Array(numTiles).keys()).map((idx) => `Repo ${idx+1}`);
-
-  const tile = (text: string) => {
+  const tile = (child: ReactNode) => {
     return (
-      <a className="grid-cell" href="http://www.zuehlke.com" target="_blank" rel="noreferrer">
+      <div className="grid-cell">
         <div className="grid-cell-inner">
           <div className="tile">
-            <span>{text}</span>
+            {child}
           </div>
         </div>
-      </a>
+      </div>
     );
   }
 
   return (
     <div className="TileGrid">
       <div className="grid">
-        {tiles.map((text: string) => tile(text))}
+        {props.children.map((child: ReactNode) => tile(child))}
       </div>
     </div>
   );

@@ -62,28 +62,27 @@
   }
 
   & .grid-cell-inner > .tile {
-    --dim-regular: 90%;
-    --dim-zoom: 95%;
+    --side-length: 90%;
+    --zoom-scale: 1.1;
     box-shadow: 0 4px 4px rgba(0,0,0,.1);
     $transition-duration: $transition-fast;
 
-    width: var(--dim-regular);
-    height: var(--dim-regular);
-    transition: width $transition-duration,
-                height $transition-duration,
+    width: var(--side-length);
+    height: var(--side-length);
+    transform: scale(1);
+    transition: transform $transition-duration,
                 background-color $transition-duration;
 
     background-color: var(--background-col);
 
     &:hover {
-      width: var(--dim-zoom);
-      height: var(--dim-zoom);
+      transform: scale(var(--zoom-scale));
       background-color: $c-primary;
     }
 
     @media #{$w-am-medium} {
-      --dim-regular: 100%;
-      --dim-zoom: 100%;
+      --side-length: 100%;
+      --zoom-scale: 1;
       box-shadow: none;
     }
   }

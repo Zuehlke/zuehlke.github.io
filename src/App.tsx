@@ -7,9 +7,9 @@ import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
-import {MetaLinkSpec, RouteSpec} from "./common/types";
+import {MetaLinkSpec, RepoSpec, RouteSpec} from "./common/types";
 import OverlayStateContext, {OverlayState} from "./context/overlayState";
-import TileGrid from "./components/TileGrid/TileGrid";
+import Contributions from "./pages/Contributions/Contributions";
 
 function App() {
 
@@ -20,10 +20,20 @@ function App() {
     sidebarNavVisible: false
   });
 
+  const contributionRepos: RepoSpec[] = [
+    {title: "Scenarioo", description: "Documentation tool to leverage the power of user interface tests by making them visible, understandable and useful for all (also non-technical) colleagues, that are involved in the software development process. Founded, driven and developed by a team of Zühlke engineers in collaboration with our customers and their needs.", url: "https://www.zuehlke.com/en"},
+    {title: "quickstart-angular", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
+    {title: "MvvmCross", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
+    {title: "linux-developer-kitchen", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
+    {title: "java-developer-vm", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
+    {title: "linus-kitchen", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
+    {title: "cookbook-windev", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
+  ];
+
   const routes = [
     {
       to: "/contributions",
-      component: <Contributions/>,
+      component: <Contributions repos={contributionRepos}/>,
       display: "Contributions"
     },
     {
@@ -100,17 +110,6 @@ function App() {
 
 // Placeholders for routable components
 // TODO: Remove these when replaced with actual components.
-const Contributions = () => {
-  return (
-    <div className="placeholder">
-      <div className="content">
-        <h1>Contributions</h1>
-        <TileGrid />
-      </div>
-    </div>
-  )
-}
-
 const People = () => {
   return (
     <div className="placeholder">

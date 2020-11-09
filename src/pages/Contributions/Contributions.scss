@@ -1,0 +1,9 @@
+@import "../../style/mixins/layout";
+
+.Contributions {
+  @include center-container-wrapper;
+
+  & .container {
+    @include container-responsive-width;
+  }
+}
