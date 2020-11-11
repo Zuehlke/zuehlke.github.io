@@ -12,7 +12,7 @@
 
   & .grid {
     --num-cols: 3;
-    $min-row-height: 200px;
+    $min-row-height: 0px;
 
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
@@ -48,14 +48,18 @@
         width: 100px;
         height: 3px;
         margin-left: $pad-rem-md;
-        background-color: $c-primary;
-        transition: width $transition-duration, margin-left $transition-duration;
+        background-color: $c-primary-sat-lo;
+        transition:
+                width $transition-duration,
+                margin-left $transition-duration,
+                color $transition-duration;
       }
 
       &:hover {
         &::before {
           width: 100%;
           margin-left: 0;
+          background-color: $c-primary;
         }
       }
     }
