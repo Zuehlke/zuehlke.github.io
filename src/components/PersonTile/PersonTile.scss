@@ -4,20 +4,27 @@
 
 .PersonTile {
   @include _flex(row, stretch, stretch);
+  padding: $pad-rem-md $pad-rem-xs $pad-rem-xs;
+  height: 100%;
 
   & .profile-container {
     @include _flex(column, center, flex-start);
-    margin-right: $pad-rem-sm;
-    width: 50%;
+    margin-right: $pad-rem-md;
     flex-shrink: 0;
 
     & .title {
       // color: $c-primary;
+      font-weight: bold;
     }
   }
 
   & .description-container {
     flex-shrink: 1;
+
+    & .description {
+      // font-style: italic;
+      color: $c-softer-text-on-light;
+    }
   }
 
   & .avatar {

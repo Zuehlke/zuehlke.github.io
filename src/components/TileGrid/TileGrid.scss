@@ -13,7 +13,7 @@
 
   & .grid {
     /* Default number of columns */
-    --num-cols: 3;
+    --num-cols: 2;
 
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
@@ -79,12 +79,13 @@
   & .grid-cell > .tile {
     width: 100%;
     height: 100%;
-    padding: $pad-rem-sm;
+    padding: $pad-rem-sm $pad-rem-sm $pad-rem-md $pad-rem-sm;
     background-color: $white;
+    //background-color: #f5f5f5;
     transition: background-color $transition-duration;
 
     &:hover {
-      background-color: $c-primary;
+      background-color: #f5f5f5;
     }
 
     @media #{$w-am-medium} {

@@ -15,7 +15,7 @@ const PersonTile = (props: Props) => {
         <span>{props.person.name}</span>
       </div>
       <div className="description-container">
-        {props.person.description}
+        <span className="description">{props.person.description}</span>
       </div>
     </div>
   );
