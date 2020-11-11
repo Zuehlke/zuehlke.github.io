@@ -1,6 +1,7 @@
 @import "../../style/mixins/layout";
 @import "../../style/mixins/fonts";
 @import "../../style/mixins/functions";
+@import "../../style/mixins/styling";
 @import "../../style/vars/colors";
 @import "../../style/vars/spacing";
 @import "../../style/vars/media";
@@ -12,13 +13,12 @@
   $transition-duration: $transition-fast;
 
   & .grid {
-    /* Default number of columns */
-    --num-cols: 2;
 
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
 
     /* Grid setup */
+    --num-cols: 2;
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-gap: $pad-rem-md;
@@ -28,7 +28,6 @@
     }
 
     @media #{$w-medium} {
-      --num-cols: 2;
       grid-gap: 0;
     }
 
@@ -41,55 +40,11 @@
     height: 100%;
     position: relative;
 
-    /* Visual separator */
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100px;
-      height: 3px;
-      background-color: $c-primary-sat-lo;
-      transition: width $transition-duration,
-                  left $transition-duration,
-                  color $transition-duration;
-    }
-
     &:hover {
       &::before {
         width: 100%;
         background-color: $c-primary;
       }
-    }
-
-    @media #{$w-am-medium} {
-      &::before {
-        left: $pad-rem-md;
-      }
-
-      &:hover {
-        &::before {
-          left: 0;
-        }
-      }
-    }
-  }
-
-  & .grid-cell > .tile {
-    width: 100%;
-    height: 100%;
-    padding: $pad-rem-sm $pad-rem-sm $pad-rem-md $pad-rem-sm;
-    background-color: $white;
-    //background-color: #f5f5f5;
-    transition: background-color $transition-duration;
-
-    &:hover {
-      background-color: #f5f5f5;
-    }
-
-    @media #{$w-am-medium} {
-      padding: $pad-rem-xs $pad-rem-md $pad-rem-xxl;
     }
   }
 }

@@ -6,6 +6,7 @@
   @include _flex(row, stretch, stretch);
   padding: $pad-rem-md $pad-rem-xs $pad-rem-xs;
   height: 100%;
+  position: relative;
 
   & .profile-container {
     @include _flex(column, center, flex-start);
