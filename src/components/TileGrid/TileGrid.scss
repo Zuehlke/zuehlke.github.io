@@ -16,11 +16,12 @@
     --num-cols: 3;
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
-    justify-items: center;
-    align-items: center;
+    grid-gap: $pad-rem-md;
+    grid-auto-rows: minmax(200px, auto);
 
     @media #{$w-medium} {
       --num-cols: 2;
+      grid-gap: 0;
     }
 
     @media #{$w-am-small} {
@@ -29,11 +30,12 @@
   }
 
   & .grid > .grid-cell {
-    @include grid-square-cell;
 
     $color-a: #e0e0e0;
     $color-b: #ccc;
     $transition-duration: $transition-fast;
+
+    height: 100%;
 
     --background-col: #{$color-a};
     &:nth-child(even) {
@@ -54,21 +56,25 @@
         --background-col: #{$color-a};
       }
     }
+
+    @media #{$w-am-small} {
+      &:nth-child(odd) {
+        --background-col: #{$color-a};
+      }
+      &:nth-child(even) {
+        --background-col: #{$color-b};
+      }
+    }
   }
 
-  & .grid-cell > .grid-cell-inner {
-    @include grid-square-cell-inner;
-    @include flex-row-center-center;
-  }
-
-  & .grid-cell-inner > .tile {
-    --side-length: 90%;
+  & .grid-cell > .tile {
     --zoom-scale: 1.1;
     box-shadow: 0 4px 4px rgba(0,0,0,.1);
     $transition-duration: $transition-fast;
 
-    width: var(--side-length);
-    height: var(--side-length);
+    width: 100%;
+    height: 100%;
+    padding: $pad-rem-sm;
     transform: scale(1);
     transition: transform $transition-duration,
                 background-color $transition-duration;
@@ -84,6 +90,7 @@
       --side-length: 100%;
       --zoom-scale: 1;
       box-shadow: none;
+      padding: $pad-rem-md;
     }
   }
 }

@@ -12,7 +12,7 @@ const Contributions = (props: Props) => {
   return (
     <div className="Contributions">
       <div className="container">
-        <h1>Contributions</h1>
+        <h1 className="title">Contributions</h1>
         <TileGrid>
           {props.repos.map((repo: RepoSpec) => <RepoTile repo={repo}/>)}
         </TileGrid>

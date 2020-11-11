@@ -12,7 +12,7 @@
     text-decoration: none;
     color: $c-text-on-light;
     @include _flex(column, flex-start, flex-start);
-    padding: $pad-rem-sm;
+    // padding: $pad-rem-sm;
     width: 100%;
     height: 100%;
     // background-color: magenta;

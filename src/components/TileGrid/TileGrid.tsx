@@ -10,10 +10,8 @@ const TileGrid = (props: Props) => {
   const tile = (child: ReactNode) => {
     return (
       <div className="grid-cell">
-        <div className="grid-cell-inner">
-          <div className="tile">
-            {child}
-          </div>
+        <div className="tile">
+          {child}
         </div>
       </div>
     );

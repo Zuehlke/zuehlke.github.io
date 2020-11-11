@@ -20,6 +20,7 @@ export type Function<T, U> = (x: T) => U;
 // Data model
 export type RepoSpec = {
   title: string;
-  description: string;
   url: string;
+  description: string;
+  logo: string;
 };

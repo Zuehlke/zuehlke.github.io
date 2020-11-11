@@ -5,9 +5,10 @@ import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
+import contributions from "./data/contributions.json";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
-import {MetaLinkSpec, RepoSpec, RouteSpec} from "./common/types";
+import {MetaLinkSpec, RouteSpec} from "./common/types";
 import OverlayStateContext, {OverlayState} from "./context/overlayState";
 import Contributions from "./pages/Contributions/Contributions";
 
@@ -20,20 +21,10 @@ function App() {
     sidebarNavVisible: false
   });
 
-  const contributionRepos: RepoSpec[] = [
-    {title: "Scenarioo", description: "Documentation tool to leverage the power of user interface tests by making them visible, understandable and useful for all (also non-technical) colleagues, that are involved in the software development process. Founded, driven and developed by a team of Zühlke engineers in collaboration with our customers and their needs.", url: "https://www.zuehlke.com/en"},
-    {title: "quickstart-angular", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
-    {title: "MvvmCross", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
-    {title: "linux-developer-kitchen", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
-    {title: "java-developer-vm", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
-    {title: "linus-kitchen", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
-    {title: "cookbook-windev", description: "Lorem ipsum", url: "https://www.zuehlke.com/en"},
-  ];
-
   const routes = [
     {
       to: "/contributions",
-      component: <Contributions repos={contributionRepos}/>,
+      component: <Contributions repos={contributions}/>,
       display: "Contributions"
     },
     {
