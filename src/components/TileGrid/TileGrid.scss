@@ -8,6 +8,7 @@
 
 .TileGrid {
   @include center-container-wrapper;
+  $border-style: 1px solid #eaeaea;
 
   & .grid {
     --num-cols: 3;
@@ -20,6 +21,10 @@
     grid-gap: $pad-rem-md;
     grid-auto-rows: minmax($min-row-height, auto);
 
+    @media #{$w-am-medium} {
+      margin-bottom: 0;
+    }
+
     @media #{$w-medium} {
       --num-cols: 2;
       grid-gap: 0;
@@ -31,45 +36,34 @@
   }
 
   & .grid > .grid-cell {
-    $color-a: #e0e0e0;
-    $color-b: #ccc;
     $transition-duration: $transition-fast;
 
+    --background-col: $white;
     height: 100%;
 
-    --background-col: #{$color-a};
-    &:nth-child(even) {
-      --background-col: #{$color-b};
-    }
+    @media #{$w-am-medium} {
+      &::before {
+        content: "";
+        display: block;
+        width: 100px;
+        height: 3px;
+        margin-left: $pad-rem-md;
+        background-color: $c-primary;
+        transition: width $transition-duration, margin-left $transition-duration;
+      }
 
-    @media #{$w-medium} {
-      &:nth-child(4n + 1) {
-        --background-col: #{$color-a};
-      }
-      &:nth-child(4n + 2) {
-        --background-col: #{$color-b};
-      }
-      &:nth-child(4n + 3) {
-        --background-col: #{$color-b};
-      }
-      &:nth-child(4n + 4) {
-        --background-col: #{$color-a};
-      }
-    }
-
-    @media #{$w-am-small} {
-      &:nth-child(odd) {
-        --background-col: #{$color-a};
-      }
-      &:nth-child(even) {
-        --background-col: #{$color-b};
+      &:hover {
+        &::before {
+          width: 100%;
+          margin-left: 0;
+        }
       }
     }
   }
 
   & .grid-cell > .tile {
     --zoom-scale: 1.1;
-    box-shadow: 0 4px 4px rgba(0,0,0,.1);
+    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.09);
     $transition-duration: $transition-fast;
 
     width: 100%;
@@ -90,7 +84,7 @@
       --side-length: 100%;
       --zoom-scale: 1;
       box-shadow: none;
-      padding: $pad-rem-md;
+      padding: $pad-rem-xs $pad-rem-md $pad-rem-xxl;
     }
   }
 }
