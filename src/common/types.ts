@@ -24,3 +24,11 @@ export type RepoSpec = {
   description: string;
   logo: string;
 };
+
+export type PersonSpec = {
+  title: string;
+  url: string;
+  name: string;
+  logoUrl: string;
+  description: string;
+}

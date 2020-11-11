@@ -1,0 +1,27 @@
+@import "../../style/mixins/functions";
+@import "../../style/vars/spacing";
+@import "../../style/vars/colors";
+
+.PersonTile {
+  @include _flex(row, stretch, stretch);
+
+  & .profile-container {
+    @include _flex(column, center, flex-start);
+    margin-right: $pad-rem-sm;
+    width: 50%;
+    flex-shrink: 0;
+
+    & .title {
+      // color: $c-primary;
+    }
+  }
+
+  & .description-container {
+    flex-shrink: 1;
+  }
+
+  & .avatar {
+    width: 100px;
+    border-radius: 50px;
+  }
+}

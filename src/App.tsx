@@ -6,11 +6,13 @@ import ZueBanner from "./components/ZueBanner/ZueBanner";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 import contributions from "./data/contributions.json";
+import people from "./data/people.json";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
 import OverlayStateContext, {OverlayState} from "./context/overlayState";
 import Contributions from "./pages/Contributions/Contributions";
+import People from "./pages/People/People";
 
 function App() {
 
@@ -29,7 +31,7 @@ function App() {
     },
     {
       to: "/people",
-      component: <People/>,
+      component: <People people={people}/>,
       display: "People"
     },
   ] as RouteSpec[];
@@ -97,18 +99,6 @@ function App() {
       </Router>
     </div>
   );
-}
-
-// Placeholders for routable components
-// TODO: Remove these when replaced with actual components.
-const People = () => {
-  return (
-    <div className="placeholder">
-      <div className="content">
-        <h1>People</h1>
-      </div>
-    </div>
-  )
 }
 
 export default App;
