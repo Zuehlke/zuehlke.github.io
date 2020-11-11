@@ -10,14 +10,15 @@
   @include center-container-wrapper;
 
   & .grid {
+    --num-cols: 3;
+    $min-row-height: 200px;
+
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
-
-    --num-cols: 3;
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-gap: $pad-rem-md;
-    grid-auto-rows: minmax(200px, auto);
+    grid-auto-rows: minmax($min-row-height, auto);
 
     @media #{$w-medium} {
       --num-cols: 2;
@@ -30,7 +31,6 @@
   }
 
   & .grid > .grid-cell {
-
     $color-a: #e0e0e0;
     $color-b: #ccc;
     $transition-duration: $transition-fast;
