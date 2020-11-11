@@ -3,7 +3,7 @@
 @import "../../style/vars/spacing";
 @import "../../style/vars/font-size";
 @import "../../style/vars/transitions";
-@import "../../style/mixins/functions";
+@import "../../style/mixins/layout";
 
 /* Slide in from the right */
 $right-transition: right $transition-default ease-out;

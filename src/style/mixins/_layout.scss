@@ -1,7 +1,13 @@
-@import "../mixins/functions";
 @import "../mixins/fonts";
 @import "../vars/colors";
 @import "../vars/media";
+
+@mixin _flex($dir, $align, $justify) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+}
 
 @mixin center-container-wrapper {
   width: 100%;

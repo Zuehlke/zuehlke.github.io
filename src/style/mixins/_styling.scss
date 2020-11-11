@@ -1,14 +1,14 @@
 @import "../vars/transitions";
 @import "../vars/colors";
 
-@mixin hover-lightgray {
+@mixin _background-hover($target-color) {
   transition: background-color $transition-fast;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: $target-color;
   }
 }
 
-@mixin top-bar($left) {
+@mixin _top-bar($left) {
   &::before {
     $transition-duration: $transition-fast;
     content: "";
