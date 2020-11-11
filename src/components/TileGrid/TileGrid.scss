@@ -9,17 +9,19 @@
 .TileGrid {
   @include center-container-wrapper;
   $border-style: 1px solid #eaeaea;
+  $transition-duration: $transition-fast;
 
   & .grid {
+    /* Default number of columns */
     --num-cols: 3;
-    $min-row-height: 0px;
 
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
+
+    /* Grid setup */
     display: grid;
     grid-template-columns: repeat(var(--num-cols), 1fr);
     grid-gap: $pad-rem-md;
-    grid-auto-rows: minmax($min-row-height, auto);
 
     @media #{$w-am-medium} {
       margin-bottom: 0;
@@ -36,58 +38,56 @@
   }
 
   & .grid > .grid-cell {
-    $transition-duration: $transition-fast;
-
-    --background-col: $white;
     height: 100%;
+    position: relative;
+
+    /* Visual separator */
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 3px;
+      background-color: $c-primary-sat-lo;
+      transition: width $transition-duration,
+                  left $transition-duration,
+                  color $transition-duration;
+    }
+
+    &:hover {
+      &::before {
+        width: 100%;
+        background-color: $c-primary;
+      }
+    }
 
     @media #{$w-am-medium} {
       &::before {
-        content: "";
-        display: block;
-        width: 100px;
-        height: 3px;
-        margin-left: $pad-rem-md;
-        background-color: $c-primary-sat-lo;
-        transition:
-                width $transition-duration,
-                margin-left $transition-duration,
-                color $transition-duration;
+        left: $pad-rem-md;
       }
 
       &:hover {
         &::before {
-          width: 100%;
-          margin-left: 0;
-          background-color: $c-primary;
+          left: 0;
         }
       }
     }
   }
 
   & .grid-cell > .tile {
-    --zoom-scale: 1.1;
-    box-shadow: 1px 1px 8px 1px rgba(0,0,0,.09);
-    $transition-duration: $transition-fast;
-
     width: 100%;
     height: 100%;
     padding: $pad-rem-sm;
-    transform: scale(1);
-    transition: transform $transition-duration,
-                background-color $transition-duration;
-
-    background-color: var(--background-col);
+    background-color: $white;
+    transition: background-color $transition-duration;
 
     &:hover {
-      transform: scale(var(--zoom-scale));
       background-color: $c-primary;
     }
 
     @media #{$w-am-medium} {
-      --side-length: 100%;
-      --zoom-scale: 1;
-      box-shadow: none;
       padding: $pad-rem-xs $pad-rem-md $pad-rem-xxl;
     }
   }
