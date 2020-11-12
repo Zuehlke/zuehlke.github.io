@@ -1,44 +1,70 @@
 import './Footer.scss';
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import logo from '../../assets/images/logo/logo-zuehlke-big.png'
+import {IconName} from '@fortawesome/fontawesome-svg-core';
 
 const Footer = () => {
+
+  const corpPageLinks = [
+    {href: "https://www.zuehlke.com/en/our-expertise", text: "Our Expertise"},
+    {href: "https://www.zuehlke.com/en/our-projects", text: "Our Projects"},
+    {href: "https://www.zuehlke.com/en/insights", text: "Our Insights"},
+    {href: "https://www.zuehlke.com/en/about-us", text: "About us"},
+    {href: "https://www.zuehlke.com/en/careers", text: "Careers"},
+    {href: "https://www.zuehlke.com/en/legal-notice", text: "Legal"},
+    {href: "https://www.zuehlke.com/en/privacy-policy", text: "Terms of Use & Data Privacy"}
+  ] as { href: string, text: string }[];
+
+  const contactLinks = [
+    {href: "https://www.linkedin.com/company/zuehlkegroup/", iconName: "linkedin"},
+    {href: "https://www.facebook.com/zuehlke.group", iconName: "facebook-square"},
+    {href: "https://twitter.com/zuehlke_group", iconName: "twitter-square"},
+    {href: "https://github.com/Zuehlke", iconName: "github"},
+    {href: "https://www.instagram.com/zuehlkegroup/?hl=en", iconName: "instagram"},
+    {href: "https://www.youtube.com/channel/UCDglr0_rdf7cIakhluxAeBA", iconName: "youtube"}
+  ] as { href: string, iconName: IconName }[];
+
+  const createCorpPageLink = (link: { href: string, text: string }) => {
+    return (
+      <li>
+        <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+          {link.text}
+        </a>
+      </li>
+    );
+  };
+
+  const createContactLink = (link: { href: string, iconName: IconName }) => {
+    return (
+      <div key={link.href} className="cell">
+        <a href={link.href} target="_blank" rel="noreferrer">
+          <FontAwesomeIcon icon={["fab", link.iconName]}/>
+        </a>
+      </div>
+    );
+  };
+
   return (
     <div className="Footer">
       <div className="content">
         <div className="logo">
-          <a href="https://www.zuehlke.com/en" target="_blank"><img src={logo} /></a>
+          <a href="https://www.zuehlke.com/en" target="_blank" rel="noreferrer">
+            <img src={logo} alt="Zuehlke logo"/>
+          </a>
         </div>
-        <div className="links">
-          <ul>
-            <li><a href="https://www.zuehlke.com/en/our-expertise" target="_blank">Our Expertise</a></li>
-            <li><a href="https://www.zuehlke.com/en/our-projects" target="_blank">Our Projects</a></li>
-            <li><a href="https://www.zuehlke.com/en/insights" target="_blank">Our Insights</a></li>
-            <li><a href="https://www.zuehlke.com/en/about-us" target="_blank">About us</a></li>
-            <li><a href="https://www.zuehlke.com/en/careers" target="_blank">Careers</a></li>
-            <li><a href="https://www.zuehlke.com/en/legal-notice" target="_blank">Legal</a></li>
-            <li><a href="https://www.zuehlke.com/en/privacy-policy" target="_blank">Terms of Use & Data Privacy</a></li>
+
+        <div className="links-container">
+          <ul className="links-list">
+            {corpPageLinks.map((link) => createCorpPageLink(link))}
           </ul>
         </div>
-        <div className="stay-in-touch">
-            <div className="row">
-                Stay in touch
-            </div>
-            <div className="row">
-                <div className="col">
-                    <a href="https://www.linkedin.com/company/zuehlkegroup/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></a>
-                    <a href="https://github.com/Zuehlke" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></a>
-                </div>
-                <div className="col">
-                    <a href="https://www.facebook.com/zuehlke.group" target="_blank"><FontAwesomeIcon icon={['fab', 'facebook-square']} /></a>
-                    <a href="https://www.instagram.com/zuehlkegroup/?hl=en" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} /></a>
-                </div>
-                <div className="col">
-                    <a href="https://twitter.com/zuehlke_group" target="_blank"><FontAwesomeIcon icon={['fab', 'twitter-square']} /></a>
-                    <a href="https://www.youtube.com/channel/UCDglr0_rdf7cIakhluxAeBA" target="_blank"><FontAwesomeIcon icon={['fab', 'youtube']} /></a>
-                </div>
-            </div>
+
+        <div className="contact-block">
+          <div className="label">Stay in touch</div>
+          <div className="contact-links-container">
+            {contactLinks.map((link) => createContactLink(link))}
+          </div>
         </div>
       </div>
     </div>
