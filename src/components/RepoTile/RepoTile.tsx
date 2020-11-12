@@ -10,10 +10,12 @@ const RepoTile = (props: Props) => {
   return (
     <div className="RepoTile">
       <a href={props.repo.url} target="_blank" rel="noreferrer" className="content-link">
-        <h2 className="title">{props.repo.title}</h2>
-        <article className="description">
-          {props.repo.description}
-        </article>
+        <div className="container">
+          <h2 className="title">{props.repo.title}</h2>
+          <article className="description">
+            {props.repo.description}
+          </article>
+        </div>
       </a>
     </div>
   );

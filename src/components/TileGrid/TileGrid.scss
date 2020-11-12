@@ -12,7 +12,6 @@
   $transition-duration: $transition-fast;
 
   & .grid {
-
     @include container-responsive-width;
     margin-bottom: $pad-rem-lg;
 
@@ -24,9 +23,6 @@
 
     @media #{$w-am-medium} {
       margin-bottom: 0;
-    }
-
-    @media #{$w-medium} {
       grid-gap: 0;
     }
 
@@ -37,13 +33,7 @@
 
   & .grid > .grid-cell {
     height: 100%;
+    width: 100%;
     position: relative;
-
-    &:hover {
-      &::before {
-        width: 100%;
-        background-color: $c-primary;
-      }
-    }
   }
 }

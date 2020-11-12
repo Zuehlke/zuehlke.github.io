@@ -1,3 +1,14 @@
-.People {
+@import "../../style/mixins/layout";
+@import "../../style/mixins/styling";
 
+.People {
+  @include center-container-wrapper;
+
+  & > .container {
+    @include container-responsive-width;
+
+    & > .title {
+      @include page-title-margin;
+    }
+  }
 }

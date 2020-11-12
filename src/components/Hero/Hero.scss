@@ -31,7 +31,7 @@ $min-height: 350px;
     height: $min-height;
   }
 
-  & .inner {
+  & > .inner {
     @include container-responsive-width;
     @include font-zue-regular;
 

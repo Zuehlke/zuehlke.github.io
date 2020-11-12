@@ -1,17 +1,14 @@
 @import "../../style/mixins/layout";
-@import "../../style/vars/media";
-@import "../../style/vars/spacing";
+@import "../../style/mixins/styling";
 
 .Contributions {
   @include center-container-wrapper;
 
-  & .container {
+  & > .container {
     @include container-responsive-width;
 
-    &>.title {
-      @media #{$w-am-medium} {
-        margin-left: $pad-rem-md;
-      }
+    & > .title {
+      @include page-title-margin;
     }
   }
 }

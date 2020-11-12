@@ -1,5 +1,7 @@
 @import "../vars/transitions";
 @import "../vars/colors";
+@import "../vars/media";
+@import "../vars/spacing";
 
 @mixin _background-hover($target-color) {
   transition: background-color $transition-fast;
@@ -8,7 +10,7 @@
   }
 }
 
-@mixin _top-bar($left) {
+@mixin _grid-cell-top-bar($left) {
   &::before {
     $transition-duration: $transition-fast;
     content: "";
@@ -30,5 +32,11 @@
       color: $c-primary;
       left: 0;
     }
+  }
+}
+
+@mixin page-title-margin {
+  @media #{$w-am-medium} {
+    margin-left: $pad-rem-md;
   }
 }

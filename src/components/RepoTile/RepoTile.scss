@@ -3,37 +3,38 @@
 @import "../../style/vars/colors";
 @import "../../style/vars/spacing";
 @import "../../style/vars/media";
-@import "../../style/vars/transitions";
-@import "../../style/vars/font-size";
 
 .RepoTile {
-  @include _flex(column, center, center);
+  @include _grid-cell-top-bar(0);
   @include _background-hover($c-off-white-lighter);
-  @include _top-bar(0);
+  @include _flex(column, center, center);
   width: 100%;
   height: 100%;
   background-color: $white;
-  padding: $pad-rem-sm $pad-rem-sm $pad-rem-md $pad-rem-sm;
 
   @media #{$w-am-medium} {
-    padding: $pad-rem-xs $pad-rem-md $pad-rem-xxl;
-    @include _top-bar($pad-rem-md);
+    @include _grid-cell-top-bar($pad-rem-md);
   }
 
-  & a {
-    text-decoration: none;
-    color: $c-text-on-light;
-    @include _flex(column, flex-start, flex-start);
+  & > a {
     width: 100%;
     height: 100%;
   }
 
-  & h2 {
-    margin: 0 0 $pad-rem-xs 0;
-  }
+  & > a > .container {
+    padding: $pad-rem-sm $pad-rem-sm $pad-rem-md $pad-rem-sm;
 
-  & .description-container {
-    width: 100%;
-    height: 100%;
+    @media #{$w-am-medium} {
+      padding: $pad-rem-xs $pad-rem-md $pad-rem-xxl;
+    }
+
+    & > h2 {
+      margin: 0 0 $pad-rem-xs 0;
+    }
+
+    & > .description-container {
+      width: 100%;
+      height: 100%;
+    }
   }
 }

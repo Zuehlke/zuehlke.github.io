@@ -6,12 +6,12 @@
 @import "../../style/vars/transitions";
 
 .PersonTile {
-  @include _top-bar(0);
+  @include _grid-cell-top-bar(0);
   @include _background-hover($c-off-white);
   $border-radius: 20px;
-  padding: $pad-rem-md;
+
   height: 100%;
-  position: relative;
+  width: 100%;
   background-color: $c-off-white-lighter;
   border-top-right-radius: $border-radius;
   border-bottom-left-radius: $border-radius;
@@ -22,52 +22,53 @@
   }
 
   @media #{$w-am-medium} {
-    @include _top-bar($pad-rem-md);
+    @include _grid-cell-top-bar($pad-rem-md);
     @include _background-hover($c-off-white-lighter);
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
     background-color: $white;
   }
 
-  & a {
-    text-decoration: none;
-    color: $c-text-on-light;
-    @include _flex(row, flex-start, flex-start);
+  & > a {
     width: 100%;
     height: 100%;
   }
 
-  & .profile-container {
-    @include _flex(column, center, flex-start);
-    margin-right: $pad-rem-md;
-    min-width: 30%;
-    flex-shrink: 0;
+  & > a > .container {
+    @include _flex(row, flex-start, flex-start);
+    padding: $pad-rem-md;
 
-    & .text {
-      text-align: center;
+    & > .profile-container {
+      @include _flex(column, center, flex-start);
+      margin-right: $pad-rem-md;
+      min-width: 30%;
+      flex-shrink: 0;
+
+      & > .text {
+        text-align: center;
+      }
+
+      & > .title {
+        font-weight: bold;
+        font-size: $fs-md;
+      }
+
+      & > .name {
+      }
+
+      & > .avatar {
+        margin-bottom: $pad-rem-xs;
+        width: 100px;
+        border-radius: 50px;
+      }
     }
 
-    & .title {
-      font-weight: bold;
-      font-size: $fs-md;
-    }
+    & > .description-container {
+      flex-shrink: 1;
 
-    & .name {
-    }
-
-    & .avatar {
-      margin-bottom: $pad-rem-xs;
-      width: 100px;
-      border-radius: 50px;
-    }
-  }
-
-  & .description-container {
-    flex-shrink: 1;
-
-    & .description {
-      // font-style: italic;
-      color: $c-softer-text-on-light;
+      & > .description {
+        color: $c-softer-text-on-light;
+      }
     }
   }
 }
