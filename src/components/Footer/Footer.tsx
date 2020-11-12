@@ -17,13 +17,13 @@ const Footer = () => {
   ] as { href: string, text: string }[];
 
   const contactLinks = [
-    {href: "https://www.linkedin.com/company/zuehlkegroup/", iconName: "linkedin"},
-    {href: "https://www.facebook.com/zuehlke.group", iconName: "facebook-square"},
-    {href: "https://twitter.com/zuehlke_group", iconName: "twitter-square"},
-    {href: "https://github.com/Zuehlke", iconName: "github"},
-    {href: "https://www.instagram.com/zuehlkegroup/?hl=en", iconName: "instagram"},
-    {href: "https://www.youtube.com/channel/UCDglr0_rdf7cIakhluxAeBA", iconName: "youtube"}
-  ] as { href: string, iconName: IconName }[];
+    {href: "https://www.linkedin.com/company/zuehlkegroup/", iconName: "linkedin", label: "LinkedIn"},
+    {href: "https://www.facebook.com/zuehlke.group", iconName: "facebook-square", label: "Facebook"},
+    {href: "https://twitter.com/zuehlke_group", iconName: "twitter-square", label: "Twitter"},
+    {href: "https://github.com/Zuehlke", iconName: "github", label: "GitHub"},
+    {href: "https://www.instagram.com/zuehlkegroup/?hl=en", iconName: "instagram", label: "Instagram"},
+    {href: "https://www.youtube.com/channel/UCDglr0_rdf7cIakhluxAeBA", iconName: "youtube", label: "YouTube"}
+  ] as { href: string, iconName: IconName, label: string }[];
 
   const createCorpPageLink = (link: { href: string, text: string }) => {
     return (
@@ -35,10 +35,10 @@ const Footer = () => {
     );
   };
 
-  const createContactLink = (link: { href: string, iconName: IconName }) => {
+  const createContactLink = (link: { href: string, iconName: IconName, label: string }) => {
     return (
       <div key={link.href} className="cell">
-        <a href={link.href} target="_blank" rel="noreferrer">
+        <a href={link.href} target="_blank" rel="noreferrer" aria-label={`Zühlke ${link.label}`}>
           <FontAwesomeIcon icon={["fab", link.iconName]}/>
         </a>
       </div>

@@ -9,7 +9,7 @@ type Props = {
 const PersonTile = (props: Props) => {
   return (
     <div className="PersonTile">
-      <a href={props.person.url} target="_blank" rel="noreferrer">
+      <a href={props.person.url} target="_blank" rel="noreferrer" aria-label={`GitHub profile ${props.person.title}`}>
         <article className="person-article">
           <div className="profile-container">
             <img src={props.person.logoUrl} className="avatar" alt={`Avatar ${props.person.title}`}/>
