@@ -1,6 +1,5 @@
 @import "../../style/vars/media";
 @import "../../style/mixins/layout";
-@import "../../style/mixins/functions";
 @import "../../style/vars/font-size";
 @import "../../style/vars/colors";
 @import "../../style/vars/spacing";
@@ -32,7 +31,7 @@ $min-height: 350px;
     height: $min-height;
   }
 
-  & .inner {
+  & > .inner {
     @include container-responsive-width;
     @include font-zue-regular;
 

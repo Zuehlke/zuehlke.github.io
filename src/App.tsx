@@ -5,10 +5,14 @@ import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
+import contributions from "./data/contributions.json";
+import people from "./data/people.json";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
 import OverlayStateContext, {OverlayState} from "./context/overlayState";
+import Contributions from "./pages/Contributions/Contributions";
+import People from "./pages/People/People";
 
 function App() {
 
@@ -22,12 +26,12 @@ function App() {
   const routes = [
     {
       to: "/contributions",
-      component: <Contributions/>,
+      component: <Contributions repos={contributions}/>,
       display: "Contributions"
     },
     {
       to: "/people",
-      component: <People/>,
+      component: <People people={people}/>,
       display: "People"
     },
   ] as RouteSpec[];
@@ -95,28 +99,6 @@ function App() {
       </Router>
     </div>
   );
-}
-
-// Placeholders for routable components
-// TODO: Remove these when replaced with actual components.
-const Contributions = () => {
-  return (
-    <div className="placeholder">
-      <div className="content">
-        <h1>Contributions</h1>
-      </div>
-    </div>
-  )
-}
-
-const People = () => {
-  return (
-    <div className="placeholder">
-      <div className="content">
-        <h1>People</h1>
-      </div>
-    </div>
-  )
 }
 
 export default App;

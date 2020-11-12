@@ -1,0 +1,39 @@
+@import "../../style/mixins/layout";
+@import "../../style/mixins/fonts";
+@import "../../style/mixins/styling";
+@import "../../style/vars/colors";
+@import "../../style/vars/spacing";
+@import "../../style/vars/media";
+@import "../../style/vars/transitions";
+
+.TileGrid {
+  @include center-container-wrapper;
+  $border-style: 1px solid #eaeaea;
+  $transition-duration: $transition-fast;
+
+  & .grid {
+    @include container-responsive-width;
+    margin-bottom: $pad-rem-lg;
+
+    /* Grid setup */
+    --num-cols: 2;
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols), 1fr);
+    grid-gap: $pad-rem-md;
+
+    @media #{$w-am-medium} {
+      margin-bottom: 0;
+      grid-gap: 0;
+    }
+
+    @media #{$w-am-small} {
+      --num-cols: 1;
+    }
+  }
+
+  & .grid > .grid-cell {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+}

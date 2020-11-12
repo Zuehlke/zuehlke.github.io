@@ -1,7 +1,13 @@
-@import "../mixins/functions";
 @import "../mixins/fonts";
 @import "../vars/colors";
 @import "../vars/media";
+
+@mixin _flex($dir, $align, $justify) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+}
 
 @mixin center-container-wrapper {
   width: 100%;
@@ -44,4 +50,22 @@
 
 @mixin flex-row-center-end {
   @include _flex(row, center, flex-end)
+}
+
+@mixin grid-square-cell {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+@mixin grid-square-cell-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
