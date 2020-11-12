@@ -12,15 +12,15 @@
     "logo": ""
   },
   {
-    "title": "linux-developer-vm",
-    "url": "https://github.com/Zuehlke/linux-developer-vm",
-    "description": "Template project for a minimal Chef-managed Linux developer VM.",
-    "logo": ""
-  },
-  {
     "title": "MvvmCross",
     "url": "https://github.com/lothrop/MvvmCross",
     "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
+    "logo": ""
+  },
+  {
+    "title": "linux-developer-vm",
+    "url": "https://github.com/Zuehlke/linux-developer-vm",
+    "description": "Template project for a minimal Chef-managed Linux developer VM.",
     "logo": ""
   },
   {
