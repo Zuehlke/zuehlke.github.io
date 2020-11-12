@@ -10,16 +10,16 @@ const PersonTile = (props: Props) => {
   return (
     <div className="PersonTile">
       <a href={props.person.url} target="_blank" rel="noreferrer">
-        <div className="container">
+        <article className="person-article">
           <div className="profile-container">
             <img src={props.person.logoUrl} className="avatar" alt={`Avatar ${props.person.title}`}/>
-            <span className="title text">{props.person.title}</span>
-            <span className="name text">{props.person.name}</span>
+            <h2 className="github-login profile-text">{props.person.title}</h2>
+            <h3 className="full-name text">{props.person.name}</h3>
           </div>
           <div className="description-container">
-            <span className="description">{props.person.description}</span>
+            <p className="description">{props.person.description}</p>
           </div>
-        </div>
+        </article>
       </a>
     </div>
   );
