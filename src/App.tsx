@@ -83,7 +83,7 @@ function App() {
           <div ref={pageContentRef}>
             <Switch>
               {routes.map((route) => (
-                <Route path={route.to} exact>
+                <Route key={route.display} path={route.to} exact>
                   {route.component}
                 </Route>
               ))}

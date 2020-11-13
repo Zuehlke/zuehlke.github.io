@@ -18,7 +18,7 @@ const Navigation = (props: Props) => {
 
   const metaNavLink = (link: MetaLinkSpec) => {
     return (
-      <div className="link-container">
+      <div key={link.href} className="link-container">
         <a href={link.href} target="_blank" rel="noreferrer">{link.display}</a>
       </div>
     );
@@ -26,7 +26,7 @@ const Navigation = (props: Props) => {
 
   const routeLink = (route: RouteSpec) => {
     return (
-      <div className="link-container" onClick={handleNavigate}>
+      <div key={route.to} className="link-container" onClick={handleNavigate} tabIndex={0}>
         <Link to={route.to}>{route.display}</Link>
       </div>
     );
@@ -58,7 +58,7 @@ const Navigation = (props: Props) => {
           </nav>
         </div>
         <div className="hamburger-container">
-          <button onClick={handleHamburgerClick} className="hamburger">
+          <button onClick={handleHamburgerClick} className="hamburger" aria-label="Open navigation">
             {overlayState.sidebarNavVisible ?
               <FontAwesomeIcon icon={["fas", "times"]}/> :
               <FontAwesomeIcon icon={["fas", "bars"]}/>}

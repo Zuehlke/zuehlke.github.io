@@ -9,12 +9,13 @@ type Props = {
 }
 
 const Contributions = (props: Props) => {
+
   return (
     <div className="Contributions">
       <div className="container">
         <h1 className="title">Contributions</h1>
         <TileGrid>
-          {props.repos.map((repo: RepoSpec) => <RepoTile repo={repo}/>)}
+          {props.repos.map((repo: RepoSpec) => <RepoTile key={repo.url} repo={repo}/>)}
         </TileGrid>
       </div>
     </div>

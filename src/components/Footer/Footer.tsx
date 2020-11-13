@@ -27,7 +27,7 @@ const Footer = () => {
 
   const createCorpPageLink = (link: { href: string, text: string }) => {
     return (
-      <li>
+      <li key={link.href}>
         <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
           {link.text}
         </a>
