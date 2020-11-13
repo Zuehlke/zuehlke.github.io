@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "postbuild": "gzipper compress -v ./build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "local-deploy": "npm run build && docker container stop zuehlke.github.io ; docker container run --rm --name zuehlke.github.io -v $(pwd)/build:/usr/share/nginx/html:ro -p 8085:80 -d nginx && echo 'Nginx running on 8085.'"
   },
   "eslintConfig": {
     "extends": [
