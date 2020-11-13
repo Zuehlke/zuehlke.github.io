@@ -1,5 +1,10 @@
 {
   "remote_name": "origin",
   "workdir_root_dirname": "_zuehlke.github.io_workdir",
-  "target_branch": "playground/automation-dev"
+  "target_branch": "playground/automation-dev",
+  "github_api_token_envvar": "GITHUB_API_TOKEN",
+  "rate_limit_buffer_sec": 60,
+  "request_delay_sec": 2,
+  "rate_limit_max_age_sec": 60,
+  "max_retries": 2
 }

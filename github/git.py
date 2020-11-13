@@ -39,15 +39,17 @@ def is_branch_tracked(context):
         # TODO: Catch and report all exceptions in main, or find better solution to this.
         raise AssertionError("Should not reach here.")
     lines = [line.strip() for line in res.split("\n")]
-    remote_branch_name = context.get_config()["remote_name"] + "/" + context.get_config()["target_branch"]
+    remote_branch_name = context.get_config("remote_name") + "/" + context.get_config("target_branch")
     return remote_branch_name in lines
 
 
 def pull_workdir_target_branch(context):
-    config = context.get_config()
-    return _workdir_repo_command(["git", "pull", config["remote_name"], config["target_branch"]], context)
+    remote_name = context.get_config("remote_name")
+    target_branch = context.get_config("target_branch")
+    return _workdir_repo_command(["git", "pull", remote_name, target_branch], context)
 
 
 def push_workdir_target_branch(context):
-    config = context.get_config()
-    return _workdir_repo_command(["git", "push", config["remote_name"], config["target_branch"]], context)
+    remote_name = context.get_config("remote_name")
+    target_branch = context.get_config("target_branch")
+    return _workdir_repo_command(["git", "push", remote_name, target_branch], context)
