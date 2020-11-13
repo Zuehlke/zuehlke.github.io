@@ -1,0 +1,14 @@
+@import "../../style/mixins/layout";
+@import "../../style/mixins/styling";
+
+.Contributions {
+  @include center-container-wrapper;
+
+  & > .container {
+    @include container-responsive-width;
+
+    & > .title {
+      @include page-title-margin;
+    }
+  }
+}

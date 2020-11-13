@@ -1,15 +1,14 @@
 @import "../../style/vars/media";
 @import "../../style/mixins/layout";
-@import "../../style/mixins/functions";
 @import "../../style/vars/font-size";
 @import "../../style/vars/colors";
 @import "../../style/vars/spacing";
 
-$min-height: 280px;
+$min-height: 350px;
 
 .Hero {
   /* Background image */
-  background-image: url("../../assets/images/wide/header_4_code.png");
+  background-image: url("../../assets/images/wide/header_zue_bg.jpg");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -20,19 +19,23 @@ $min-height: 280px;
   @include _flex(column, center, flex-end);
 
   /* Height */
-  height: 47vh;
+  height: 600px;
   min-height: $min-height;
+  max-height: 55vh;
 
-  /* Medium screens or smaller */
   @media #{$w-am-medium} {
+    height: 40vh;
+  }
+
+  @media #{$w-am-small} {
     height: $min-height;
   }
 
-  & .inner {
+  & > .inner {
     @include container-responsive-width;
     @include font-zue-regular;
 
-    background: $c-gray-opacity-md;
+    background: $c-gray-opacity-hg;
     font-size: $fs-lg;
     padding: $pad-rem-sm $pad-rem-xl;
     color: $c-off-black;

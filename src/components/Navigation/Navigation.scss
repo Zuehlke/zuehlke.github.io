@@ -1,0 +1,95 @@
+@import "../../style/mixins/layout";
+@import "../../style/vars/media";
+@import "../../style/vars/spacing";
+@import "../../style/vars/colors";
+@import "../../style/vars/transitions";
+@import "../../style/vars/font-size";
+
+.Navigation {
+  @include center-container-wrapper;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: $c-navigation-bg;
+  width: 100%;
+  height: var(--header-height);
+  transition: background-color $transition-default;
+
+  &.opaque {
+    background-color: $c-navigation-bg-blur;
+  }
+
+  & .content {
+    @include container-responsive-width;
+    @include _flex(row, center, space-between);
+
+    & .branding-container {
+      padding-left: $pad-rem-sm;
+    }
+
+    & .branding {
+      background-image: url("../../assets/images/logo/logo-zuehlke-big.png");
+      height: var(--header-height);
+      width: var(--header-height);
+      background-size: cover;
+    }
+
+    & .nav-links {
+      @include _flex(column, stretch, flex-start);
+      height: 100%;
+      padding-left: $pad-rem-lg;
+      flex-grow: 1;
+
+      a {
+        text-decoration: none;
+
+      }
+
+      .link-container {
+        margin-right: 1rem;
+      }
+
+      & .meta-nav {
+        @include _flex(row, flex-end, flex-start);
+        padding-top: $pad-rem-sm;
+        padding-bottom: 0.6rem;
+
+        & a {
+          color: $c-softer-text-on-light;
+        }
+      }
+
+      & .main-nav {
+        @include _flex(row, flex-start, flex-start);
+
+        & a {
+          color: $c-softer-text-on-light;
+          font-weight: bold;
+          font-size: $fs-md;
+        }
+      }
+
+      @media #{$w-am-small} {
+        display: none;
+      }
+    }
+
+    & .hamburger-container {
+      @include _flex(row, center, center);
+      width: 100px;
+      height: 100%;
+
+      & button.hamburger {
+        background: none;
+        border: none;
+        font-size: $fs-lg;
+      }
+
+      @media #{$w-al-medium} {
+        display: none;
+      }
+    }
+  }
+}

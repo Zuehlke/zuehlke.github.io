@@ -1,0 +1,78 @@
+@import "../../style/vars/colors";
+@import "../../style/vars/media";
+@import "../../style/vars/spacing";
+@import "../../style/vars/font-size";
+@import "../../style/vars/transitions";
+@import "../../style/mixins/layout";
+
+/* Slide in from the right */
+$right-transition: right $transition-default ease-out;
+
+/* Delay visibility transition when hiding sidebar */
+$visibility-transition-out: visibility 0s $transition-default;
+
+/* Don't delay visibility transition when showing sidebar */
+$visibility-transition-in: visibility 0s 0s;
+
+.SidebarNavigation {
+  width: 100vw;
+  height: calc(100vh - var(--header-height));
+  position: fixed;
+  right: -100vw;
+  top: var(--header-height);
+  background-color: $c-navigation-bg-blur;
+  z-index: 200;
+  visibility: hidden;
+  transition: #{$right-transition}, #{$visibility-transition-out};
+
+  @media #{$w-al-medium} {
+    display: none;
+  }
+
+  &.visible {
+    right: 0;
+    visibility: visible;
+    transition: #{$right-transition}, #{$visibility-transition-in};
+  }
+
+  & .content {
+    @include _flex(column, flex-start, flex-start);
+    padding: $pad-rem-lg;
+
+    & .nav-links {
+
+      a {
+        text-decoration: none;
+      }
+
+      & .main-nav {
+        @include _flex(column, flex-start, flex-start);
+
+        & .link-container {
+          margin-bottom: $pad-rem-sm;
+
+          & a {
+            color: $c-softer-text-on-light;
+            font-weight: bold;
+            font-size: $fs-lg;
+          }
+        }
+      }
+
+      & .meta-nav {
+        @include _flex(column, flex-start, flex-start);
+        padding-top: $pad-rem-sm;
+        padding-bottom: 0.6rem;
+
+        & .link-container {
+          margin-bottom: $pad-rem-xs;
+
+          & a {
+            color: $c-softer-text-on-light;
+            font-size: $fs-md;
+          }
+        }
+      }
+    }
+  }
+}

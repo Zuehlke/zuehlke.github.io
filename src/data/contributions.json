@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Scenarioo",
+    "url": "https://scenarioo.github.io",
+    "description": "Documentation tool to leverage the power of user interface tests by making them visible, understandable and useful for all (also non-technical) colleagues, that are involved in the software development process. Founded, driven and developed by a team of Zühlke engineers in collaboration with our customers and their needs.",
+    "logo": ""
+  },
+  {
+    "title": "quickstarts-angular",
+    "url": "https://github.com/Zuehlke/quickstarts-angular",
+    "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
+    "logo": ""
+  },
+  {
+    "title": "MvvmCross",
+    "url": "https://github.com/lothrop/MvvmCross",
+    "description": "The Mvvm Platform for Xamarin.iOS, Xamarin.Android, WindowsPhone, WindowsStore, WPF and Mac. Includes databinding support for Android XML, for iOS XIBs and for                                 MonoTouch.Dialog.",
+    "logo": ""
+  },
+  {
+    "title": "linux-developer-vm",
+    "url": "https://github.com/Zuehlke/linux-developer-vm",
+    "description": "Template project for a minimal Chef-managed Linux developer VM.",
+    "logo": ""
+  },
+  {
+    "title": "java-developer-vm",
+    "url": "https://github.com/Zuehlke/java-developer-vm",
+    "description": "A Chef-managed developer VM for Java / Maven / Eclipse development on an Ubuntu Desktop.",
+    "logo": ""
+  },
+  {
+    "title": "linus-kitchen",
+    "url": "https://github.com/tknerr/linus-kitchen",
+    "description": "An Ubuntu-based development box for hacking with Chef, Vagrant, Docker & Co.",
+    "logo": ""
+  },
+  {
+    "title": "cookbook-windev",
+    "url": "https://github.com/Zuehlke/cookbook-windev",
+    "description": "One cookbook with resources for setting up a Windows development environment.",
+    "logo": ""
+  },
+  {
+    "title": "windev-example",
+    "url": "https://github.com/Zuehlke/windev-example",
+    "description": "An example utilizing the windev cookbook.",
+    "logo": ""
+  },
+  {
+    "title": "propcheck",
+    "url": "https://github.com/alfert/propcheck",
+    "description": "Property based Testing for Elixir (based upon PropEr)",
+    "logo": ""
+  },
+  {
+    "title": "coverex",
+    "url": "https://github.com/alfert/coverex",
+    "description": "Coverage Reports for Elixir",
+    "logo": ""
+  }
+]
