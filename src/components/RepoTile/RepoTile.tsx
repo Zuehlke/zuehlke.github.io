@@ -9,13 +9,14 @@ type Props = {
 const RepoTile = (props: Props) => {
   return (
     <div className="RepoTile">
-      <a href={props.repo.url} target="_blank" rel="noreferrer" className="content-link">
-        <div className="container">
-          <h2 className="title">{props.repo.title}</h2>
-          <article className="description">
-            {props.repo.description}
-          </article>
-        </div>
+      <a href={props.repo.url}
+         target="_blank" rel="noreferrer"
+         className="content-link"
+         aria-label={`${props.repo.title} repository on GitHub`}>
+        <article className="repo-article">
+          <h2 className="repo-name">{props.repo.title}</h2>
+          <p>{props.repo.description}</p>
+        </article>
       </a>
     </div>
   );

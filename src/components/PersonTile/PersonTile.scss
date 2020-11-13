@@ -15,7 +15,8 @@
   background-color: $c-off-white-lighter;
   border-top-right-radius: $border-radius;
   border-bottom-left-radius: $border-radius;
-  transition: border-top-right-radius $transition-fast, background-color $transition-fast;
+  transition: border-top-right-radius $transition-fast ease-in,
+              background-color $transition-fast;
 
   &:hover {
     border-top-right-radius: 0;
@@ -34,7 +35,7 @@
     height: 100%;
   }
 
-  & > a > .container {
+  & > a > .person-article {
     @include _flex(row, flex-start, flex-start);
     padding: $pad-rem-md;
 
@@ -44,22 +45,27 @@
       min-width: 30%;
       flex-shrink: 0;
 
-      & > .text {
-        text-align: center;
-      }
-
-      & > .title {
-        font-weight: bold;
-        font-size: $fs-md;
-      }
-
-      & > .name {
-      }
-
       & > .avatar {
         margin-bottom: $pad-rem-xs;
         width: 100px;
         border-radius: 50px;
+      }
+
+      & > .profile-text {
+        margin: 0;
+        text-align: center;
+      }
+
+      & > .github-login {
+        font-weight: bold;
+        font-size: $fs-md;
+      }
+
+      & > .full-name {
+        margin: 0;
+        font-weight: normal;
+        font-size: $fs-base;
+        color: $c-softer-text-on-light
       }
     }
 

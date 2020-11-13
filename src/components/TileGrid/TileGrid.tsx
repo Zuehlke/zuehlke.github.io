@@ -1,15 +1,16 @@
 import './TileGrid.scss';
-import React, {ReactNode} from 'react';
+import React, {ReactChild} from 'react';
 
 type Props = {
-  children: ReactNode[]
+  children: ReactChild[]
 }
 
 const TileGrid = (props: Props) => {
 
-  const tile = (child: ReactNode) => {
+  const tile = (child: ReactChild, idx: number) => {
+
     return (
-      <div className="grid-cell">
+      <div key={idx} className="grid-cell">
         {child}
       </div>
     );
@@ -18,7 +19,7 @@ const TileGrid = (props: Props) => {
   return (
     <div className="TileGrid">
       <div className="grid">
-        {props.children.map((child: ReactNode) => tile(child))}
+        {React.Children.map(props.children, (child: ReactChild, idx: number) => tile(child, idx))}
       </div>
     </div>
   );

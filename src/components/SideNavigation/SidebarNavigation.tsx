@@ -16,7 +16,7 @@ const SidebarNavigation = (props: Props) => {
 
   const routeLink = (route: RouteSpec) => {
     return (
-      <div className="link-container" onClick={() => handleLinkClicked(true)}>
+      <div key={route.to} className="link-container" onClick={() => handleLinkClicked(true)}>
         <Link to={route.to}>{route.display}</Link>
       </div>
     );
@@ -24,7 +24,7 @@ const SidebarNavigation = (props: Props) => {
 
   const metaNavLink = (link: MetaLinkSpec) => {
     return (
-      <div className="link-container" onClick={() => handleLinkClicked(false)}>
+      <div key={link.href} className="link-container" onClick={() => handleLinkClicked(false)}>
         <a href={link.href} target="_blank" rel="noreferrer">{link.display}</a>
       </div>
     );

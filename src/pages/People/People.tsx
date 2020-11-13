@@ -15,7 +15,7 @@ const People = (props: Props) => {
         <div className="container">
           <h1 className="title">People</h1>
           <TileGrid>
-            {props.people.map((person: PersonSpec) => <PersonTile person={person}/>)}
+            {props.people.map((person: PersonSpec) => <PersonTile key={person.url} person={person}/>)}
           </TileGrid>
         </div>
       </div>
