@@ -60,27 +60,50 @@ def setup_workdir_repo(context, git):
              f"Workdir repo '{context.get_workdir_repo_root()}' set up to {'tracked' if branch_tracked else 'untracked'} branch '{target_branch}'.")
 
 
-def main():
-    # update contribution repos
-    # update people repos
-    # git add ../src/data/contributions.json ../src/data/people.json
-    # git commit -m "Automated update: contributions, people"
-    # git push origin develop
+def run_jobs(context, github_api):
+    util.log_rate_limit_status("MAIN", github_api)
+    # TODO: Can we unify this and still have the option for custom args per job?
+    jobs.JobCollectOrgRepos.initialize(context, github_api).run()
+    util.log_rate_limit_status("MAIN", github_api)
 
+
+def commit_and_push(context, git_wrapper):
+    if not git_wrapper.workdir_has_uncommitted_changes():
+        log.info("MAIN", "No changes to commit.")
+        return
+    commit_msg = f"[AUTO] Data updated at {util.timestamp_utc0_formatted()} UTC+0."
+    log.info("MAIN", f"Committing changes with message '{commit_msg}'.")
+    success, res = git_wrapper.commit_workdir_data_dir(commit_msg)
+    if not success:
+        log.abort_and_exit("MAIN", f"Failed to commit: '{res}'.")
+    remote_name = context.get_config("remote_name")
+    log.info("MAIN", f"Pushing branch '{context.get_config('target_branch')}' to remote '{remote_name}' at '{git_wrapper.get_workdir_remote_url(remote_name)}'.")
+    success, res = git_wrapper.push_workdir_target_branch()
+    if not success:
+        log.abort_and_exit("MAIN", f"Failed to push: '{res}'.")
+    log.info("MAIN", "Done.")
+
+
+def main():
     # Absolute path of this script.
     script_path = Path(os.path.abspath(__file__))
 
-    # Set up context and Git wrapper.
+    # Set up context and API wrappers.
     context = Context.initialize(script_path)
-    git = GitWrapper(context)
+    git_wrapper = GitWrapper(context)
+    github_api = GitHubApi(context)
 
-    setup_workdir_repo(context, git)
+    # Set up secondary repo clone as workdir.
+    setup_workdir_repo(context, git_wrapper)
 
-    github = GitHubApi(context)
+    # Run jobs.
+    run_jobs(context, github_api)
 
-    util.log_rate_limit_status("MAIN", github)
-    jobs.JobCollectOrgRepos.initialize(context, git, github).run()
-    util.log_rate_limit_status("MAIN", github)
+    # Commit and push.
+    commit_and_push(context, git_wrapper)
+
+    # Terminate.
+    log.terminate_successfully("MAIN")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import subprocess
 import time
+from datetime import datetime
 
 import log
 
@@ -21,6 +22,10 @@ def get_time_format_pattern():
 
 def epoch_to_local_datetime(epoch_time):
     return time.strftime(get_time_format_pattern(), time.localtime(epoch_time))
+
+
+def timestamp_utc0_formatted():
+    return datetime.utcnow().strftime(get_time_format_pattern())
 
 
 def log_rate_limit_status(tag, github_api):

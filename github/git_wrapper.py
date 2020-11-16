@@ -40,7 +40,7 @@ class GitWrapper:
         success, res = self.checkout_workdir_branch(branch_name)
         if success:
             return success, res
-        print(f"Unable to check out workdir branch {branch_name}, trying to create it.")
+        log.warning("GITW", f"Unable to check out workdir branch '{branch_name}', trying to create it.")
         return self._workdir_repo_command(["git", "checkout", "-b", branch_name])
 
     def is_target_branch_tracked(self):
@@ -57,13 +57,26 @@ class GitWrapper:
         target_branch = self._context.get_config("target_branch")
         return self._workdir_repo_command(["git", "pull", remote_name, target_branch])
 
+    def commit_workdir_data_dir(self, commit_msg):
+        success, res = self._workdir_repo_command(["git", "add", self._context.get_workdir_data_dir_path()])
+        if not success:
+            log.abort_and_exit("GITW", f"Failed to add workdir data dir path: '{res}'.")
+        return self._workdir_repo_command(["git", "commit", "-m", commit_msg])
+
+    def workdir_has_uncommitted_changes(self):
+        success, res = self._workdir_repo_command(["git", "status"])
+        if not success:
+            log.abort_and_exit("GITW", f"Failed to query git status: '{res}'.")
+        for line in res.splitlines():
+            if "nothing to commit" in line.lower():
+                # Found line including "nothing to commit" - no uncommitted changes.
+                return False
+        # Found no line saying "nothing to commit" - assuming uncommitted changes.
+        return True
+
     def push_workdir_target_branch(self):
         remote_name = self._context.get_config("remote_name")
         target_branch = self._context.get_config("target_branch")
         return self._workdir_repo_command(["git", "push", remote_name, target_branch])
 
-    def commit_workdir_data_dir(self):
-        success, res = self._workdir_repo_command(["git", "add", self._context.get_workdir_data_dir_path])
-        if not success:
-            log.abort_and_exit("GITW", f"Failed to add workdir data dir path: '{res}'.")
-        return self._workdir_repo_command(["git", "commit", "-m", "Automated data update on "])
+

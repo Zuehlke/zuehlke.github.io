@@ -4,10 +4,9 @@ import log
 
 class Job:
 
-    def __init__(self, job_name, context, git_wrapper, github_api):
+    def __init__(self, job_name, context, github_api):
         self._job_name = job_name
         self._context = context
-        self._git_wrapper = git_wrapper
         self._github_api = github_api
 
     def _write_to_json_file(self, filename, data):
@@ -26,12 +25,12 @@ class Job:
 
 class JobCollectOrgRepos(Job):
 
-    def __init__(self, context, git_wrapper, github_api):
-        super().__init__("COLLECT_ORG_REPOS", context, git_wrapper, github_api)
+    def __init__(self, context, github_api):
+        super().__init__("COLLECT_ORG_REPOS", context, github_api)
 
     @staticmethod
-    def initialize(context, git_wrapper, github_api):
-        return JobCollectOrgRepos(context, git_wrapper, github_api)
+    def initialize(context, github_api):
+        return JobCollectOrgRepos(context, github_api)
 
     def _execute_task(self):
         repos = self._github_api.collect_org_repos()
