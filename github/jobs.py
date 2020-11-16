@@ -10,9 +10,13 @@ class Job:
         self._github_api = github_api
 
     def _write_to_json_file(self, filename, data):
-        filepath = self._context.get_workdir_data_dir_path().joinpath(filename)
-        with open(filepath, "w", encoding="utf-8") as outfile:
-            json.dump(data, outfile, indent=2)
+        out_dir_path = self._context.get_workdir_data_dir_path()
+        filepath = out_dir_path.joinpath(filename)
+        try:
+            with open(filepath, "w", encoding="utf-8") as outfile:
+                json.dump(data, outfile, indent=2)
+        except FileNotFoundError:
+            log.abort_and_exit("JOBS", f"Output directory path '{out_dir_path}' not found.")
 
     def run(self):
         log.info("JOBS", f"Starting job '{self._job_name}'.")
