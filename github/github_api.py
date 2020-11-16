@@ -140,10 +140,13 @@ class GitHubApi:
         self._rate_limit_status = self._parse_rate_limit_headers(response.headers)
         status = response.status_code
 
-        # TODO: If this header is not None, its value is essentially an "ad-hoc rate limit".
         retry_after_header = response.headers.get("Retry-After")
         if retry_after_header is not None:
-            log.abort_and_exit("GHUB", f"Found Retry-After header: '{retry_after_header}'.")
+            # Retry-After header found, indicates abuse rate limiting. Discard response, wait and retry.
+            retry_sec = int(retry_after_header)
+            log.warning("GHUB", f"Received Retry-After (abuse rate limiting), trying again after '{retry_sec}' seconds.")
+            self.update_rate_limit_status()
+            self._api_request(url, headers, expected_status_codes, retry + 1)
 
         if (status == 403) or (status not in expected_status_codes):
             # Check for rate limiting in case of unexpected status code.
