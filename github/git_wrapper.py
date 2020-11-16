@@ -1,4 +1,5 @@
 import util
+import log
 
 
 class GitWrapper:
@@ -16,13 +17,20 @@ class GitWrapper:
         return self._workdir_repo_command(["git", "fetch", self._context.get_config("remote_name")])
 
     def get_source_remote_url(self, remote_name):
-        return self._source_repo_command(["git", "remote", "get-url", remote_name])
+        success, res = self._source_repo_command(["git", "remote", "get-url", remote_name])
+        if not success:
+            log.abort_and_exit("GITW", f"Unable to get URL for source remote '{remote_name}'.")
+        return res
 
     def get_workdir_remote_url(self, remote_name):
-        return self._workdir_repo_command(["git", "remote", "get-url", remote_name])
+        success, res = self._workdir_repo_command(["git", "remote", "get-url", remote_name])
+        if not success:
+            log.abort_and_exit("GITW", f"Unable to get URL for workdir remote '{remote_name}'.")
+        return res
 
     def clone_repository(self, clone_path):
-        return util.run_os_command(["git", "clone", self._context.get_remote_url(), clone_path.name], clone_path.parent)
+        remote_url = self.get_source_remote_url(self._context.get_config("remote_name"))
+        return util.run_os_command(["git", "clone", remote_url, clone_path.name], clone_path.parent)
 
     def checkout_workdir_branch(self, branch_name):
         return self._workdir_repo_command(["git", "checkout", branch_name])

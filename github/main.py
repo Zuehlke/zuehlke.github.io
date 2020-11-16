@@ -1,5 +1,4 @@
 import os
-import json
 
 import github_api
 import log
@@ -13,19 +12,12 @@ from git_wrapper import GitWrapper
 DATA_DIR = ["src", "data"]
 
 
-def read_config_file(script_path):
-    file_path = script_path.parent.joinpath("config.json")
-    try:
-        with open(file_path) as infile:
-            return json.load(infile)
-    except FileNotFoundError:
-        log.abort_and_exit("MAIN", f"Failed to read config file '{file_path}': not found.")
-
-
 def ensure_repo_clone(clone_path, context, git):
+    source_remote_url = git.get_source_remote_url(context.get_config("remote_name"))
+
     if not clone_path.exists():
         # Workdir clone doesn't exist, creating.
-        log.info("MAIN", f"Workdir doesn't exist - cloning '{context.get_remote_url()}' into '{clone_path}'.")
+        log.info("MAIN", f"Workdir doesn't exist - cloning '{source_remote_url}' into '{clone_path}'.")
         git.clone_repository(clone_path)
         return
 
@@ -34,10 +26,10 @@ def ensure_repo_clone(clone_path, context, git):
         log.abort_and_exit("MAIN", f"Unable to establish workdir: '{clone_path}' exists but is not a directory.")
 
     # Path is a directory - make sure it is a git remote with the same remote as the source repo.
-    success, remote = git.get_workdir_remote_url(context.get_config("remote_name"))
-    if (not success) or (remote != context.get_remote_url()):
+    remote_url = git.get_workdir_remote_url(context.get_config("remote_name"))
+    if remote_url != source_remote_url:
         log.abort_and_exit("MAIN",
-                           f"Workdir exists but has has incorrect remote: '{remote}' (expected '{context.get_remote_url()}').")
+                           f"Workdir exists but has has incorrect remote: '{remote_url}' (expected '{source_remote_url}').")
 
     log.info("MAIN", f"Workdir already exists at '{clone_path}', no need to clone.")
 
@@ -70,32 +62,12 @@ def main():
     # git commit -m "Automated update: contributions, people"
     # git push origin develop
 
-    context = Context()
-    git = GitWrapper(context)
-
     # Absolute path of this script.
     script_path = Path(os.path.abspath(__file__))
 
-    context.set_config(read_config_file(script_path))
-    context.set_source_repo_root(script_path.parent.parent)
-
-    # Retrieve GitHub token from env var.
-    token_env_var_name = context.get_config("github_api_token_envvar")
-    github_token = os.getenv(token_env_var_name)
-    if github_token is None:
-        log.abort_and_exit("MAIN", f"Required env var '{token_env_var_name}' is not set.")
-    context.set_github_token(github_token)
-
-    # Directory containing the source repository.
-    sources_root_parent = context.get_source_repo_root().parent
-
-    # Root of the working directory (secondary clone on which to operate)
-    context.set_workdir_repo_root(sources_root_parent.joinpath(context.get_config("workdir_root_dirname")))
-
-    success, remote_url = git.get_source_remote_url(context.get_config("remote_name"))
-    if not success:
-        log.abort_and_exit("MAIN", f"Could not get remote URL of source repo: '{remote_url}'")
-    context.set_remote_url(remote_url)
+    # Set up context and Git wrapper.
+    context = Context.initialize(script_path)
+    git = GitWrapper(context)
 
     setup_workdir_repo(context, git)
 
