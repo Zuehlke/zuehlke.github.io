@@ -162,24 +162,30 @@ class GitHubApi:
 
         return status, response.json(), self._parse_link_header(response.headers.get("Link"))
 
-    def _collect_repo_page(self, url, repos):
-        _, data, cursor = self._api_request(url)
-        parsed_repos = github_response_parser.parse_response_item(REPO_SCHEMA, data)
-        for repo in parsed_repos:
-            repos[repo["id"]] = repo
+    def _fetch_page(self, url, pages, flatten=True, expected_status_codes=None):
+        log.info("GHUB", f"Fetching page '{url}'.")
+        _, data, cursor = self._api_request(url, expected_status_codes=expected_status_codes)
+        assert type(data) is list
+        if flatten:
+            for element in data:
+                pages.append(element)
+        else:
+            pages.append(data)
         return cursor
+
+    def _fetch_all_pages(self, initial_url, flatten=True, expected_status_codes=None):
+        pages = []
+        cursor = self._fetch_page(initial_url, pages, flatten, expected_status_codes)
+        while cursor["next"] is not None:
+            cursor = self._fetch_page(cursor["next"], pages, flatten, expected_status_codes)
+        return pages
 
     def collect_org_repos(self):
         log.info("GHUB", "Fetching org repos.")
         initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
-        repos = {}
-        cursor = {
-            "next": initial_url
-        }
-        while cursor["next"] is not None:
-            next_url = cursor["next"]
-            log.info("GHUB", f"Fetching '{next_url}'.")
-            cursor = self._collect_repo_page(next_url, repos)
-
-        log.info("GHUB", "Done fetching org repos.")
-        return repos
+        repos = self._fetch_all_pages(initial_url, flatten=True)
+        parsed_repos = github_response_parser.parse_response_item(REPO_SCHEMA, repos)
+        result = {}
+        for repo in parsed_repos:
+            result[repo["id"]] = repo
+        return result
