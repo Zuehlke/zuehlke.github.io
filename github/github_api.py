@@ -7,8 +7,29 @@ import util
 
 ORG = 'zuehlke'
 BASE_URL = "https://api.github.com"
-KEY_VARS = ['name', 'owner', 'html_url', 'created_at', 'updated_at', 'stargazers_count', 'language', 'forks_count']
-SUB_KEY_WARS = {'owner': ('login', 'id')}
+SELECTED_REPO_KEYS = ['name', 'owner', 'html_url', 'created_at', 'updated_at', 'stargazers_count', 'language',
+                      'forks_count']
+SELECTED_REPO_SUBKEYS = {'owner': ('login', 'id')}
+
+REPO_SCHEMA = {
+    "name": {},
+    "owner": {
+        "login": {},
+        "id": {}
+    },
+    "html_url": {},
+    "created_at": {},
+    "updated_at": {},
+    "stargazers_count": {},
+    "language": {},
+    "forks_count": {},
+    "contribs": [
+        {
+            "login": {},
+            "id": {}
+        }
+    ]
+}
 
 
 class GitHubApi:
@@ -147,9 +168,11 @@ class GitHubApi:
     def _collect_repo_page(self, url, repos):
         _, data, cursor = self._api_request(url)
         for repo in data:
-            repos[repo['id']] = {k: v for k, v in repo.items() if k in KEY_VARS}
-            for sub_key in SUB_KEY_WARS:
-                repos[repo['id']][sub_key] = {k: v for k, v in repo[sub_key].items() if k in SUB_KEY_WARS[sub_key]}
+            repo_id = repo["id"]
+            repos[repo_id] = {key: value for key, value in repo.items() if key in SELECTED_REPO_KEYS}
+            for sub_key in SELECTED_REPO_SUBKEYS:
+                repos[repo_id][sub_key] = {key: value for key, value in repo[sub_key].items() if
+                                           key in SELECTED_REPO_SUBKEYS[sub_key]}
         return cursor
 
     def collect_org_repos(self):
