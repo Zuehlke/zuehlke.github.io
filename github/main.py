@@ -2,12 +2,12 @@ import os
 import json
 
 import github_api
-import git
 import log
 from pathlib import Path
 
 import util
 from context import Context
+from git_wrapper import GitWrapper
 
 # Path to data output directory, as segments relative to repository root
 DATA_DIR = ["src", "data"]
@@ -22,11 +22,11 @@ def read_config_file(script_path):
         log.abort_and_exit("MAIN", f"Failed to read config file '{file_path}': not found.")
 
 
-def ensure_repo_clone(clone_path, context):
+def ensure_repo_clone(clone_path, context, git):
     if not clone_path.exists():
         # Workdir clone doesn't exist, creating.
         log.info("MAIN", f"Workdir doesn't exist - cloning '{context.get_remote_url()}' into '{clone_path}'.")
-        git.clone_repository(clone_path, context)
+        git.clone_repository(clone_path)
         return
 
     # Path already exists - make sure it is a directory.
@@ -34,7 +34,7 @@ def ensure_repo_clone(clone_path, context):
         log.abort_and_exit("MAIN", f"Unable to establish workdir: '{clone_path}' exists but is not a directory.")
 
     # Path is a directory - make sure it is a git remote with the same remote as the source repo.
-    success, remote = git.get_workdir_remote_url(context.get_config("remote_name"), context)
+    success, remote = git.get_workdir_remote_url(context.get_config("remote_name"))
     if (not success) or (remote != context.get_remote_url()):
         log.abort_and_exit("MAIN",
                            f"Workdir exists but has has incorrect remote: '{remote}' (expected '{context.get_remote_url()}').")
@@ -42,18 +42,18 @@ def ensure_repo_clone(clone_path, context):
     log.info("MAIN", f"Workdir already exists at '{clone_path}', no need to clone.")
 
 
-def setup_workdir_repo(context):
+def setup_workdir_repo(context, git):
     target_branch = context.get_config("target_branch")
-    ensure_repo_clone(context.get_workdir_repo_root(), context)
+    ensure_repo_clone(context.get_workdir_repo_root(), context, git)
 
     # Workdir clone now exists. Set up branch.
-    success, res = git.ensure_workdir_branch(target_branch, context)
+    success, res = git.ensure_workdir_branch(target_branch)
     if not success:
         log.abort_and_exit("MAIN", f"Failed to check out workdir branch '{target_branch}': {res}.")
-    branch_tracked = git.is_branch_tracked(context)
+    branch_tracked = git.is_target_branch_tracked()
     if branch_tracked:
         log.info("MAIN", f"Target branch '{target_branch}' is tracked - pulling.")
-        success, res = git.pull_workdir_target_branch(context)
+        success, res = git.pull_workdir_target_branch()
         if not success:
             log.abort_and_exit("MAIN", f"Failed to pull workdir repository: {res}.")
     else:
@@ -71,6 +71,7 @@ def main():
     # git push origin develop
 
     context = Context()
+    git = GitWrapper(context)
 
     # Absolute path of this script.
     script_path = Path(os.path.abspath(__file__))
@@ -91,12 +92,12 @@ def main():
     # Root of the working directory (secondary clone on which to operate)
     context.set_workdir_repo_root(sources_root_parent.joinpath(context.get_config("workdir_root_dirname")))
 
-    success, remote_url = git.get_source_remote_url(context.get_config("remote_name"), context)
+    success, remote_url = git.get_source_remote_url(context.get_config("remote_name"))
     if not success:
         log.abort_and_exit("MAIN", f"Could not get remote URL of source repo: '{remote_url}'")
     context.set_remote_url(remote_url)
 
-    setup_workdir_repo(context)
+    setup_workdir_repo(context, git)
 
     github = github_api.GitHubApi(context)
     rl_status = github.request_rate_limit_status()

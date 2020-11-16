@@ -1,11 +1,11 @@
 class Context:
 
     def __init__(self):
-        self._config = {}
-        self._github_token = {}
-        self._source_repo_root = ""
-        self._workdir_repo_root = ""
-        self._remote_url = ""
+        self._config = None
+        self._github_token = None
+        self._source_repo_root = None
+        self._workdir_repo_root = None
+        self._remote_url = None
 
     def set_config(self, config):
         self._config = config
