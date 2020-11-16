@@ -1,6 +1,8 @@
 import subprocess
 import time
 
+import log
+
 
 def decode_command_output_buffer(buffer):
     return buffer.decode("utf-8").strip()
@@ -19,3 +21,9 @@ def get_time_format_pattern():
 
 def epoch_to_local_datetime(epoch_time):
     return time.strftime(get_time_format_pattern(), time.localtime(epoch_time))
+
+
+def log_rate_limit_status(tag, github_api):
+    rl_status = github_api.request_rate_limit_status()
+    log.info(tag,
+             f"{rl_status['remaining']} calls remaining, resets at {epoch_to_local_datetime(rl_status['reset_at_utc'])}.")

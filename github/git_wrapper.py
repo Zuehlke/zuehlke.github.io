@@ -13,8 +13,9 @@ class GitWrapper:
     def _workdir_repo_command(self, command_segments):
         return util.run_os_command(command_segments, self._context.get_workdir_repo_root())
 
-    def workdir_fetch(self):
-        return self._workdir_repo_command(["git", "fetch", self._context.get_config("remote_name")])
+    def fetch_workdir(self):
+        success, _ = self._workdir_repo_command(["git", "fetch", self._context.get_config("remote_name")])
+        return success
 
     def get_source_remote_url(self, remote_name):
         success, res = self._source_repo_command(["git", "remote", "get-url", remote_name])
@@ -60,3 +61,9 @@ class GitWrapper:
         remote_name = self._context.get_config("remote_name")
         target_branch = self._context.get_config("target_branch")
         return self._workdir_repo_command(["git", "push", remote_name, target_branch])
+
+    def commit_workdir_data_dir(self):
+        success, res = self._workdir_repo_command(["git", "add", self._context.get_workdir_data_dir_path])
+        if not success:
+            log.abort_and_exit("GITW", f"Failed to add workdir data dir path: '{res}'.")
+        return self._workdir_repo_command(["git", "commit", "-m", "Automated data update on "])

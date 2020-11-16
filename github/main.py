@@ -1,12 +1,13 @@
 import os
 
-import github_api
 import log
 from pathlib import Path
 
 import util
+import jobs
 from context import Context
 from git_wrapper import GitWrapper
+from github_api import GitHubApi
 
 # Path to data output directory, as segments relative to repository root
 DATA_DIR = ["src", "data"]
@@ -39,6 +40,10 @@ def setup_workdir_repo(context, git):
     ensure_repo_clone(context.get_workdir_repo_root(), context, git)
 
     # Workdir clone now exists. Set up branch.
+    log.info("MAIN", f"Fetching workdir from targeted remote ({context.get_config('remote_name')}).")
+    success = git.fetch_workdir()
+    if not success:
+        log.abort_and_exit("MAIN", "Failed to fetch workdir.")
     success, res = git.ensure_workdir_branch(target_branch)
     if not success:
         log.abort_and_exit("MAIN", f"Failed to check out workdir branch '{target_branch}': {res}.")
@@ -71,16 +76,11 @@ def main():
 
     setup_workdir_repo(context, git)
 
-    github = github_api.GitHubApi(context)
-    rl_status = github.request_rate_limit_status()
-    log.info("MAIN",
-             f"{rl_status['remaining']} calls remaining, resets at {util.epoch_to_local_datetime(rl_status['reset_at_utc'])}.")
-    repos = github.collect_org_repos()
-    rl_status = github.request_rate_limit_status()
-    log.info("MAIN",
-             f"{rl_status['remaining']} calls remaining, resets at {util.epoch_to_local_datetime(rl_status['reset_at_utc'])}.")
+    github = GitHubApi(context)
 
-    print(repos)
+    util.log_rate_limit_status("MAIN", github)
+    jobs.JobCollectOrgRepos.initialize(context, git, github).run()
+    util.log_rate_limit_status("MAIN", github)
 
 
 if __name__ == "__main__":

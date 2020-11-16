@@ -144,7 +144,6 @@ class GitHubApi:
 
         return status, response.json(), self._parse_link_header(response.headers.get("Link"))
 
-    # TODO: Factor out.
     def _collect_repo_page(self, url, repos):
         _, data, cursor = self._api_request(url)
         for repo in data:
@@ -153,7 +152,6 @@ class GitHubApi:
                 repos[repo['id']][sub_key] = {k: v for k, v in repo[sub_key].items() if k in SUB_KEY_WARS[sub_key]}
         return cursor
 
-    # TODO: Factor out.
     def collect_org_repos(self):
         log.info("GHUB", "Fetching org repos.")
         initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
