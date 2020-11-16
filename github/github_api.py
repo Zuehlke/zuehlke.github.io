@@ -2,16 +2,16 @@ import time
 
 import requests
 import re
+
+import github_response_parser
 import log
 import util
 
 ORG = 'zuehlke'
 BASE_URL = "https://api.github.com"
-SELECTED_REPO_KEYS = ['name', 'owner', 'html_url', 'created_at', 'updated_at', 'stargazers_count', 'language',
-                      'forks_count']
-SELECTED_REPO_SUBKEYS = {'owner': ('login', 'id')}
 
-REPO_SCHEMA = {
+REPO_SCHEMA = [{
+    "id": {},
     "name": {},
     "owner": {
         "login": {},
@@ -22,14 +22,8 @@ REPO_SCHEMA = {
     "updated_at": {},
     "stargazers_count": {},
     "language": {},
-    "forks_count": {},
-    "contribs": [
-        {
-            "login": {},
-            "id": {}
-        }
-    ]
-}
+    "forks_count": {}
+}]
 
 
 class GitHubApi:
@@ -167,12 +161,9 @@ class GitHubApi:
 
     def _collect_repo_page(self, url, repos):
         _, data, cursor = self._api_request(url)
-        for repo in data:
-            repo_id = repo["id"]
-            repos[repo_id] = {key: value for key, value in repo.items() if key in SELECTED_REPO_KEYS}
-            for sub_key in SELECTED_REPO_SUBKEYS:
-                repos[repo_id][sub_key] = {key: value for key, value in repo[sub_key].items() if
-                                           key in SELECTED_REPO_SUBKEYS[sub_key]}
+        parsed_repos = github_response_parser.parse_response_item(REPO_SCHEMA, data)
+        for repo in parsed_repos:
+            repos[repo["id"]] = repo
         return cursor
 
     def collect_org_repos(self):

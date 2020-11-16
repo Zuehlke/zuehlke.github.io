@@ -100,7 +100,7 @@ def main():
     run_jobs(context, github_api)
 
     # Commit and push.
-    commit_and_push(context, git_wrapper)
+    # commit_and_push(context, git_wrapper)
 
     # Terminate.
     log.terminate_successfully("MAIN")
