@@ -46,7 +46,6 @@ class GitWrapper:
     def is_target_branch_tracked(self):
         success, res = self._workdir_repo_command(["git", "branch", "-r"])
         if not success:
-            # TODO: Catch and report all exceptions in main, or find better solution to this.
             raise AssertionError("Should not reach here.")
         lines = [line.strip() for line in res.split("\n")]
         remote_branch_name = self._context.get_config("remote_name") + "/" + self._context.get_config("target_branch")
