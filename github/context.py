@@ -30,7 +30,7 @@ class Context:
         return val
 
     @staticmethod
-    def initialize(main_script_path):
+    def create(main_script_path):
         config = Context._read_config_file(main_script_path)
         github_token = Context._read_env_var(config["github_api_token_envvar"])
         source_repo_root = main_script_path.parent.parent

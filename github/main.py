@@ -13,6 +13,14 @@ from github_api import GitHubApi
 DATA_DIR = ["src", "data"]
 
 
+def pull_source_repo(script_path):
+    log.info("MAIN", "Pulling source repository.")
+    context = Context.create(script_path)
+    success, res = GitWrapper(context).pull_source_repo()
+    if not success:
+        log.abort_and_exit("MAIN", f"Failed to pull source repository: '{res}'")
+
+
 def ensure_repo_clone(clone_path, context, git):
     source_remote_url = git.get_source_remote_url(context.get_config("remote_name"))
 
@@ -62,8 +70,8 @@ def setup_workdir_repo(context, git):
 
 def run_jobs(context, github_api):
     util.log_rate_limit_status("MAIN", github_api)
-    # TODO: Can we unify this and still have the option for custom args per job?
     jobs.JobCollectOrgRepos.initialize(context, github_api).run()
+    jobs.JobCollectOrgMembers.initialize(context, github_api).run()
     util.log_rate_limit_status("MAIN", github_api)
 
 
@@ -88,8 +96,11 @@ def main():
     # Absolute path of this script.
     script_path = Path(os.path.abspath(__file__))
 
+    # Make sure source repository is up to date.
+    pull_source_repo(script_path)
+
     # Set up context and API wrappers.
-    context = Context.initialize(script_path)
+    context = Context.create(script_path)
     git_wrapper = GitWrapper(context)
     github_api = GitHubApi(context)
 
@@ -100,7 +111,7 @@ def main():
     run_jobs(context, github_api)
 
     # Commit and push.
-    # commit_and_push(context, git_wrapper)
+    commit_and_push(context, git_wrapper)
 
     # Terminate.
     log.terminate_successfully("MAIN")

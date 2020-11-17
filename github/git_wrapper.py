@@ -52,6 +52,9 @@ class GitWrapper:
         remote_branch_name = self._context.get_config("remote_name") + "/" + self._context.get_config("target_branch")
         return remote_branch_name in lines
 
+    def pull_source_repo(self):
+        return self._source_repo_command(["git", "pull"])
+
     def pull_workdir_target_branch(self):
         remote_name = self._context.get_config("remote_name")
         target_branch = self._context.get_config("target_branch")
