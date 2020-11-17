@@ -32,3 +32,15 @@ def log_rate_limit_status(tag, github_api):
     rl_status = github_api.request_rate_limit_status()
     log.info(tag,
              f"{rl_status['remaining']} calls remaining, resets at {epoch_to_local_datetime(rl_status['reset_at_utc'])}.")
+
+
+def ensure_directory(dirname, relative_to, create_parents=True):
+    path = dirname
+    if not dirname.is_absolute():
+        path = relative_to.joinpath(dirname)
+    if path.exists():
+        assert not path.is_file(), "Expected directory, found existing file."
+        return path
+    path.mkdir(parents=create_parents)
+    assert path.exists(), "Expected directory to exist after creation."
+    return path

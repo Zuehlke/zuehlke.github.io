@@ -1,4 +1,5 @@
 import os
+import argparse
 
 import log
 from pathlib import Path
@@ -11,6 +12,14 @@ from github_api import GitHubApi
 
 # Path to data output directory, as segments relative to repository root
 DATA_DIR = ["src", "data"]
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Automated zuehlke.github.io data update.")
+    parser.add_argument("--log-dir",
+                        help="log file output directory (default: ./), absolute or relative to cwd")
+    parser.add_argument("--no-logfile", help="don't create a log file", action="store_true")
+    return parser.parse_args()
 
 
 def pull_source_repo(script_path):
@@ -85,7 +94,8 @@ def commit_and_push(context, git_wrapper):
     if not success:
         log.abort_and_exit("MAIN", f"Failed to commit: '{res}'.")
     remote_name = context.get_config("remote_name")
-    log.info("MAIN", f"Pushing branch '{context.get_config('target_branch')}' to remote '{remote_name}' at '{git_wrapper.get_workdir_remote_url(remote_name)}'.")
+    log.info("MAIN",
+             f"Pushing branch '{context.get_config('target_branch')}' to remote '{remote_name}' at '{git_wrapper.get_workdir_remote_url(remote_name)}'.")
     success, res = git_wrapper.push_workdir_target_branch()
     if not success:
         log.abort_and_exit("MAIN", f"Failed to push: '{res}'.")
@@ -95,6 +105,12 @@ def commit_and_push(context, git_wrapper):
 def main():
     # Absolute path of this script.
     script_path = Path(os.path.abspath(__file__))
+
+    args = parse_arguments()
+    if not args.no_logfile:
+        log.open_log_file(args.log_dir)
+    else:
+        log.info("MAIN", "Not logging to a file.")
 
     # Make sure source repository is up to date.
     pull_source_repo(script_path)
