@@ -39,3 +39,17 @@ class JobCollectOrgRepos(Job):
     def _execute_task(self):
         repos = self._github_api.collect_org_repos()
         self._write_to_json_file(self._context.get_config("contributions_filename"), repos)
+
+
+class JobCollectOrgMembers(Job):
+
+    def __init__(self, context, github_api):
+        super().__init__("COLLECT_ORG_MEMBERS", context, github_api)
+
+    @staticmethod
+    def initialize(context, github_api):
+        return JobCollectOrgMembers(context, github_api)
+
+    def _execute_task(self):
+        members = self._github_api.collect_org_members()
+        self._write_to_json_file(self._context.get_config("people_filename"), members)

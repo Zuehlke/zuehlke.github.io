@@ -10,7 +10,7 @@ import util
 ORG = 'zuehlke'
 BASE_URL = "https://api.github.com"
 
-REPO_SCHEMA = [{
+REPOS_SCHEMA = [{
     "id": {},
     "name": {},
     "owner": {
@@ -24,6 +24,15 @@ REPO_SCHEMA = [{
     "language": {},
     "forks_count": {}
 }]
+
+PERSON_SCHEMA = {
+    "id": {},
+    "login": {},
+    "name": {},
+    "bio": {},
+    "avatar_url": {},
+    "html_url": {},
+}
 
 
 class GitHubApi:
@@ -184,8 +193,20 @@ class GitHubApi:
         log.info("GHUB", "Fetching org repos.")
         initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
         repos = self._fetch_all_pages(initial_url, flatten=True)
-        parsed_repos = github_response_parser.parse_response_item(REPO_SCHEMA, repos)
+        parsed_repos = github_response_parser.parse_response_item(REPOS_SCHEMA, repos)
         result = {}
         for repo in parsed_repos:
             result[repo["id"]] = repo
         return result
+
+    def collect_org_members(self):
+        log.info("GHUB", "Fetching org members.")
+        initial_members_url = f"{BASE_URL}/orgs/{ORG}/members"
+        member_urls = [member["url"] for member in self._fetch_all_pages(initial_members_url, flatten=True)]
+        members = {}
+        for member_url in member_urls:
+            log.info("GHUB", f"Fetching member '{member_url}'.")
+            _, member_raw, _ = self._api_request(member_url)
+            member_parsed = github_response_parser.parse_response_item(PERSON_SCHEMA, member_raw)
+            members[member_parsed["id"]] = member_parsed
+        return members
