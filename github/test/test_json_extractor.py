@@ -1,43 +1,43 @@
 import unittest
 
-import github_response_parser
+import json_extractor
 
 
-class TestGithubResponseParser(unittest.TestCase):
+class TestJsonExtractor(unittest.TestCase):
 
-    def test__parse_response_item_single_key__should_select_all(self):
+    def test__extract_single_key__should_select_all(self):
         schema = {
             "name": {}
         }
-        response_item = {
+        json_node = {
             "name": "Jon Doe"
         }
         expected = {
             "name": "Jon Doe"
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__two_keys__should_ignore_second(self):
+    def test__extract__two_keys__should_ignore_second(self):
         schema = {
             "name": {}
         }
-        response_item = {
+        json_node = {
             "name": "Jon Doe",
             "age": 42
         }
         expected = {
             "name": "Jon Doe"
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_one_level__should_implicitly_select_all(self):
+    def test__extract__nested_one_level__should_implicitly_select_all(self):
         schema = {
             "id": {},
             "person": {}
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": "Jon Doe",
@@ -51,12 +51,12 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_one_level__empty_schema__should_implicitly_select_all(self):
+    def test__extract__nested_one_level__empty_schema__should_implicitly_select_all(self):
         schema = {}
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": "Jon Doe",
@@ -70,10 +70,10 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_one_level__should_explicitly_select_all(self):
+    def test__extract__nested_one_level__should_explicitly_select_all(self):
         schema = {
             "id": {},
             "person": {
@@ -81,7 +81,7 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": {}
             }
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": "Jon Doe",
@@ -95,17 +95,17 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_one_level__should_ignore_person_age(self):
+    def test__extract__nested_one_level__should_ignore_person_age(self):
         schema = {
             "id": {},
             "person": {
                 "name": {}
             }
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": "Jon Doe",
@@ -118,12 +118,12 @@ class TestGithubResponseParser(unittest.TestCase):
                 "name": "Jon Doe"
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_two_levels__should_implicitly_empty_schema__should_select_all(self):
+    def test__extract__nested_two_levels__should_implicitly_empty_schema__should_select_all(self):
         schema = {}
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": {
@@ -143,10 +143,10 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_two_levels__should_explicitly_select_all(self):
+    def test__extract__nested_two_levels__should_explicitly_select_all(self):
         schema = {
             "id": {},
             "person": {
@@ -157,7 +157,7 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": {}
             }
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": {
@@ -177,10 +177,10 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_two_levels__should_implicitly_select_full_name(self):
+    def test__extract__nested_two_levels__should_implicitly_select_full_name(self):
         schema = {
             "id": {},
             "person": {
@@ -188,7 +188,7 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": {}
             }
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": {
@@ -208,15 +208,15 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_two_levels__should_implicitly_select_full_person(self):
+    def test__extract__nested_two_levels__should_implicitly_select_full_person(self):
         schema = {
             "id": {},
             "person": {}
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": {
@@ -236,10 +236,10 @@ class TestGithubResponseParser(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__nested_two_levels__should_ignore_id_age_lastname(self):
+    def test__extract__nested_two_levels__should_ignore_id_age_lastname(self):
         schema = {
             "person": {
                 "name": {
@@ -247,7 +247,7 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             }
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "person": {
                 "name": {
@@ -264,12 +264,12 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             }
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__root_list__no_schema__should_select_all(self):
+    def test__extract__root_list__no_schema__should_select_all(self):
         schema = []
-        response_item = [
+        json_node = [
             {"name": "Jon Doe"},
             {"name": "Jane Doe"}
         ]
@@ -277,14 +277,14 @@ class TestGithubResponseParser(unittest.TestCase):
             {"name": "Jon Doe"},
             {"name": "Jane Doe"}
         ]
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__root_list__should_explicitly_select_all(self):
+    def test__extract__root_list__should_explicitly_select_all(self):
         schema = [{
             "name": {}
         }]
-        response_item = [
+        json_node = [
             {"name": "Jon Doe"},
             {"name": "Jane Doe"}
         ]
@@ -292,16 +292,16 @@ class TestGithubResponseParser(unittest.TestCase):
             {"name": "Jon Doe"},
             {"name": "Jane Doe"}
         ]
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__root_list__nested_elements__should_ignore_age_lastname(self):
+    def test__extract__root_list__nested_elements__should_ignore_age_lastname(self):
         schema = [{
             "name": {
                 "first": {}
             }
         }]
-        response_item = [
+        json_node = [
             {
                 "name": {
                     "first": "Jon",
@@ -329,15 +329,15 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             }
         ]
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__child_list__nested_elements__should_ignore_list(self):
+    def test__extract__child_list__nested_elements__should_ignore_list(self):
         schema = {
             "id": {},
             "title": {}
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "title": "hello-world",
             "contributors": [
@@ -355,16 +355,16 @@ class TestGithubResponseParser(unittest.TestCase):
             "id": "1234",
             "title": "hello-world"
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__child_list__nested_elements__should_implicitly_select_full_items(self):
+    def test__extract__child_list__nested_elements__should_implicitly_select_full_items(self):
         schema = {
             "id": {},
             "title": {},
             "contributors": []
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "title": "hello-world",
             "contributors": [
@@ -392,10 +392,10 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             ]
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__child_list__nested_elements__should_explicitly_select_full_items(self):
+    def test__extract__child_list__nested_elements__should_explicitly_select_full_items(self):
         schema = {
             "id": {},
             "title": {},
@@ -404,7 +404,7 @@ class TestGithubResponseParser(unittest.TestCase):
                 "login": {}
             }]
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "title": "hello-world",
             "contributors": [
@@ -432,17 +432,17 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             ]
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__child_list__nested_elements__should_ignore_title_login(self):
+    def test__extract__child_list__nested_elements__should_ignore_title_login(self):
         schema = {
             "id": {},
             "contributors": [{
                 "id": {}
             }]
         }
-        response_item = {
+        json_node = {
             "id": "1234",
             "title": "hello-world",
             "contributors": [
@@ -467,10 +467,10 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             ]
         }
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__parse_response_item__complex_nested_objects_and_lists(self):
+    def test__extract__complex_nested_objects_and_lists(self):
         schema = [{
             "id": {},
             "title": {},
@@ -485,7 +485,7 @@ class TestGithubResponseParser(unittest.TestCase):
                 }
             ]
         }]
-        response_item = [
+        json_node = [
             {
                 "id": "1234",
                 "title": "hello-world",
@@ -576,5 +576,5 @@ class TestGithubResponseParser(unittest.TestCase):
                 ]
             }
         ]
-        actual = github_response_parser.parse_response_item(schema, response_item)
+        actual = json_extractor.extract(schema, json_node)
         self.assertEqual(expected, actual)

@@ -79,7 +79,7 @@ def setup_workdir_repo(context, git):
 
 def run_jobs(context, github_api):
     util.log_rate_limit_status("MAIN", github_api)
-    jobs.JobCollectOrgRepos.initialize(context, github_api).run()
+    # jobs.JobCollectOrgRepos.initialize(context, github_api).run()
     jobs.JobCollectOrgMembers.initialize(context, github_api).run()
     util.log_rate_limit_status("MAIN", github_api)
 
