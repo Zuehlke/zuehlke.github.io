@@ -189,11 +189,14 @@ class GitHubApi:
             cursor = self._fetch_page(cursor["next"], pages, flatten, expected_status_codes)
         return pages
 
+    def _preprocess_repos(self, repos_list):
+        return [repo for repo in repos_list if not repo["private"]]
+
     def collect_org_repos(self):
         log.info("GHUB", "Fetching org repos.")
         initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
-        repos = self._fetch_all_pages(initial_url, flatten=True)
-        parsed_repos = github_response_parser.parse_response_item(REPOS_SCHEMA, repos)
+        preprocessed_repos = self._preprocess_repos(self._fetch_all_pages(initial_url, flatten=True))
+        parsed_repos = github_response_parser.parse_response_item(REPOS_SCHEMA, preprocessed_repos)
         result = {}
         for repo in parsed_repos:
             result[repo["id"]] = repo
