@@ -84,22 +84,33 @@ def run_jobs(context, github_api):
     util.log_rate_limit_status("MAIN", github_api)
 
 
-def commit_and_push(context, git_wrapper):
+def commit(git_wrapper):
     if not git_wrapper.workdir_has_uncommitted_changes():
         log.info("MAIN", "No changes to commit.")
-        return
+        return False
     commit_msg = f"[AUTO] Data updated at {util.timestamp_utc0_formatted()} UTC+0."
     log.info("MAIN", f"Committing changes with message '{commit_msg}'.")
     success, res = git_wrapper.commit_workdir_data_dir(commit_msg)
     if not success:
         log.abort_and_exit("MAIN", f"Failed to commit: '{res}'.")
+    return True
+
+
+def push(context, git_wrapper, did_commit, must_push=False):
+    if (not must_push) and (not did_commit) and git_wrapper.is_target_branch_tracked():
+        # No mandatory push, no new commit, and target branch is already tracked - no need to push.
+        return
     remote_name = context.get_config("remote_name")
     log.info("MAIN",
              f"Pushing branch '{context.get_config('target_branch')}' to remote '{remote_name}' at '{git_wrapper.get_workdir_remote_url(remote_name)}'.")
     success, res = git_wrapper.push_workdir_target_branch()
     if not success:
         log.abort_and_exit("MAIN", f"Failed to push: '{res}'.")
-    log.info("MAIN", "Done.")
+
+
+def commit_and_push(context, git_wrapper):
+    did_commit = commit(git_wrapper)
+    push(context, git_wrapper, did_commit, context.get_config("push_always"))
 
 
 def main():

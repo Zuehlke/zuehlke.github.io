@@ -14,7 +14,7 @@ class GitWrapper:
         return util.run_os_command(command_segments, self._context.get_workdir_repo_root())
 
     def fetch_workdir(self):
-        success, _ = self._workdir_repo_command(["git", "fetch", self._context.get_config("remote_name")])
+        success, _ = self._workdir_repo_command(["git", "fetch", "-p", self._context.get_config("remote_name")])
         return success
 
     def get_source_remote_url(self, remote_name):

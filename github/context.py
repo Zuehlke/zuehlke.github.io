@@ -26,7 +26,7 @@ class Context:
     def _read_env_var(var_name):
         val = os.getenv(var_name)
         if val is None:
-            log.abort_and_exit("CTXT", f"Context init failed, required env var '{var_name}' is not defined.")
+            log.abort_and_exit("CTXT", f"Context init failed, required env var '{var_name}' is not set.")
         return val
 
     @staticmethod
