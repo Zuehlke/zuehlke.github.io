@@ -212,13 +212,21 @@ class GitHubApi:
     def _preprocess_repos(self, repos_list):
         return [repo for repo in repos_list if not repo["private"]]
 
+    def _get_repo_contributors(self, owner, repo):
+        url = f"{BASE_URL}/repos/{owner}/{repo}/contributors"
+        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
+
+    def _get_org_members(self):
+        url = f"{BASE_URL}/orgs/{ORG}/members"
+        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
+
+    def _get_org_repos(self):
+        url = f"{BASE_URL}/orgs/{ORG}/repos"
+        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
+
     def collect_org_repos(self):
-        log.info("GHUB", "Fetching org repos.")
-        query_params = {
-            "per_page": 100
-        }
-        initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
-        raw_repos = self.fetch_all_pages(initial_url, query_params=query_params, flatten=True)
+        log.info("GHUB", "Collecting org repos.")
+        raw_repos = self._get_org_repos()
         preprocessed_repos = self._preprocess_repos(raw_repos)
         parsed_repos = json_reducer.reduce(REPOS_SCHEMA, preprocessed_repos)
         result = {}
@@ -227,13 +235,8 @@ class GitHubApi:
         return result
 
     def collect_org_members(self):
-        log.info("GHUB", "Fetching org members.")
-        query_params = {
-            "per_page": 100
-        }
-        initial_members_url = f"{BASE_URL}/orgs/{ORG}/members"
-        member_list = self.fetch_all_pages(initial_members_url, query_params=query_params, flatten=True)
-        member_urls = [member["url"] for member in member_list]
+        log.info("GHUB", "Collecting org members.")
+        member_urls = [member["url"] for member in self._get_org_members()]
         members = {}
         for member_url in member_urls:
             log.info("GHUB", f"Fetching member '{member_url}'.")
