@@ -42,13 +42,11 @@ class GitHubApi:
     def __init__(self, context):
         self._context = context
         self._api_token = context.get_github_token()
-        self._default_headers = {
-            "Authorization": f"token {context.get_github_token()}"
-        }
         self._rate_limit_status = None
 
     def update_rate_limit_status(self):
-        res = requests.get(f"{BASE_URL}/rate_limit", headers=self._default_headers)
+        headers = {"Authorization": self._get_authorization_header()}
+        res = requests.get(f"{BASE_URL}/rate_limit", headers=headers)
         if res.status_code != 200:
             log.abort_and_exit("GHUB", f"Failed to update rate limit status, status code {res.status_code}.")
         data = res.json()["rate"]
@@ -77,6 +75,9 @@ class GitHubApi:
     def is_rate_limited(self, force_update=False, ignore_stale=False):
         status = self.request_rate_limit_status(force_update, ignore_stale)
         return status["remaining"] <= 0
+
+    def _get_authorization_header(self):
+        return f"token {self._context.get_github_token()}"
 
     @staticmethod
     def _parse_rate_limit_headers(headers):
@@ -129,11 +130,24 @@ class GitHubApi:
                 result["prev"] = url
         return result
 
-    def _api_request(self, url, headers=None, expected_status_codes=None, retry=0):
+    def get(self, url, authenticate=True, headers=None, query_params=None, expected_status_codes=None, retry=0):
+        # Initialize headers if not provided.
         if headers is None:
-            headers = self._default_headers
+            headers = {}
+
+        # Set expected status codes to default value if not provided.
         if expected_status_codes is None:
-            expected_status_codes = [200]
+            expected_status_codes = [200, 204]
+
+        # If request is authenticated, add authorization header.
+        if authenticate:
+            headers["Authorization"] = self._get_authorization_header()
+
+        # Append query params to URL if provided.
+        if query_params is not None:
+            url = f"{url}?"
+            for key, value in query_params.items():
+                url = f"{url}{key}={value}&"
 
         # If max number of retries is exceeded, abort.
         if retry > self._context.get_config("max_retries"):
@@ -155,9 +169,10 @@ class GitHubApi:
         if retry_after_header is not None:
             # Retry-After header found, indicates abuse rate limiting. Discard response, wait and retry.
             retry_sec = int(retry_after_header)
-            log.warning("GHUB", f"Received Retry-After (abuse rate limiting), trying again after '{retry_sec}' seconds.")
+            log.warning("GHUB",
+                        f"Received Retry-After (abuse rate limiting), trying again after '{retry_sec}' seconds.")
             self.update_rate_limit_status()
-            self._api_request(url, headers, expected_status_codes, retry + 1)
+            self.get(url, headers, expected_status_codes, retry + 1)
 
         if (status == 403) or (status not in expected_status_codes):
             # Check for rate limiting in case of unexpected status code.
@@ -169,35 +184,42 @@ class GitHubApi:
                 log.warning("GHUB", f"Unexpected status code {status} for request {url}.")
 
             # Rate limit should now be lifted if there was one. Retry, update number of retries.
-            self._api_request(url, headers, expected_status_codes, retry + 1)
+            self.get(url, headers, expected_status_codes, retry + 1)
 
         return status, response.json(), self._parse_link_header(response.headers.get("Link"))
 
-    def _fetch_page(self, url, pages, flatten=True, expected_status_codes=None):
+    def request_page(self, url, authenticate=True, headers=None, query_params=None, expected_status_codes=None):
         log.info("GHUB", f"Fetching page '{url}'.")
-        _, data, cursor = self._api_request(url, expected_status_codes=expected_status_codes)
-        assert type(data) is list
-        if flatten:
-            for element in data:
-                pages.append(element)
-        else:
-            pages.append(data)
-        return cursor
+        _, data, cursor = self.get(url, authenticate, headers, query_params, expected_status_codes)
+        page = data
+        if type(data) is not list:
+            page = [data]
+        return cursor, page
 
-    def _fetch_all_pages(self, initial_url, flatten=True, expected_status_codes=None):
-        pages = []
-        cursor = self._fetch_page(initial_url, pages, flatten, expected_status_codes)
-        while cursor["next"] is not None:
-            cursor = self._fetch_page(cursor["next"], pages, flatten, expected_status_codes)
-        return pages
+    def fetch_all_pages(self, initial_url, flatten=False, authenticate=True, headers=None, query_params=None, expected_status_codes=None):
+        result = []
+        url = initial_url
+        while url is not None:
+            cursor, page = self.request_page(url, authenticate, headers, query_params, expected_status_codes)
+            if flatten:
+                for element in page:
+                    result.append(element)
+            else:
+                result.append(page)
+            url = cursor["next"]
+        return result
 
     def _preprocess_repos(self, repos_list):
         return [repo for repo in repos_list if not repo["private"]]
 
     def collect_org_repos(self):
         log.info("GHUB", "Fetching org repos.")
+        query_params = {
+            "per_page": 100
+        }
         initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
-        preprocessed_repos = self._preprocess_repos(self._fetch_all_pages(initial_url, flatten=True))
+        raw_repos = self.fetch_all_pages(initial_url, query_params=query_params, flatten=True)
+        preprocessed_repos = self._preprocess_repos(raw_repos)
         parsed_repos = json_reducer.reduce(REPOS_SCHEMA, preprocessed_repos)
         result = {}
         for repo in parsed_repos:
@@ -206,12 +228,16 @@ class GitHubApi:
 
     def collect_org_members(self):
         log.info("GHUB", "Fetching org members.")
+        query_params = {
+            "per_page": 100
+        }
         initial_members_url = f"{BASE_URL}/orgs/{ORG}/members"
-        member_urls = [member["url"] for member in self._fetch_all_pages(initial_members_url, flatten=True)]
+        member_list = self.fetch_all_pages(initial_members_url, query_params=query_params, flatten=True)
+        member_urls = [member["url"] for member in member_list]
         members = {}
         for member_url in member_urls:
             log.info("GHUB", f"Fetching member '{member_url}'.")
-            _, member_raw, _ = self._api_request(member_url)
+            _, member_raw, _ = self.get(member_url)
             member_parsed = json_reducer.reduce(PERSON_SCHEMA, member_raw)
             members[member_parsed["id"]] = member_parsed
         return members
