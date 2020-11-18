@@ -38,62 +38,29 @@ PERSON_SCHEMA = {
 
 
 class GitHubApi:
+    """Provides a wrapper for fetching data from GitHub API."""
 
     def __init__(self, context):
+        """
+        Create a new GitHubApi object.
+        :param context: application context
+        """
         self._context = context
         self._api_token = context.get_github_token()
         self._rate_limit_status = None
 
-    def update_rate_limit_status(self):
-        headers = {"Authorization": self._get_authorization_header()}
-        res = requests.get(f"{BASE_URL}/rate_limit", headers=headers)
-        if res.status_code != 200:
-            log.abort_and_exit("GHUB", f"Failed to update rate limit status, status code {res.status_code}.")
-        data = res.json()["rate"]
-        self._rate_limit_status = {
-            "limit": int(data["limit"]),
-            "used": int(data["used"]),
-            "remaining": int(data["remaining"]),
-            "reset_at_utc": int(data["reset"]),
-            "reset_in_sec": int(data["reset"] - round(time.time())),
-            "last_update": round(time.time())
-        }
-
-    def is_rate_limit_status_stale(self):
-        if self._rate_limit_status is None:
-            self.update_rate_limit_status()
-        max_age_sec = self._context.get_config("rate_limit_max_age_sec")
-        return (round(time.time()) - self._rate_limit_status["last_update"]) > max_age_sec
-
-    def request_rate_limit_status(self, force_update=False, ignore_stale=False):
-        if self._rate_limit_status is None:
-            self.update_rate_limit_status()
-        if force_update or (self.is_rate_limit_status_stale() and not ignore_stale):
-            self.update_rate_limit_status()
-        return self._rate_limit_status
-
-    def is_rate_limited(self, force_update=False, ignore_stale=False):
-        status = self.request_rate_limit_status(force_update, ignore_stale)
-        return status["remaining"] <= 0
-
     def _get_authorization_header(self):
+        """
+        Return the correct authorization header value based on the API token provided in the application context.
+        :return: authorization header value
+        """
         return f"token {self._context.get_github_token()}"
 
-    @staticmethod
-    def _parse_rate_limit_headers(headers):
-        limit = int(headers["X-RateLimit-Limit"])
-        remaining = int(headers["X-RateLimit-Remaining"])
-        reset_at_utc = int(headers["X-RateLimit-Reset"])
-        return {
-            "limit": limit,
-            "used": limit - remaining,
-            "remaining": remaining,
-            "reset_at_utc": reset_at_utc,
-            "reset_in_sec": reset_at_utc - round(time.time()),
-            "last_update": round(time.time())
-        }
-
     def _handle_rate_limit(self):
+        """
+        Sleep until rate limit block is lifted, plus additional time specified in the config file. Update rate limit
+        status as needed.
+        """
         if self.is_rate_limit_status_stale():
             self.update_rate_limit_status()
         sleep_duration = self._rate_limit_status["reset_in_sec"] + self._context.get_config("rate_limit_buffer_sec")
@@ -102,8 +69,47 @@ class GitHubApi:
         log.warning("GHUB", f"Rate limit reached - sleeping for {sleep_duration}s until {wakeup_time}.")
         time.sleep(sleep_duration)
 
+    def _preprocess_repos(self, repos_list):
+        """
+        Perform generic, predefined set of actions (filter, sort, transform) on a list of repositories.
+        :param repos_list: list of raw repositories, as returned by the GitHub API
+        :return: preprocesses list of repositories
+        """
+        return [repo for repo in repos_list if not repo["private"]]
+
+    def _get_repo_contributors(self, owner, repo):
+        """
+        Fetch list of contributors for a given repository, identified by owner and repo name.
+        :param owner: owner of the repository
+        :param repo: name of the repository
+        :return: list of contributors as returned by the GitHub API
+        """
+        url = f"{BASE_URL}/repos/{owner}/{repo}/contributors"
+        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
+
+    def _get_org_members(self):
+        """
+        Fetch list of members of the Zuehlke GitHub organisation.
+        :return: list of members of the Zuehlke org as returned by the GitHub API
+        """
+        url = f"{BASE_URL}/orgs/{ORG}/members"
+        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
+
+    def _get_org_repos(self):
+        """
+        Fetch list of repositories owned by the Zuehlke GitHub organisation.
+        :return: list of repos owned by the Zuehlke org as returned by the GitHub API
+        """
+        url = f"{BASE_URL}/orgs/{ORG}/repos"
+        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
+
     @staticmethod
     def _parse_link_header(link_header):
+        """
+        Parse contents of the Link header into dictionary.
+        :param link_header: Link header value, or None
+        :return: dictionary containing links for next, last, first and prev; all of which may be None
+        """
         result = {
             "next": None,
             "last": None,
@@ -130,7 +136,96 @@ class GitHubApi:
                 result["prev"] = url
         return result
 
+    def update_rate_limit_status(self):
+        """
+        Fetch latest rate limit status and update status information in this object. Uses an API endpoint
+        which is itself not rate-limited, and is therefore not affected by any rate limit blocks. Information
+        is presented in a pre-defined rate limit status information dictionary format.
+        """
+        headers = {"Authorization": self._get_authorization_header()}
+        res = requests.get(f"{BASE_URL}/rate_limit", headers=headers)
+        if res.status_code != 200:
+            log.abort_and_exit("GHUB", f"Failed to update rate limit status, status code {res.status_code}.")
+        data = res.json()["rate"]
+        self._rate_limit_status = {
+            "limit": int(data["limit"]),
+            "used": int(data["used"]),
+            "remaining": int(data["remaining"]),
+            "reset_at_utc": int(data["reset"]),
+            "reset_in_sec": int(data["reset"] - round(time.time())),
+            "last_update": round(time.time())
+        }
+
+    def is_rate_limit_status_stale(self):
+        """
+        Whether the latest rate limit update is older than the maximum allowed age specified in the
+        config file.
+        :return: True of the current rate limit status information is stale, False else
+        """
+        if self._rate_limit_status is None:
+            self.update_rate_limit_status()
+        max_age_sec = self._context.get_config("rate_limit_max_age_sec")
+        return (round(time.time()) - self._rate_limit_status["last_update"]) > max_age_sec
+
+    def request_rate_limit_status(self, force_update=False, ignore_stale=False):
+        """
+        Get current rate limit status information, triggering status update request if the current
+        information is stale.
+        :param force_update: force status update request (False)
+        :param ignore_stale: stale status information does not require a status update request (False)
+        :return: current rate limit status information
+        """
+        if self._rate_limit_status is None:
+            self.update_rate_limit_status()
+        if force_update or (self.is_rate_limit_status_stale() and not ignore_stale):
+            self.update_rate_limit_status()
+        return self._rate_limit_status
+
+    def is_rate_limited(self, force_update=False, ignore_stale=False):
+        """
+        Whether the authenticated user is currently blocked by rate limitation.
+        :param force_update: force rate limit status update request (is allowed during rate limit blocks) (False)
+        :param ignore_stale: allow using stale rate limit information for answering this query (False)
+        :return: True if currently blocked by rate limitation, False else
+        """
+        status = self.request_rate_limit_status(force_update, ignore_stale)
+        return status["remaining"] <= 0
+
+    @staticmethod
+    def _parse_rate_limit_headers(headers):
+        """
+        Extract rate limit response headers from header dictionary and transform information into a
+        pre-defined rate limit status information dictionary format.
+        :param headers: response headers returned during any request to the GitHub API
+        :return: rate limit status information in pre-defined dictionary format
+        """
+        limit = int(headers["X-RateLimit-Limit"])
+        remaining = int(headers["X-RateLimit-Remaining"])
+        reset_at_utc = int(headers["X-RateLimit-Reset"])
+        return {
+            "limit": limit,
+            "used": limit - remaining,
+            "remaining": remaining,
+            "reset_at_utc": reset_at_utc,
+            "reset_in_sec": reset_at_utc - round(time.time()),
+            "last_update": round(time.time())
+        }
+
     def get(self, url, authenticate=True, headers=None, query_params=None, expected_status_codes=None, retry=0):
+        """
+        Perform a GET request to the GitHub API. Appropriately handle rate limits. Retry if failed due to rate limiting
+        or unexpected response code. Fail if no success after reaching maximum number of retries as specified in the
+        config file. Return the status code, response JSON, and cursor object containing next, first, last and prev
+        links.
+        :param url: request URL, not including query parameters
+        :param authenticate: whether this request should include the appropriate Authorization header (True)
+        :param headers: additional custom headers (not including Authorization) (None)
+        :param query_params: query parameters dictionary (None)
+        :param expected_status_codes: list of status codes for which no retry is necessary ([200, 204])
+        :param retry: how many retries have already occurred (0)
+        :return: status, response_json, cursor
+        """
+
         # Initialize headers if not provided.
         if headers is None:
             headers = {}
@@ -189,6 +284,17 @@ class GitHubApi:
         return status, response.json(), self._parse_link_header(response.headers.get("Link"))
 
     def request_page(self, url, authenticate=True, headers=None, query_params=None, expected_status_codes=None):
+        """
+        Perform a GET request to a potentially paginated resource in the GitHub API. Return a list containing all
+        items on that page, and a cursor object. This method can also be used for non-paginated responses. It returns
+        a result list and cursor in any case.
+        :param url: request URL
+        :param authenticate: whether to provide appropriate Authorization header (True)
+        :param headers: custom headers (None)
+        :param query_params: query parameters dictionary (None)
+        :param expected_status_codes: response codes for which no retry is necessary ([200, 204])
+        :return: result_list, cursor
+        """
         log.info("GHUB", f"Fetching page '{url}'.")
         _, data, cursor = self.get(url, authenticate, headers, query_params, expected_status_codes)
         page = data
@@ -196,7 +302,20 @@ class GitHubApi:
             page = [data]
         return cursor, page
 
-    def fetch_all_pages(self, initial_url, flatten=False, authenticate=True, headers=None, query_params=None, expected_status_codes=None):
+    def fetch_all_pages(self, initial_url, flatten=False, authenticate=True, headers=None, query_params=None,
+                        expected_status_codes=None):
+        """
+        Perform a series of GET requests to a potentially paginated resource in the GitHub API and return results as
+        a single list.
+        :param initial_url: URL of the first page
+        :param flatten: whether to flatten the result list. If False, the result list contains an individual child list
+        for each page (False)
+        :param authenticate: whether to provide appropriate Authorization header (True)
+        :param headers: custom headers (None)
+        :param query_params: query parameters dictionary (None)
+        :param expected_status_codes: response codes for which no retry is necessary ([200, 204])
+        :return: list of page results, potentially flattened
+        """
         result = []
         url = initial_url
         while url is not None:
@@ -209,22 +328,11 @@ class GitHubApi:
             url = cursor["next"]
         return result
 
-    def _preprocess_repos(self, repos_list):
-        return [repo for repo in repos_list if not repo["private"]]
-
-    def _get_repo_contributors(self, owner, repo):
-        url = f"{BASE_URL}/repos/{owner}/{repo}/contributors"
-        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
-
-    def _get_org_members(self):
-        url = f"{BASE_URL}/orgs/{ORG}/members"
-        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
-
-    def _get_org_repos(self):
-        url = f"{BASE_URL}/orgs/{ORG}/repos"
-        return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
-
     def collect_org_repos(self):
+        """
+        Get and aggregate all public repositories owned by the Zuehlke org.
+        :return: id-indexed dictionary containing all aggregated public Zuehlke org repos
+        """
         log.info("GHUB", "Collecting org repos.")
         raw_repos = self._get_org_repos()
         preprocessed_repos = self._preprocess_repos(raw_repos)
@@ -235,6 +343,10 @@ class GitHubApi:
         return result
 
     def collect_org_members(self):
+        """
+        Get and aggregate all non-concealed members of the Zühlke org.
+        :return: id-indexed dictionary containing all aggregated non-concealed members of the Zühlke org.
+        """
         log.info("GHUB", "Collecting org members.")
         member_urls = [member["url"] for member in self._get_org_members()]
         members = {}
