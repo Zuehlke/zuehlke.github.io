@@ -3,7 +3,7 @@ import time
 import requests
 import re
 
-import json_extractor
+import json_reducer
 import log
 import util
 
@@ -21,8 +21,10 @@ REPOS_SCHEMA = [{
     "created_at": {},
     "updated_at": {},
     "stargazers_count": {},
+    "watchers_count": {},
+    "forks_count": {},
+    "fork": {},
     "language": {},
-    "forks_count": {}
 }]
 
 PERSON_SCHEMA = {
@@ -196,7 +198,7 @@ class GitHubApi:
         log.info("GHUB", "Fetching org repos.")
         initial_url = f"{BASE_URL}/orgs/{ORG}/repos"
         preprocessed_repos = self._preprocess_repos(self._fetch_all_pages(initial_url, flatten=True))
-        parsed_repos = json_extractor.extract(REPOS_SCHEMA, preprocessed_repos)
+        parsed_repos = json_reducer.reduce(REPOS_SCHEMA, preprocessed_repos)
         result = {}
         for repo in parsed_repos:
             result[repo["id"]] = repo
@@ -210,6 +212,6 @@ class GitHubApi:
         for member_url in member_urls:
             log.info("GHUB", f"Fetching member '{member_url}'.")
             _, member_raw, _ = self._api_request(member_url)
-            member_parsed = json_extractor.extract(PERSON_SCHEMA, member_raw)
+            member_parsed = json_reducer.reduce(PERSON_SCHEMA, member_raw)
             members[member_parsed["id"]] = member_parsed
         return members

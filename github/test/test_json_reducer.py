@@ -1,11 +1,11 @@
 import unittest
 
-import json_extractor
+import json_reducer
 
 
-class TestJsonExtractor(unittest.TestCase):
+class TestJsonReducer(unittest.TestCase):
 
-    def test__extract_single_key__should_select_all(self):
+    def test__reduce_single_key__should_select_all(self):
         schema = {
             "name": {}
         }
@@ -15,10 +15,10 @@ class TestJsonExtractor(unittest.TestCase):
         expected = {
             "name": "Jon Doe"
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__two_keys__should_ignore_second(self):
+    def test__reduce__two_keys__should_ignore_second(self):
         schema = {
             "name": {}
         }
@@ -29,10 +29,10 @@ class TestJsonExtractor(unittest.TestCase):
         expected = {
             "name": "Jon Doe"
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_one_level__should_implicitly_select_all(self):
+    def test__reduce__nested_one_level__should_implicitly_select_all(self):
         schema = {
             "id": {},
             "person": {}
@@ -51,10 +51,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_one_level__empty_schema__should_implicitly_select_all(self):
+    def test__reduce__nested_one_level__empty_schema__should_implicitly_select_all(self):
         schema = {}
         json_node = {
             "id": "1234",
@@ -70,10 +70,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_one_level__should_explicitly_select_all(self):
+    def test__reduce__nested_one_level__should_explicitly_select_all(self):
         schema = {
             "id": {},
             "person": {
@@ -95,10 +95,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_one_level__should_ignore_person_age(self):
+    def test__reduce__nested_one_level__should_ignore_person_age(self):
         schema = {
             "id": {},
             "person": {
@@ -118,10 +118,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "name": "Jon Doe"
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_two_levels__should_implicitly_empty_schema__should_select_all(self):
+    def test__reduce__nested_two_levels__should_implicitly_empty_schema__should_select_all(self):
         schema = {}
         json_node = {
             "id": "1234",
@@ -143,10 +143,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_two_levels__should_explicitly_select_all(self):
+    def test__reduce__nested_two_levels__should_explicitly_select_all(self):
         schema = {
             "id": {},
             "person": {
@@ -177,10 +177,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_two_levels__should_implicitly_select_full_name(self):
+    def test__reduce__nested_two_levels__should_implicitly_select_full_name(self):
         schema = {
             "id": {},
             "person": {
@@ -208,10 +208,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_two_levels__should_implicitly_select_full_person(self):
+    def test__reduce__nested_two_levels__should_implicitly_select_full_person(self):
         schema = {
             "id": {},
             "person": {}
@@ -236,10 +236,10 @@ class TestJsonExtractor(unittest.TestCase):
                 "age": 42
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__nested_two_levels__should_ignore_id_age_lastname(self):
+    def test__reduce__nested_two_levels__should_ignore_id_age_lastname(self):
         schema = {
             "person": {
                 "name": {
@@ -264,10 +264,10 @@ class TestJsonExtractor(unittest.TestCase):
                 }
             }
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__root_list__no_schema__should_select_all(self):
+    def test__reduce__root_list__no_schema__should_select_all(self):
         schema = []
         json_node = [
             {"name": "Jon Doe"},
@@ -277,10 +277,10 @@ class TestJsonExtractor(unittest.TestCase):
             {"name": "Jon Doe"},
             {"name": "Jane Doe"}
         ]
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__root_list__should_explicitly_select_all(self):
+    def test__reduce__root_list__should_explicitly_select_all(self):
         schema = [{
             "name": {}
         }]
@@ -292,10 +292,10 @@ class TestJsonExtractor(unittest.TestCase):
             {"name": "Jon Doe"},
             {"name": "Jane Doe"}
         ]
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__root_list__nested_elements__should_ignore_age_lastname(self):
+    def test__reduce__root_list__nested_elements__should_ignore_age_lastname(self):
         schema = [{
             "name": {
                 "first": {}
@@ -329,10 +329,10 @@ class TestJsonExtractor(unittest.TestCase):
                 }
             }
         ]
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__child_list__nested_elements__should_ignore_list(self):
+    def test__reduce__child_list__nested_elements__should_ignore_list(self):
         schema = {
             "id": {},
             "title": {}
@@ -355,10 +355,10 @@ class TestJsonExtractor(unittest.TestCase):
             "id": "1234",
             "title": "hello-world"
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__child_list__nested_elements__should_implicitly_select_full_items(self):
+    def test__reduce__child_list__nested_elements__should_implicitly_select_full_items(self):
         schema = {
             "id": {},
             "title": {},
@@ -392,10 +392,10 @@ class TestJsonExtractor(unittest.TestCase):
                 }
             ]
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__child_list__nested_elements__should_explicitly_select_full_items(self):
+    def test__reduce__child_list__nested_elements__should_explicitly_select_full_items(self):
         schema = {
             "id": {},
             "title": {},
@@ -432,10 +432,10 @@ class TestJsonExtractor(unittest.TestCase):
                 }
             ]
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__child_list__nested_elements__should_ignore_title_login(self):
+    def test__reduce__child_list__nested_elements__should_ignore_title_login(self):
         schema = {
             "id": {},
             "contributors": [{
@@ -467,10 +467,10 @@ class TestJsonExtractor(unittest.TestCase):
                 }
             ]
         }
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
 
-    def test__extract__complex_nested_objects_and_lists(self):
+    def test__reduce__complex_nested_objects_and_lists(self):
         schema = [{
             "id": {},
             "title": {},
@@ -576,5 +576,5 @@ class TestJsonExtractor(unittest.TestCase):
                 ]
             }
         ]
-        actual = json_extractor.extract(schema, json_node)
+        actual = json_reducer.reduce(schema, json_node)
         self.assertEqual(expected, actual)
