@@ -10,6 +10,13 @@ def decode_command_output_buffer(buffer):
 
 
 def run_os_command(command_segments, cwd):
+    """
+    Execute an OS command in a given cwd context. In case of success, return the captured output
+    to stdout. In case of failure (non-0 exit code), return the captured output to stderr.
+    :param command_segments: segments of the OS command
+    :param cwd: current working directory path to be used as the execution context
+    :return: success, output
+    """
     res = subprocess.run(command_segments, capture_output=True, cwd=cwd)
     if res.returncode == 0:
         return True, decode_command_output_buffer(res.stdout)

@@ -5,16 +5,32 @@
   install the required dependencies.
 - Run `main.py` with Python 3, and with the required GitHub API token environment variable set. The name of this
   variable is defined in `config.json`. 
-  
+
 ### Example Usage
 ```
 GITHUBAPI_TOKEN=<some_api_token> python3 automation.py 
 ```
 
-### Additional Information
-A log file is automatically created in the present working directory. To change the logging behavior, run `main.py -h`
-for more information.
+### Source Repo and Workdir
+Part of the automation process includes creating automated commits and pushes. These actions are performed on a
+secondary clone of the repository that includes the automation script, which is referred to as the _working directory_
+or the _workdir_. The name of the workdir is set in the config file, and its location is always next to the source
+repository. The workdir is not deleted after the script execution.
 
+To determine the URL of the remote to be used for the workdir, the script retrieves the URL of a remote of its
+containing source repository. The name of the remote to be used for this is set in the config file. For example: if
+the target remote is configured to `origin` and the URL of the `origin` remote of the current repository is
+`git@github.com:Example/example`, that URL is used for creating the workdir clone (if necessary) and for pushing
+any new changes.
+
+Most git operations such as `checkout`, `commit` and `push` are only ever performed on the workdir, to avoid changing
+the source code of the script itself. The only "active" operation performed on the source repository is a `git pull`
+at the start of the script, which allows it to receive updates to the config file.
+
+**Warning**: Do not use this automatic pull mechanism to update the script itself. The script is not restarted after the
+pull, which may lead to undefined behavior of some parts of it are updated during execution.
+
+### Script Lifecycle
 When the script is executed, it performs the following steps:
 - Pull the source repository (i.e. the repository in which the script is located).
 - Ensure that a second clone of the same repository exists, which will be used as a working directory. This second clone
@@ -26,6 +42,14 @@ When the script is executed, it performs the following steps:
   (specified in the config file) in the workdir.
 - Commit changes in the workdir to its current branch, if there is anything to commit.
 - Push the workdir's current branch if there was a commit, or if the `push_always` config option is set.
+
+### Additional Information
+A log file is automatically created in the present working directory. To change the logging behavior, run `main.py -h`
+for more information.
+
+Git and API operations are generally implemented in a "fail-safe" manner. That is, an unexpected status or response
+will usually cause the script to error out and terminate, in order to avoid data corruption or excessive use of a
+third-party API.
 
 ### Config File
 The config file has the following properties:
