@@ -124,7 +124,7 @@ def main():
         log.info("MAIN", "Not logging to a file.")
 
     # Make sure source repository is up to date.
-    # pull_source_repo(script_path)
+    pull_source_repo(script_path)
 
     # Set up context and API wrappers.
     context = Context.create(script_path)
