@@ -147,6 +147,9 @@ def commit_and_push(context, git_wrapper):
     :param context: application context
     :param git_wrapper: Git CLI wrapper
     """
+    if context.get_config("no_commit"):
+        log.info("MAIN", "Not committing/pushing - disabled in configuration.")
+        return
     did_commit = commit(git_wrapper)
     push(context, git_wrapper, did_commit, context.get_config("push_always"))
 
