@@ -10,6 +10,9 @@ class Context:
     """
 
     def __init__(self, config, github_token, source_repo_root, workdir_repo_root, data_dir_path):
+        """
+        Private constructor.
+        """
         self._config = config
         self._github_token = github_token
         self._source_repo_root = source_repo_root
