@@ -7,18 +7,18 @@ export type RepoSpec = {
   };
   html_url: string;
   created_at: string;
-  stargazers_count: string;
-  watchers_count: string;
-  forks_count: string;
+  stargazers_count: number;
+  watchers_count: number;
+  forks_count: number;
   fork: boolean;
-  language: string;
+  language: string | null;
 }
 
 export type PersonSpec = {
   id: number;
   login: string;
-  name: string;
-  bio: string;
+  name: string | null;
+  bio: string | null;
   avatar_url: string;
   html_url: string;
 }
