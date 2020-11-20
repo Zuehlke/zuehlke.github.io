@@ -2,6 +2,7 @@
   "remote_name": "origin",
   "workdir_root_dirname": "_zuehlke.github.io_workdir",
   "target_branch": "playground/automation-dev",
+  "no_commit": true,
   "push_always": true,
   "github_api_token_envvar": "GITHUB_API_TOKEN",
   "rate_limit_buffer_sec": 60,

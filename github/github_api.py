@@ -337,9 +337,9 @@ class GitHubApi:
         raw_repos = self._get_org_repos()
         preprocessed_repos = self._preprocess_repos(raw_repos)
         parsed_repos = json_reducer.reduce(REPOS_SCHEMA, preprocessed_repos)
-        result = {}
+        result = []
         for repo in parsed_repos:
-            result[repo["id"]] = repo
+            result.append(repo)
         return result
 
     def collect_org_members(self):
@@ -349,10 +349,10 @@ class GitHubApi:
         """
         log.info("GHUB", "Collecting org members.")
         member_urls = [member["url"] for member in self._get_org_members()]
-        members = {}
+        members = []
         for member_url in member_urls:
             log.info("GHUB", f"Fetching member '{member_url}'.")
             _, member_raw, _ = self.get(member_url)
             member_parsed = json_reducer.reduce(PERSON_SCHEMA, member_raw)
-            members[member_parsed["id"]] = member_parsed
+            members.append(member_parsed)
         return members

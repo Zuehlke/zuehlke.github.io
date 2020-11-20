@@ -57,7 +57,9 @@ The config file has the following properties:
 - `workdir_root_name`: Directory name of the second repository clone (sibling of this repository directory) which serves
   as a workspace for the script.
 - `target_branch`: Name of the branch which this script should work on.
-- `push_always`: Always push target branch, even if there are no new commits (ensures branch is tracked).
+- `no_commit`: Do not commit and/or push the workdir repository.
+- `push_always`: Always push target branch, even if there are no new commits (ensures branch is tracked), unless
+  `no_commit` is set to `true`.
 - `github_api_token_envvar`: Name of the environment variable through which the GitHub API token is provided.
 - `rate_limit_buffer_sec`: Wait this many additional seconds before retrying after a rate limit should have been lifted.
 - `request_delay_sec`: Wait this many seconds between requests (to avoid abuse rate limiting),
