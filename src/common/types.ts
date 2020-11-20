@@ -16,19 +16,3 @@ export type Runnable = () => void;
 export type Consumer<T> = (x: T) => void;
 export type Producer<T> = () => T;
 export type Function<T, U> = (x: T) => U;
-
-// Data model
-export type RepoSpec = {
-  title: string;
-  url: string;
-  description: string;
-  logo: string;
-};
-
-export type PersonSpec = {
-  title: string;
-  url: string;
-  name: string;
-  logoUrl: string;
-  description: string;
-}
