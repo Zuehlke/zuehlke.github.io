@@ -2,10 +2,10 @@ import './Contributions.scss';
 import React from 'react';
 import RepoTile from "../../components/RepoTile/RepoTile";
 import TileGrid from "../../components/TileGrid/TileGrid";
-import {RepoSpec} from "../../common/model";
+import {RepoModel} from "../../common/model";
 
 type Props = {
-  repos: RepoSpec[]
+  repos: RepoModel[]
 }
 
 const Contributions = (props: Props) => {
@@ -17,7 +17,7 @@ const Contributions = (props: Props) => {
       <div className="container">
         <h1 className="title">Contributions</h1>
         <TileGrid>
-          {props.repos.map((repo: RepoSpec) => <RepoTile key={repo.html_url} repo={repo}/>)}
+          {props.repos.map((repo: RepoModel) => <RepoTile key={repo.html_url} repo={repo}/>)}
         </TileGrid>
       </div>
     </div>

@@ -1,9 +1,9 @@
 import './RepoTile.scss';
 import React from 'react';
-import {RepoSpec} from "../../common/model";
+import {RepoModel} from "../../common/model";
 
 type Props = {
-  repo: RepoSpec
+  repo: RepoModel
 }
 
 const RepoTile = (props: Props) => {
@@ -15,7 +15,7 @@ const RepoTile = (props: Props) => {
          aria-label={`${props.repo.name} repository on GitHub`}>
         <article className="repo-article">
           <h2 className="repo-name">{props.repo.name}</h2>
-          { /* TODO: <p>{props.repo.description}</p>*/ }
+          <p>{props.repo.description}</p>
         </article>
       </a>
     </div>

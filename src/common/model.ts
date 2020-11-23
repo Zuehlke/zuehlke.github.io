@@ -1,10 +1,11 @@
-export type RepoSpec = {
+export type RepoModel = {
   id: number;
   name: string;
   owner: {
     login: string;
     id: number;
   };
+  description: string | null;
   html_url: string;
   created_at: string;
   stargazers_count: number;
@@ -14,7 +15,7 @@ export type RepoSpec = {
   language: string | null;
 }
 
-export type PersonSpec = {
+export type PersonModel = {
   id: number;
   login: string;
   name: string | null;

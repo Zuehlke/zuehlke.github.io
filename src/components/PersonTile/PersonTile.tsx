@@ -1,9 +1,9 @@
 import './PersonTile.scss';
 import React from 'react';
-import {PersonSpec} from "../../common/model";
+import {PersonModel} from "../../common/model";
 
 type Props = {
-  person: PersonSpec;
+  person: PersonModel;
 }
 
 const PersonTile = (props: Props) => {
