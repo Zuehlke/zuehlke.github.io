@@ -1,11 +1,11 @@
 import './People.scss';
 import React from 'react';
 import TileGrid from "../../components/TileGrid/TileGrid";
-import {PersonSpec} from "../../common/model";
+import {PersonModel} from "../../common/model";
 import PersonTile from "../../components/PersonTile/PersonTile";
 
 type Props = {
-  people: PersonSpec[]
+  people: PersonModel[]
 }
 
 const People = (props: Props) => {
@@ -15,7 +15,7 @@ const People = (props: Props) => {
         <div className="container">
           <h1 className="title">People</h1>
           <TileGrid>
-            {props.people.map((person: PersonSpec) => <PersonTile key={person.html_url} person={person}/>)}
+            {props.people.map((person: PersonModel) => <PersonTile key={person.html_url} person={person}/>)}
           </TileGrid>
         </div>
       </div>

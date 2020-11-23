@@ -6,6 +6,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
     "html_url": "https://github.com/Zuehlke/quickstarts-angular",
     "created_at": "2015-03-12T12:51:11Z",
     "updated_at": "2018-10-22T15:04:39Z",
@@ -22,6 +23,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "One cookbook with resources for setting up a Windows development environment",
     "html_url": "https://github.com/Zuehlke/cookbook-windev",
     "created_at": "2015-04-24T11:04:47Z",
     "updated_at": "2020-03-02T08:52:37Z",
@@ -38,6 +40,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "An example cookbook for setting up Jenkins CI",
     "html_url": "https://github.com/Zuehlke/cookbooks-jenkins-simple-app",
     "created_at": "2015-05-29T06:44:37Z",
     "updated_at": "2018-08-09T18:17:16Z",
@@ -54,6 +57,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/buildbot-chef",
     "created_at": "2015-06-17T09:00:54Z",
     "updated_at": "2015-09-07T13:32:31Z",
@@ -70,6 +74,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "swagger-codegen contains a template-driven engine to generate client code in different languages by parsing your Swagger Resource Declaration.",
     "html_url": "https://github.com/Zuehlke/swagger-codegen",
     "created_at": "2015-06-29T12:17:10Z",
     "updated_at": "2015-06-29T12:17:12Z",
@@ -86,6 +91,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "RavenDB Workshop for Z\u00fchlke Days 2015",
     "html_url": "https://github.com/Zuehlke/ravendb-workshop",
     "created_at": "2015-09-07T11:30:40Z",
     "updated_at": "2016-11-21T12:13:55Z",
@@ -102,6 +108,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "An example utilizing the windev cookbook",
     "html_url": "https://github.com/Zuehlke/windev-example",
     "created_at": "2015-09-08T13:33:59Z",
     "updated_at": "2018-10-22T15:06:46Z",
@@ -118,6 +125,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Template project for a minimal Chef-managed Linux developer VM",
     "html_url": "https://github.com/Zuehlke/linux-developer-vm",
     "created_at": "2015-09-09T22:15:32Z",
     "updated_at": "2020-10-27T05:51:25Z",
@@ -134,6 +142,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "ZRS Angular Workshop",
     "html_url": "https://github.com/Zuehlke/ZRS-Angular-Workshop",
     "created_at": "2015-10-15T09:29:19Z",
     "updated_at": "2015-10-15T12:08:19Z",
@@ -150,6 +159,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Automation and convenience in for setting up a S.H.M.A.C.K. stack with DC/OS on AWS",
     "html_url": "https://github.com/Zuehlke/SHMACK",
     "created_at": "2015-10-22T18:19:47Z",
     "updated_at": "2019-01-13T15:50:13Z",
@@ -166,6 +176,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/cookbook-elk-stack",
     "created_at": "2015-11-04T09:11:07Z",
     "updated_at": "2016-03-09T06:20:19Z",
@@ -182,6 +193,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "A Chef-managed developer VM for Java / Maven / Eclipse development on an Ubuntu Desktop",
     "html_url": "https://github.com/Zuehlke/java-developer-vm",
     "created_at": "2015-12-07T12:34:23Z",
     "updated_at": "2020-01-30T11:33:54Z",
@@ -198,6 +210,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Show Trello dashboard in Kiosk mode with RaspberryPi.",
     "html_url": "https://github.com/Zuehlke/Trello-Kiosk",
     "created_at": "2016-01-13T16:50:10Z",
     "updated_at": "2020-09-24T11:51:21Z",
@@ -214,6 +227,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Software Craftsmanship by Z\u00fchlke",
     "html_url": "https://github.com/Zuehlke/z-craft",
     "created_at": "2016-01-26T12:28:26Z",
     "updated_at": "2016-09-16T10:17:43Z",
@@ -230,6 +244,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Distributed Planning Poker",
     "html_url": "https://github.com/Zuehlke/poinz",
     "created_at": "2016-02-25T14:08:35Z",
     "updated_at": "2020-11-08T09:16:23Z",
@@ -246,6 +261,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/BiZEPS",
     "created_at": "2016-03-07T13:29:57Z",
     "updated_at": "2020-10-22T09:01:10Z",
@@ -262,6 +278,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Z\u00fchlke RoboChallenge",
     "html_url": "https://github.com/Zuehlke/robo-challenge",
     "created_at": "2016-04-27T11:30:11Z",
     "updated_at": "2017-03-24T21:32:06Z",
@@ -278,6 +295,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/Xerus",
     "created_at": "2016-04-28T06:14:30Z",
     "updated_at": "2016-12-09T21:00:30Z",
@@ -294,6 +312,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/Hololens",
     "created_at": "2016-07-29T11:05:48Z",
     "updated_at": "2016-07-29T11:05:48Z",
@@ -310,6 +329,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "HoloWorld demo application for HoloLens",
     "html_url": "https://github.com/Zuehlke/HLZuehlke",
     "created_at": "2016-08-16T08:16:56Z",
     "updated_at": "2016-09-09T07:17:22Z",
@@ -326,6 +346,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/Xamarin4Cordova",
     "created_at": "2016-08-26T08:24:56Z",
     "updated_at": "2018-11-29T19:27:29Z",
@@ -342,6 +363,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Sensor Data Analysis initially used for Workshop #7 at HackZurich",
     "html_url": "https://github.com/Zuehlke/hackzurich-sensordataanalysis",
     "created_at": "2016-08-31T09:26:14Z",
     "updated_at": "2019-12-16T00:37:32Z",
@@ -358,6 +380,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/hackzurich-sensordata-ios",
     "created_at": "2016-09-14T21:15:10Z",
     "updated_at": "2019-01-10T15:55:21Z",
@@ -374,6 +397,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/hackzurich-sensordata-android",
     "created_at": "2016-09-14T21:18:21Z",
     "updated_at": "2016-09-16T06:08:27Z",
@@ -390,6 +414,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Client Tech Day Session about Scenarioo JS",
     "html_url": "https://github.com/Zuehlke/scenarioo-js-ctd-session",
     "created_at": "2016-10-10T11:25:51Z",
     "updated_at": "2016-11-29T17:57:36Z",
@@ -406,6 +431,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Materials and source code for an Angular 2 training workshop.",
     "html_url": "https://github.com/Zuehlke/training-angular2",
     "created_at": "2016-10-13T12:09:58Z",
     "updated_at": "2016-10-27T08:07:13Z",
@@ -422,6 +448,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "A set of scripts for creating Windows Devpacks with an example DevPack for Ruby/git/terraform/aws-cli",
     "html_url": "https://github.com/Zuehlke/z-devpack",
     "created_at": "2016-10-23T09:31:25Z",
     "updated_at": "2018-06-23T22:18:13Z",
@@ -438,6 +465,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Educational application suite providing a common competition platform for arbitrary card games. ",
     "html_url": "https://github.com/Zuehlke/HouseOfCards",
     "created_at": "2016-11-09T13:49:13Z",
     "updated_at": "2016-12-07T14:07:33Z",
@@ -454,6 +482,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "OAuth2 authentication plugin for Aurelia",
     "html_url": "https://github.com/Zuehlke/aurelia-oauth",
     "created_at": "2016-11-15T07:21:22Z",
     "updated_at": "2016-11-15T07:21:24Z",
@@ -470,6 +499,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Open Source Book about practicaly proven concepts, best practices, cultural philosophies and great ideas that we use in our daily work in projects at Z\u00fchlke",
     "html_url": "https://github.com/Zuehlke/machines-code-people",
     "created_at": "2017-01-04T11:30:47Z",
     "updated_at": "2020-11-02T07:23:04Z",
@@ -486,6 +516,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "FHNW Workshop 6 (WS6C) \u2013 Mobile App Development",
     "html_url": "https://github.com/Zuehlke/fhnw-mobile-workshop",
     "created_at": "2017-01-10T10:17:44Z",
     "updated_at": "2020-05-18T15:47:04Z",
@@ -502,6 +533,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/springboot-sec-tutor",
     "created_at": "2017-01-19T14:28:13Z",
     "updated_at": "2019-10-12T22:57:40Z",
@@ -518,6 +550,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/fhnw-xamarin-workshop",
     "created_at": "2017-02-06T15:00:40Z",
     "updated_at": "2017-08-30T10:46:30Z",
@@ -534,6 +567,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/aws-cloudformation-tutorial",
     "created_at": "2017-02-20T12:36:03Z",
     "updated_at": "2019-06-18T16:06:19Z",
@@ -550,6 +584,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Aurelia Tutorials",
     "html_url": "https://github.com/Zuehlke/aurelia-tutorial",
     "created_at": "2017-05-08T11:38:13Z",
     "updated_at": "2017-06-07T13:49:58Z",
@@ -566,6 +601,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "watchOS RSS-Reader",
     "html_url": "https://github.com/Zuehlke/THMReader",
     "created_at": "2017-05-12T10:19:29Z",
     "updated_at": "2017-05-15T14:53:47Z",
@@ -582,6 +618,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Inspect interactions with your smart contracts in real time. Command line tool. ",
     "html_url": "https://github.com/Zuehlke/block-inspector",
     "created_at": "2017-05-12T10:55:45Z",
     "updated_at": "2018-03-31T10:03:51Z",
@@ -598,6 +635,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "This is a build monitor for the Visual Studio mobile center written in Xamarin Forms.",
     "html_url": "https://github.com/Zuehlke/mobilecenter-buildmonitor",
     "created_at": "2017-05-22T14:12:04Z",
     "updated_at": "2017-05-30T12:14:17Z",
@@ -614,6 +652,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Application to find parkinglots",
     "html_url": "https://github.com/Zuehlke/parkingZ",
     "created_at": "2017-05-30T15:22:06Z",
     "updated_at": "2017-05-31T13:46:26Z",
@@ -630,6 +669,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Project file templates for open source projects.",
     "html_url": "https://github.com/Zuehlke/templates",
     "created_at": "2017-06-08T09:15:12Z",
     "updated_at": "2017-12-18T22:43:27Z",
@@ -646,6 +686,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Collection of blueprints and recommendations for starting agile projects",
     "html_url": "https://github.com/Zuehlke/agile-project-blueprint",
     "created_at": "2017-06-30T08:21:59Z",
     "updated_at": "2018-10-29T18:51:35Z",
@@ -662,6 +703,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Shared whiteboard via HoloLens",
     "html_url": "https://github.com/Zuehlke/SharedWhiteboard",
     "created_at": "2017-08-09T08:44:54Z",
     "updated_at": "2020-06-01T03:14:16Z",
@@ -678,6 +720,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Generic example for a Windows-based Developer VM",
     "html_url": "https://github.com/Zuehlke/windows-developer-vm",
     "created_at": "2017-08-17T09:38:55Z",
     "updated_at": "2020-02-12T12:43:43Z",
@@ -694,6 +737,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/hackzurich-docs",
     "created_at": "2017-08-23T08:11:01Z",
     "updated_at": "2017-08-23T12:27:57Z",
@@ -710,6 +754,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "rutema is a test execution tool aimed at simplifying test result collection and analysis",
     "html_url": "https://github.com/Zuehlke/rutema",
     "created_at": "2017-08-23T14:44:24Z",
     "updated_at": "2017-08-23T14:44:26Z",
@@ -726,6 +771,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "a library providing helpers for typical project automation tasks",
     "html_url": "https://github.com/Zuehlke/patir",
     "created_at": "2017-08-24T15:50:47Z",
     "updated_at": "2017-08-24T15:50:48Z",
@@ -742,6 +788,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Generate a changelog based on merged pull requests between tagged versions",
     "html_url": "https://github.com/Zuehlke/bitbucket-changelog",
     "created_at": "2017-11-20T13:00:55Z",
     "updated_at": "2017-11-20T13:00:57Z",
@@ -758,6 +805,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "A NUnit test reporter for Jest.",
     "html_url": "https://github.com/Zuehlke/jest-nunit-reporter",
     "created_at": "2017-11-25T06:54:22Z",
     "updated_at": "2018-08-22T08:02:27Z",
@@ -774,6 +822,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "utility to parse bower and npm packages used in a project and generate an attribution file to include in your product",
     "html_url": "https://github.com/Zuehlke/oss-attribution-generator",
     "created_at": "2018-04-05T10:49:47Z",
     "updated_at": "2018-04-16T14:09:40Z",
@@ -790,6 +839,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Microsoft Authentication Library (MSAL) Preview for JS",
     "html_url": "https://github.com/Zuehlke/microsoft-authentication-library-for-js",
     "created_at": "2018-04-18T13:51:20Z",
     "updated_at": "2018-04-18T13:59:26Z",
@@ -806,6 +856,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "ARKit Demo Application developed at #zCamp2018",
     "html_url": "https://github.com/Zuehlke/doorplate-ar",
     "created_at": "2018-05-03T12:23:33Z",
     "updated_at": "2018-12-31T09:40:51Z",
@@ -822,6 +873,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/tdd-workshop",
     "created_at": "2018-08-21T13:01:01Z",
     "updated_at": "2018-08-23T04:52:38Z",
@@ -838,6 +890,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Demo-App f\u00fcr den Vortrag \"Android-Testing\" am 28.08.2018 an der Technischen Hochschule Mittelhessen.",
     "html_url": "https://github.com/Zuehlke/THM-ToDo",
     "created_at": "2018-08-29T09:06:15Z",
     "updated_at": "2018-08-29T09:36:42Z",
@@ -854,6 +907,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "A plugin that provides i18n support.",
     "html_url": "https://github.com/Zuehlke/i18n",
     "created_at": "2018-10-08T08:15:06Z",
     "updated_at": "2020-03-05T14:09:42Z",
@@ -870,6 +924,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Bluetooth Low Energy Phonegap Plugin",
     "html_url": "https://github.com/Zuehlke/cordova-plugin-bluetoothle",
     "created_at": "2018-10-08T12:57:50Z",
     "updated_at": "2019-02-07T08:57:13Z",
@@ -886,6 +941,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/zrs-onboarding",
     "created_at": "2018-10-28T18:34:02Z",
     "updated_at": "2018-10-29T15:43:34Z",
@@ -902,6 +958,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Get rid of text formatting in the clipboard",
     "html_url": "https://github.com/Zuehlke/Clipboard_Cleaner",
     "created_at": "2018-12-10T13:01:59Z",
     "updated_at": "2020-06-08T08:44:33Z",
@@ -918,6 +975,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/carbonara",
     "created_at": "2019-02-11T16:22:05Z",
     "updated_at": "2019-03-17T17:05:21Z",
@@ -934,6 +992,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/z-sport-frontend",
     "created_at": "2019-02-19T09:12:09Z",
     "updated_at": "2019-10-16T14:58:28Z",
@@ -950,6 +1009,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/z-sport-backend",
     "created_at": "2019-02-19T09:14:21Z",
     "updated_at": "2019-05-06T12:23:12Z",
@@ -966,6 +1026,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Z\u00fchlke Cloud Challenge 2018",
     "html_url": "https://github.com/Zuehlke/zcloudchallenge2018",
     "created_at": "2019-02-22T09:04:51Z",
     "updated_at": "2019-02-22T09:04:54Z",
@@ -982,6 +1043,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Z\u00fchlke Cloud Challenge 2019",
     "html_url": "https://github.com/Zuehlke/zcloudchallenge2019",
     "created_at": "2019-02-22T10:25:23Z",
     "updated_at": "2019-02-22T10:25:25Z",
@@ -998,6 +1060,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Z\u00fchlke Cloud Snippets",
     "html_url": "https://github.com/Zuehlke/zcloudsnippets",
     "created_at": "2019-02-22T10:28:10Z",
     "updated_at": "2019-02-22T10:34:23Z",
@@ -1014,6 +1077,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Exercises / walkthroughs for getting started with Vagrant and Chef",
     "html_url": "https://github.com/Zuehlke/vagrant-chef-exercises",
     "created_at": "2019-04-30T13:15:37Z",
     "updated_at": "2020-02-02T00:34:56Z",
@@ -1030,6 +1094,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/popcorn_flutter",
     "created_at": "2019-05-07T10:08:22Z",
     "updated_at": "2019-05-13T07:16:05Z",
@@ -1046,6 +1111,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Example application cookbook created during the TDD with Chef exercises",
     "html_url": "https://github.com/Zuehlke/cookbook-myapp",
     "created_at": "2019-05-17T07:58:50Z",
     "updated_at": "2019-05-17T15:15:09Z",
@@ -1062,6 +1128,7 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": null,
     "html_url": "https://github.com/Zuehlke/matf-trs-2019",
     "created_at": "2019-10-14T12:39:26Z",
     "updated_at": "2019-12-17T17:16:22Z",
@@ -1078,12 +1145,13 @@
       "login": "Zuehlke",
       "id": 10219568
     },
+    "description": "Basic skeleton for an Ubuntu 20.04 LTS Developer VM set up via Ansible",
     "html_url": "https://github.com/Zuehlke/linux-developer-vm-with-ansible",
     "created_at": "2020-04-16T08:56:41Z",
     "updated_at": "2020-04-20T16:11:16Z",
     "stargazers_count": 1,
     "watchers_count": 1,
-    "forks_count": 1,
+    "forks_count": 2,
     "fork": false,
     "language": "Shell"
   }

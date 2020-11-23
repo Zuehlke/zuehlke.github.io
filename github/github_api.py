@@ -17,6 +17,7 @@ REPOS_SCHEMA = [{
         "login": {},
         "id": {}
     },
+    "description": {},
     "html_url": {},
     "created_at": {},
     "updated_at": {},
