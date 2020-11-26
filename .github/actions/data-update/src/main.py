@@ -1,10 +1,6 @@
-import os
-
-import log
-from pathlib import Path
-
-import util
 import jobs
+import log
+import util
 from context import Context
 from github_api import GitHubApi
 
