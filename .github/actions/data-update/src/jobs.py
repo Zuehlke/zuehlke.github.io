@@ -29,7 +29,7 @@ class Job:
         """
         out_dir_path = self._context.get_data_dir_path()
         filepath = out_dir_path.joinpath(filename)
-        log.info(filepath)
+        log.info(self._job_name, f"Writing data to {filepath}")
         try:
             with open(filepath, "w", encoding="utf-8") as outfile:
                 json.dump(data, outfile, indent=2)
