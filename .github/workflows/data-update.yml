@@ -1,5 +1,8 @@
+name: Data Update
+
 on:
-  workflow_dispatch:
+  push:
+    branches: [ topic/automation-into-action ]
 
 jobs:
   hello_world_job:
