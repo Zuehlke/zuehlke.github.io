@@ -1,4 +1,6 @@
 import json
+
+import consts
 import log
 
 
@@ -25,7 +27,7 @@ class Job:
         :param filename: name of the file (no path), should end in .json
         :param data: JSON-serializable object
         """
-        out_dir_path = self._context.get_workdir_data_dir_path()
+        out_dir_path = self._context.get_data_dir_path()
         filepath = out_dir_path.joinpath(filename)
         try:
             with open(filepath, "w", encoding="utf-8") as outfile:
@@ -71,7 +73,7 @@ class JobCollectOrgRepos(Job):
         Override - define tasks of this job.
         """
         repos = self._github_api.collect_org_repos()
-        self._write_to_json_file(self._context.get_config("contributions_filename"), repos)
+        self._write_to_json_file(consts.CONTRIBUTIONS_FILENAME, repos)
 
 
 class JobCollectOrgMembers(Job):
@@ -96,4 +98,4 @@ class JobCollectOrgMembers(Job):
         Override - define tasks of this job.
         """
         members = self._github_api.collect_org_members()
-        self._write_to_json_file(self._context.get_config("people_filename"), members)
+        self._write_to_json_file(consts.PEOPLE_FILENAME, members)

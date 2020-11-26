@@ -1,0 +1,5 @@
+name: 'Data Update'
+description: 'Update contributions & people form the GitHub API.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

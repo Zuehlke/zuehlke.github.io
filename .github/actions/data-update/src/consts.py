@@ -1,0 +1,13 @@
+# Env var names
+ENV_GITHUB_PAT = "GITHUB_PAT"
+ENV_DATA_DIR = "DATA_DIR"
+
+# API and rate limits
+API_REQUEST_DELAY_SEC = 1
+RATE_LIMIT_BUFFER_SEC = 60
+RATE_LIMIT_MAX_AGE_SEC = 30
+MAX_RETRIES = 1
+
+# Files
+CONTRIBUTIONS_FILENAME = "contributions.json"
+PEOPLE_FILENAME = "people.json"

@@ -3,6 +3,7 @@ import time
 import requests
 import re
 
+import consts
 import json_reducer
 import log
 import util
@@ -64,7 +65,7 @@ class GitHubApi:
         """
         if self.is_rate_limit_status_stale():
             self.update_rate_limit_status()
-        sleep_duration = self._rate_limit_status["reset_in_sec"] + self._context.get_config("rate_limit_buffer_sec")
+        sleep_duration = self._rate_limit_status["reset_in_sec"] + consts.RATE_LIMIT_BUFFER_SEC
         time.sleep(sleep_duration)
         wakeup_time = util.epoch_to_local_datetime(self._rate_limit_status["reset_at_utc"])
         log.warning("GHUB", f"Rate limit reached - sleeping for {sleep_duration}s until {wakeup_time}.")
@@ -165,7 +166,7 @@ class GitHubApi:
         """
         if self._rate_limit_status is None:
             self.update_rate_limit_status()
-        max_age_sec = self._context.get_config("rate_limit_max_age_sec")
+        max_age_sec = consts.RATE_LIMIT_MAX_AGE_SEC
         return (round(time.time()) - self._rate_limit_status["last_update"]) > max_age_sec
 
     def request_rate_limit_status(self, force_update=False, ignore_stale=False):
@@ -246,11 +247,11 @@ class GitHubApi:
                 url = f"{url}{key}={value}&"
 
         # If max number of retries is exceeded, abort.
-        if retry > self._context.get_config("max_retries"):
+        if retry > consts.MAX_RETRIES:
             log.abort_and_exit("GHUB", f"Request to {url} with headers {headers} failed after {retry} retries.")
 
         # Sleep before making request to ensure proper delay.
-        time.sleep(self._context.get_config("request_delay_sec"))
+        time.sleep(consts.API_REQUEST_DELAY_SEC)
 
         # Before making a request, check for rate limiting. Wait if necessary.
         if self.is_rate_limited():
