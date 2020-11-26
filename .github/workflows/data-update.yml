@@ -16,8 +16,8 @@ jobs:
       - name: Update data
         uses: ./.github/actions/data-update
         with:
-          GITHUB_PATH: ${{ secrets.PAT }}
-          DATA_DIR: /github/workspace
+          github_pat: ${{ secrets.PAT }}
+          data_dir: /github/workspace
       - name: Commit & Push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
