@@ -1,0 +1,23 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Update data from API
+    steps:
+      - name: Clone this repo
+        uses: actions/checkout@v2
+        with:
+          ref: "topic/automation-into-action"
+      - name: Update data
+        uses: ./.github/actions/data-update
+        with:
+          GITHUB_PATH: ${{ secrets.PAT }}
+          DATA_DIR: /github/workspace
+      - name: Commit & Push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[AUTO] Update data."
+          branch: "topic/automation-into-action"
+          file_pattern: "src/data/*.json"
