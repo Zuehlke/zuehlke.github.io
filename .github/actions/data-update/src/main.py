@@ -22,8 +22,7 @@ def run_jobs(context, github_api):
 
 
 def main():
-    # Absolute path of this script.
-    script_path = Path(os.path.abspath(__file__))
+    print(os.environ)
 
     # Set up context and API wrappers.
     context = Context.create()
