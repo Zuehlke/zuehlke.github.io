@@ -4,6 +4,7 @@ from pathlib import Path
 
 import consts
 import log
+import util
 
 
 class Context:
@@ -42,6 +43,7 @@ class Context:
         """
         data_dir_path = Path(Context._read_env_var(consts.ENV_DATA_DIR))
         github_pat = Context._read_env_var(consts.ENV_GITHUB_PAT)
+        util.ensure_directory(data_dir_path)
         return Context(data_dir_path, github_pat)
 
     def get_github_token(self):
