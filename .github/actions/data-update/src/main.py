@@ -22,8 +22,6 @@ def run_jobs(context, github_api):
 
 
 def main():
-    print(os.environ)
-
     # Set up context and API wrappers.
     context = Context.create()
     github_api = GitHubApi(context)
