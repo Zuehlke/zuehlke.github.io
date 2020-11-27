@@ -1,8 +1,8 @@
-name: Data Update
+name: Data Update Workflow
 
 on:
   schedule:
-    - cron: '20 * * * *'
+    - cron: '25 * * * *'
 
 jobs:
   hello_world_job:
