@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          - ref: 'revitalize'
+          ref: 'revitalize'
       - name: Update data from API
         uses: ./.github/actions/data-update
         with:
