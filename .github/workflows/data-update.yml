@@ -2,7 +2,7 @@ name: Data Update Workflow
 
 on:
   schedule:
-    - cron: '25 * * * *'
+    - cron: '* 13 * * *'
 
 jobs:
   hello_world_job:
