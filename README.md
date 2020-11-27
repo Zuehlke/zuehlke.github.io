@@ -3,10 +3,15 @@ The source code for the [zuehlke.github.io](http://zuehlke.github.io/) page.
 
 ## Usage
 ### Branches
-During development, the default branch is `revitalize`. Development is done on `topic/*` and/or `feature/*` branches,
-which are squash-merged back to `revitalize` when done. Once the revitalized version is merged into the mainline
-repository, the default branch will be `development`. The `master` branch contains only the build, which is served on
-[zuehlke.github.io](http://zuehlke.github.io/). 
+The default branch is `development`. All changes should be made via pull requests into that branch. The `gh-pages`
+branch contains only the build, which is served on [zuehlke.github.io](http://zuehlke.github.io/). A build and
+re-deployment is automatically triggered on every push to the `develop` branch (see "Deployment and Automation" below).
+The `master` branch contains the last build of the old application, which is no longer being served.
+
+**In summary:**
+- `development`: default branch, pushes to this branch trigger a build and re-deployment
+- `gh-pages`: deployed branch containing the static web page
+- `master`: no longer in use, contains the latest build of the old website
 
 ### Development
 - Run `npm install` to install all dependencies
@@ -14,11 +19,90 @@ repository, the default branch will be `development`. The `master` branch contai
 - Run `npm run build` to create a production build in the `build` directory
 - Run `npm run test` to run all tests (no tests defined at the moment)
 
-### Deployment
-The deployment process is yet to be defined. Most likely, it will include a Travis job that triggers on every push
-to the `develop` branch, builds the application (`npm install && npm run build`) and automatically commits the contents
-of the `build` directory to the master branch. Currently, the `zuehlke.github.io` repository is set up to serve the
-contents on its master branch as the web page.
+## Deployment and Automation
+### CI/CD
+On every push to the `develop` branch, the `[push] Build and Deploy` GitHub Actions workflow is triggered, which is
+defined in [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-deploy.yml). This workflow checks out
+the `develop` branch, builds the application using `npm run build` and commits the contents of the `build` directory
+to the `gh-pages` branch.
+
+Its final step in the `build_and_deploy` job uses the `PAT` secret, which is the Personal Access Token (PAT) of any
+GitHub user with read permissions to this repository and write permissions to at least the `gh-pages` branch. It would
+alternatively be possible to use `${{ secrets.GITHUB_TOKEN }}` for the GITHUB_TOKE
+
+TODO:
+- automatic build and deployment on push to develop branch, deployed to gh-pages branch
+- scheduled job once a day fetches latest people and contributors from API and creates an auto-commit into the
+  develop branch (which triggers another re-deploy). At the core of this workflow is a custom GitHub action (see below).
+- "costs" action minutes to run
+- scheduled job takes about 2.5 minutes to run at the moment
+- scheduled job always operates (i.e. takes action source from and pushes to) default branch (here: develop)
+- scheduled jobs can often be significantly delayed (seen up to 20 minutes late)
+- data and last update in src/data
+
+```yml
+on:
+  schedule:
+    - cron: '0 14,15 * * *'
+
+name: "[schedule] Update from API"
+
+jobs:
+  data_update:
+    runs-on: ubuntu-latest
+    name: Update data from API
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Update data from API
+        uses: ./.github/actions/data-update
+        with:
+          github_pat: ${{ secrets.PAT }}
+          data_dir: /github/workspace/src/data
+      - name: Commit & push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[AUTO] Update data."
+          file_pattern: "src/data/*.json src/data/last_update"
+```
+
+```yml
+on:
+  push:
+    branches:
+      - revitalize
+
+name: "[push] Build and Deploy"
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+      - name: npm install and run build
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy build to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          BRANCH: gh-pages
+          FOLDER: build
+          CLEAN: true
+```
+  
+### Data Update Action
+- Python script
+- Job architecture
+- constants for settings
+
+### Resources
+- Dummy GitHub user
+- Specify Dummy GitHub user's PAT as an input to the custom action (used for API access only)
 
 ## Architecture
 This application is built with React and is managed through
@@ -52,8 +136,6 @@ This application is built with React and is managed through
 
 ### Automation
 - **Implement a reliable scheduled trigger for the automation workflow**
-- **Add a workflow which builds the app on every push to the `develop` branch**
-- **Make sure this "source branch = target branch" paradigm doesn't get too finicky, or change it if possible**
 - **Update documentation**
   - Doc comments in code
   - Custom action
