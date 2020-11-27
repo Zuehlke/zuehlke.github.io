@@ -1,8 +1,8 @@
-name: Update from API
-
 on:
   schedule:
-    - cron: '35 13,14 * * *'
+    - cron: '42 13,14 * * *'
+
+name: Update from API
 
 jobs:
   data_update_job:
