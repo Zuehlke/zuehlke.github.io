@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '30 16 * * *'
+    - cron: '45 15,16 * * *'
 
 name: "[schedule] Update from API"
 
@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: 'revitalize'
+          token: ${{ secrets.PAT }}
       - name: Update data from API
         uses: ./.github/actions/data-update
         with:
