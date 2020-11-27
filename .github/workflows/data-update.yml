@@ -23,4 +23,4 @@ jobs:
         with:
           commit_message: "[AUTO] Update data."
           branch: "topic/automation-into-action"
-          file_pattern: "src/data/*.json"
+          file_pattern: "src/data/*.json src/data/last_update"
