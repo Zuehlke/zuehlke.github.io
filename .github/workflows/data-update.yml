@@ -1,4 +1,4 @@
-name: Data Update
+name: Data Update Automation
 
 on:
   schedule:
