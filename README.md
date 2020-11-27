@@ -26,83 +26,35 @@ defined in [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-
 the `develop` branch, builds the application using `npm run build` and commits the contents of the `build` directory
 to the `gh-pages` branch.
 
-Its final step in the `build_and_deploy` job uses the `PAT` secret, which is the Personal Access Token (PAT) of any
-GitHub user with read permissions to this repository and write permissions to at least the `gh-pages` branch. It would
-alternatively be possible to use `${{ secrets.GITHUB_TOKEN }}` for the GITHUB_TOKE
+The `secrets.GITHUB_TOKEN` value used in the `build_and_deploy` job's final step is a special environment variable
+automatically provided to every GitHub Actions workflow. This token grants the workflow full permissions on the
+repository it is running for.
 
-TODO:
-- automatic build and deployment on push to develop branch, deployed to gh-pages branch
+### Data Update Automation (Workflow)
 - scheduled job once a day fetches latest people and contributors from API and creates an auto-commit into the
   develop branch (which triggers another re-deploy). At the core of this workflow is a custom GitHub action (see below).
-- "costs" action minutes to run
-- scheduled job takes about 2.5 minutes to run at the moment
 - scheduled job always operates (i.e. takes action source from and pushes to) default branch (here: develop)
-- scheduled jobs can often be significantly delayed (seen up to 20 minutes late)
+- often significantly delayed (up to 30 minutes is realistic)
 - data and last update in src/data
 
-```yml
-on:
-  schedule:
-    - cron: '0 14,15 * * *'
-
-name: "[schedule] Update from API"
-
-jobs:
-  data_update:
-    runs-on: ubuntu-latest
-    name: Update data from API
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Update data from API
-        uses: ./.github/actions/data-update
-        with:
-          github_pat: ${{ secrets.PAT }}
-          data_dir: /github/workspace/src/data
-      - name: Commit & push
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "[AUTO] Update data."
-          file_pattern: "src/data/*.json src/data/last_update"
-```
-
-```yml
-on:
-  push:
-    branches:
-      - revitalize
-
-name: "[push] Build and Deploy"
-
-jobs:
-  build_and_deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.1
-        with:
-          persist-credentials: false
-      - name: npm install and run build
-        run: |
-          npm ci
-          npm run build
-      - name: Deploy build to gh-pages branch
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          BRANCH: gh-pages
-          FOLDER: build
-          CLEAN: true
-```
-  
-### Data Update Action
-- Python script
-- Job architecture
-- constants for settings
+### Data Update Automation (Custom Action)
+- dockerized python script (Python doesn't run natively on GH actions)
+- any branch settings here?
+- settings in consts
+- discuss action.yml
+- why an action vs. azure
+- Overall architecture
+- Expectations for data coming from GitHub API (only showing non-concealed members (althoug that should theoretically be
+different, according to the API specs), alumni are still members, etc.)
 
 ### Resources
-- Dummy GitHub user
-- Specify Dummy GitHub user's PAT as an input to the custom action (used for API access only)
+- **Bot user**: A GitHub user with read and write permissions to this repository
+- **PAT**: A _GitHub Personal Access Token_ (PAT) owned by the bot user's account and created with the full `repo`
+  scope. PATs can be created on GitHub under `Settings -> Developer settings -> Personal access tokens`.
+
+### Limitations
+- costs in minutes (currently around 2.5 for the udpate + 1.5 for the build)
+- scheduled workflows may get deactivated (would need to use external trigger then)
 
 ## Architecture
 This application is built with React and is managed through
@@ -136,16 +88,6 @@ This application is built with React and is managed through
 
 ### Automation
 - **Implement a reliable scheduled trigger for the automation workflow**
-- **Update documentation**
-  - Doc comments in code
-  - Custom action
-  - Workflows
-  - Limitations due to GitHub Actions (2000 minutes / month quota for the account, script takes longer with every new user in the Zühlke org)
-  - Reson why we went with custom Action vs. Web App on Azure
-  - Trigger
-  - Special users, permissions, tokens, etc.
-  - Overall architecture
-  - Expectations for data coming from GitHub API (only showing non-concealed members (althoug that should theoretically be different, according to the API specs), alumni are still members, etc.)
 - Migrate to JavaScript
   - We currently spend about 1 minute per run on a Docker build
   - Regular GitHub Action environment provides everything we need, except for a Python runtime: if we use JavaScript, we don't need Docker anymore
