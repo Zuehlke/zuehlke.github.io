@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - revitalize
+
+name: "[push] Build and Deploy"
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
+      - name: npm install and run build
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy build to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          CLEAN: true
