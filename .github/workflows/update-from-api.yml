@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '42 13,14 * * *'
+    - cron: '0 14,15 * * *'
 
 name: Update from API
 
