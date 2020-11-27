@@ -2,7 +2,7 @@ on:
   schedule:
     - cron: '0 14,15 * * *'
 
-name: Update from API
+name: "[schedule] Update from API"
 
 jobs:
   data_update:
