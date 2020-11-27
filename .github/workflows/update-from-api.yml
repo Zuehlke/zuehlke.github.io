@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '30 16 * * *'
 
 name: "[schedule] Update from API"
 
