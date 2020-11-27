@@ -2,7 +2,7 @@ name: Data Update Automation
 
 on:
   schedule:
-    - cron: '20 13,14 * * *'
+    - cron: '26 14 * * *'
 
 jobs:
   hello_world_job:
