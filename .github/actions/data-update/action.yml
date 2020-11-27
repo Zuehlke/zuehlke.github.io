@@ -1,0 +1,12 @@
+name: 'Data Update'
+description: 'Update contributions & people form the GitHub API.'
+inputs:
+  github_pat:
+    description: 'GitHub Personal Access Token with read/write permissions to this repo.'
+    required: true
+  data_dir:
+    description: 'Absolute path to the data output directory within the Docker container'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

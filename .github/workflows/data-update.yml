@@ -1,0 +1,26 @@
+name: Data Update
+
+on:
+  push:
+    branches: [ topic/automation-into-action ]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Update data from API
+    steps:
+      - name: Clone this repo
+        uses: actions/checkout@v2
+        with:
+          ref: "topic/automation-into-action"
+      - name: Update data
+        uses: ./.github/actions/data-update
+        with:
+          github_pat: ${{ secrets.PAT }}
+          data_dir: /github/workspace/src/data
+      - name: Commit & Push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[AUTO] Update data."
+          branch: "topic/automation-into-action"
+          file_pattern: "src/data/*.json src/data/last_update"
