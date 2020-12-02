@@ -8,7 +8,7 @@ $min-height: 350px;
 
 .Hero {
   /* Background image */
-  background-image: url("../../assets/images/wide/header_zue_bg.jpg");
+  background-image: url("../../assets/images/wide/header_code.jpg");
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@ $min-height: 350px;
     @include container-responsive-width;
     @include font-zue-regular;
 
-    background: $c-gray-opacity-hg;
+    background: $c-white-opacity-hg;
     font-size: $fs-lg;
     padding: $pad-rem-sm $pad-rem-xl;
     color: $c-off-black;
