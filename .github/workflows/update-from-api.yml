@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '40 16 * * *'
+    - cron: '30 10 * * *'
 
 name: "[schedule] Update from API"
 
@@ -9,16 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     name: Update data from API
     steps:
+      # Check out the specified branch of the current repository.
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: 'revitalize'
           token: ${{ secrets.PAT_REPO }}
+
+      # Execute custom action which fetches data from the GitHub API and updates the data files
+      # in the checked-out repository.
       - name: Update data from API
         uses: ./.github/actions/data-update
         with:
           github_pat: ${{ secrets.PAT_PUBLIC }}
           data_dir: /github/workspace/src/data
+
+      # Commit and push any changes matching the specified pattern. Commit to the checked out branch.
+      # The automation action will always change the last_update file. Hence, this step always results
+      # in a commit.
       - name: Commit & push
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
