@@ -50,13 +50,12 @@ The website is mobile-responsive and its design approximates that of the
 [GitHub Pages](https://pages.github.com/) is a feature offered by GitHub which allows every user or organization to
 serve the contents of one repository as a static website. The name of that repository has to be
 `<user_or_org>.github.io`, which will also be the default URL for the resulting web page. In our case, this is
-`zuehlke.github.io`, and [http://zuehlke.github.io/#/main/contributions](http://zuehlke.github.io/#/main/contributions)
-respectively.
+`zuehlke.github.io`, and [http://zuehlke.github.io](http://zuehlke.github.io) respectively.
 
 In the settings for a GitHub Pages repository, we can specify the branch which should be served as the website. In our
-case, the branch to be served is set to `gh_pages`. It therefore needs to contain the built, static website content,
+case, the branch to be served is set to `gh-pages`. It therefore needs to contain the built, static website content,
 rather than any source code. A GitHub Actions workflow is set up to automatically build the application on every push
-to the `develop` branch and commit the results to the `gh_pages` branch (see _CI/CD_).
+to the `develop` branch and commit the results to the `gh-pages` branch (see _CI/CD_).
 
 ### CI/CD
 On every push to the `develop` branch, the `[push] Build and Deploy` GitHub Actions workflow is triggered, which is
@@ -68,19 +67,27 @@ The `secrets.GITHUB_TOKEN` value used in the `build_and_deploy` job's final step
 automatically provided to every GitHub Actions workflow. This token grants the workflow full permissions on the
 repository it is running for.
 
+This workflow can also be manually triggered in the repository's _Actions_ tab. Make sure to select the branch with the
+most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually the default branch, `develop`).
+
 ### Data Update Automation (Workflow)
-- Defined by `.github/workflows/update-from-api.yml` (file contains additional documentation).
+- `[schedule] Update from API` workflow, defined by
+  [.github/workflows/update-from-api.yml](.github/workflows/update-from-api.yml) (file contains additional
+  documentation).
 - A scheduled workflow which runs once a day.
-  - Note: Scheduled execution is often significantly delayed (can be 30 minutes or more)
-  - Schedule is defined as a cron expression 
-- The relevant workflow definition is the one present on the default branch (here, `develop`).
+  - Note: Scheduled execution is often significantly delayed (can be 30 minutes or more).
+  - Schedule is defined as a cron expression in the `update-from-api.yml` file.
+- Can also be manually triggered in the repository's _Actions_ tab. Make sure to select the branch with the most
+  up-to-date workflow description (i.e. `update-from-api.yml` file) (usually the default branch, `develop`).
+- When triggered by schedule, the relevant workflow definition is the one present on the default branch
+  (here, `develop`).
 - Fetches the latest people and contributors data from API and creates an auto-commit into a working branch.
 - API access and data update is handled by a custom GitHub action (see _Custom Action_ below).
 - Working branch:
   - Is specified in the `with.ref` field for the workflow's `Checkout` step.
   - Defines both the source branch for the custom action source code, and the target branch for the automated commit.
   - Is currently set to `develop`. Hence, the automated push will also trigger a re-build of the application into the
-    `gh_pages` branch.
+    `gh-pages` branch.
 - The custom action step takes two inputs: `github_pat` and `data_dir`.
   - Both are automatically passed as environment variables to the Docker container running the script
   - Environment variables coming from inputs follow the naming pattern `INPUT_<INPUT_NAME>`. Hence, these two inputs
@@ -121,20 +128,6 @@ The script can be configured in code by editing `src/consts.py`. The following p
   overwritten).
 - `PEOPLE_FILENAME`: Name of the people output file in the data output directory (file will be created or overwritten).
 
-### Azure
-The initial plan was to deploy the automation script on Azure, most likely as a Docker container with a cron job which
-automatically executes the script once per day. However, this approach was discarded due to the following reasons:
-- An F1-tier App Service Plan may have rate limits which are too strict for the script to run to completion
-- A B1-tier App Service Plan is expensive, considering our application would be running for only about ~5 minutes / day
-  and would be idling for the rest of the time
-- When using Docker, we would also need to rent a container registry for an additional 5.-/month.
-
-An Azure subscription already exists for this project:
-- Name: I10ZCH_SWE6 - zuehlke github io
-- Id: 53bca82e-7c7d-4a54-ab90-8e82f48a27c9
-- Members: Silas Berger, Sergio Trentini
-- Monthly budget declared to PSS: $15 / month
-
 ### Resources
 - **Email account:** TBA
 - **Bot GitHub User:** A GitHub user with read and write permissions to this repository
@@ -148,6 +141,20 @@ An Azure subscription already exists for this project:
   any scopes, resulting in public-only access to repositories, organization members, etc.
   - Created in the bot user's GitHub account, under `Settings -> Developer settings -> Personal access tokens`.
   - Added as `PAT_PUBLIC` to this repository's _Secrets_.
+
+### Azure
+The initial plan was to deploy the automation script on Azure, most likely as a Docker container with a cron job which
+automatically executes the script once per day. However, this approach was discarded due to the following reasons:
+- An F1-tier App Service Plan may have rate limits which are too strict for the script to run to completion
+- A B1-tier App Service Plan is expensive, considering our application would be running for only about ~5 minutes / day
+  and would be idling for the rest of the time
+- When using Docker, we would also need to rent a container registry for an additional 5.-/month.
+
+An Azure subscription already exists for this project:
+- Name: I10ZCH_SWE6 - zuehlke github io
+- Id: 53bca82e-7c7d-4a54-ab90-8e82f48a27c9
+- Members: Silas Berger, Sergio Trentini
+- Monthly budget declared to PSS: $15 / month
 
 ### Limitations
 - GitHub Actions has a limited monthly quota of Action Minutes per account or organization. For organizations without
@@ -210,12 +217,20 @@ An Azure subscription already exists for this project:
 ## Integration Instructions
 This section is only relevant for integrating the current forked branch into the mainline repository and can be removed
 afterwards. To integrate the revitalization, the following steps are required:
+- In the Zuehlke organization settings, make sure no credit card is added, or a spending limit (e.g. $0/month) is in
+  place for GitHub Actions (safety precautions, in case workflows run significantly longer or more often than expected).
 - Grant read/write access for `Zuehlke/zuehlke.github.io` to the Bot GitHub User.
 - Create a `PAT_PUBLIC` and `PAT_REPO` (see _Resources_) in the Bot GitHub User's account and add them to the
   `Zuehlke/zuehlke.github.io` repository's _Secrets_, using these exact names.
 - Merge the pull request from `SilasBerger/zuehlke.github.io@revitalize` into `Zuehlke/zuehlke.github.io@develop`.
 - Make sure the _Actions_ tab shows two actions named `[push] Build and Deploy` and `[schedule] Update from API`.
-  - If this is not the case (TBA!!)
-- 
-
-
+  - If this is not the case, try committing a minor change to the corresponding `.yml` file (e.g. change the workflow's
+    name, add a comment). This generally gets GitHub Actions to detect the added workflow.
+- Manually execute the `[push] Build and Deploy` workflow on the `develop` branch, to build the application and
+  deploy to the `gh-pages` branch.
+- In the `Zuehlke/zuehlke.github.io` repository settings, set the `gh-pages` branch as the "deployed branch" in the
+  GitHub Pages section.
+- The new page should now be live and available at [http://zuehlke.github.io](http://zuehlke.github.io).
+- After the first scheduled execution of the `[schedule] Update from API` workflow, check the repository's _Actions_
+  tab to verify that the job ran successfully. Keep in mind that a delay between the scheduled and the actual execution
+  time of up to 30 minutes is not unusual.
