@@ -178,7 +178,6 @@ An Azure subscription already exists for this project:
   
 ## Improvements and Additional Features
 ### Frontend
-- **Consider using Zühlke font for H2 headings, use slightly weaker gray.**
 - Show stargazers / forks / watchers counts on contribution tiles
 - Allow curated inputs
   - In an additional JSON file, we can add repo IDs which should be crawled even if they are not owned by the Zühlke org
