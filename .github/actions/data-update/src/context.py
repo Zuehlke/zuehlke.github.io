@@ -1,4 +1,3 @@
-import json
 import os
 from pathlib import Path
 
@@ -18,15 +17,6 @@ class Context:
         """
         self._data_dir_path = out_dir_path
         self._github_token = github_token
-
-    @staticmethod
-    def _read_config_file(main_script_path):
-        file_path = main_script_path.parent.joinpath("config.json")
-        try:
-            with open(file_path) as infile:
-                return json.load(infile)
-        except FileNotFoundError:
-            log.abort_and_exit("CTXT", f"Context init failed, could not to read config file '{file_path}': not found.")
 
     @staticmethod
     def _read_env_var(var_name):
