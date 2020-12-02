@@ -138,17 +138,20 @@ The script can be configured in code by editing `src/consts.py`. The following p
 - `PEOPLE_FILENAME`: Name of the people output file in the data output directory (file will be created or overwritten).
 
 ### Resources
-- **Email account:** TBA
-- **Bot GitHub User:** A GitHub user with read and write permissions to this repository
-  - **Username:** TBA
-  - **Email:** TBA
+- **Email account:**
+  - **Address:** zuehlke.githubio@gmail.com
+  - **Password:** (Ask Silas Berger or Sergio Trentini)
+- **Bot GitHub User (ZuehlkeGitHubIO):** A GitHub user with read and write permissions to this repository
+  - **Username:** ZuehlkeGitHubIO
+  - **Email:** zuehlke.githubio@gmail.com
+  - **Password:** (Ask Silas Berger or Sergio Trentini)
 - **PAT_REPO**: A _GitHub Personal Access Token_ (PAT) owned by the bot user's account and created with the full `repo`
   scope.
-  - Created in the bot user's GitHub account, under `Settings -> Developer settings -> Personal access tokens`.
+  - Created in ZuehlkeGitHubIO's account, under `Settings -> Developer settings -> Personal access tokens`.
   - Added as `PAT_REPO` to this repository's _Secrets_.
-- **PAT_PUBLIC**: A _GitHub Personal Access Token_ (PAT) owned by the bot user's account and created without selecting
-  any scopes, resulting in public-only access to repositories, organization members, etc.
-  - Created in the bot user's GitHub account, under `Settings -> Developer settings -> Personal access tokens`.
+- **PAT_PUBLIC**: A _GitHub Personal Access Token_ (PAT) owned by ZuehlkeGitHubIO and created without selecting any
+  scopes, resulting in public-only access to repositories, organization members, etc.
+  - Created in ZuehlkeGitHubIO's account, under `Settings -> Developer settings -> Personal access tokens`.
   - Added as `PAT_PUBLIC` to this repository's _Secrets_.
 
 ### Azure
