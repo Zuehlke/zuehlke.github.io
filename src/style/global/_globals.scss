@@ -15,7 +15,7 @@ $height-smaller-screens: 55px;
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $c-text-on-light;
@@ -28,7 +28,7 @@ h1 {
 }
 
 h2 {
-  @include font-open-sans-regular;
+  @include font-lato-regular;
   font-size: $fs-lg;
   margin: 30px 0 20px 0;
 }
