@@ -23,6 +23,12 @@ The `master` branch contains the last build of the old application, which is no 
 **Automation**
 TBA (GitHub actions: input names go from some_value to INPUT_SOME_VALUE)
 
+To avoid unnecessary GitHub Actions workflow runs, it is recommended to not commit directly to the `develop` branch,
+but rather work with pull requests instead. Alternatively, disable the `[push] Build and Deploy` workflow in the
+_Actions_ tab during development. Keep in mind though that this will also stop data updates (contributions, people) from
+being automatically merged into the production branch. Both workflows can also be manually triggered in the _Actions_
+tab (preferably on the `develop` branch).
+
 ## Frontend Structure
 The frontend is written in React + TypeScript and is managed through
 [create-react-app](https://www.npmjs.com/package/create-react-app). It has the following pages:
@@ -37,6 +43,9 @@ count, and a person's GitHub name, full name, bio and avatar.
 
 The website is mobile-responsive and its design approximates that of the
 [Zühlke corporate page](https://www.zuehlke.com/en).
+
+Hero image source: GettyImages stock photo from
+[https://zuehlke.templafy.com/images/stock-images?search=code](https://zuehlke.templafy.com/images/stock-images?search=code).
 
 ## Deployment and Automation
 ### GitHub Pages
