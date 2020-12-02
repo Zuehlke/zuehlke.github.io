@@ -179,8 +179,6 @@ An Azure subscription already exists for this project:
 ## Improvements and Additional Features
 ### Frontend
 - **Consider using Zühlke font for H2 headings, use slightly weaker gray.**
-- **Use translate instead of left for the mobile nav slide-in (should improve performance issues)**
-- **Sort by relevance (stargazers, forks, watchers, activity)**
 - Show stargazers / forks / watchers counts on contribution tiles
 - Allow curated inputs
   - In an additional JSON file, we can add repo IDs which should be crawled even if they are not owned by the Zühlke org
@@ -203,9 +201,9 @@ An Azure subscription already exists for this project:
   - When not using Docker, make sure to commit all `node_modules` - there is no `npm intall` step. Be careful not to
     accidentally `.gitignore` some file or directory in the `node_modules` (e.g. some `dist` dir).
 - Implement commit / push logic, rather than using a third-party action (for security and to reduce dependencies)
-  - Big parts of the logic were already in Python, and removed during the migration to GitHub Actions, in commit 
+  - Most of the logic was already implemented in Python, and removed during the migration to GitHub Actions, in commit 
     [6315e486b3cceafd4918c242819b4727bec0b1ff](https://github.com/SilasBerger/zuehlke.github.io/commit/6315e486b3cceafd4918c242819b4727bec0b1ff)
-    (see [git_wrapper.py](https://github.com/SilasBerger/zuehlke.github.io/commit/6315e486b3cceafd4918c242819b4727bec0b1ff)).
+    (see [git_wrapper.py](https://github.com/SilasBerger/zuehlke.github.io/blob/2efd08e773c2beac196e85116a30037fcd2bff87/github/git_wrapper.py)).
   - Note: That code is not up-to-date with the current setup and architecture, many concepts have changed (context,
     config file, workdir / source dir, etc.)
   - Needs to be modified to use a GitHub PAT for authentication, rather than the default SSH key available on the
