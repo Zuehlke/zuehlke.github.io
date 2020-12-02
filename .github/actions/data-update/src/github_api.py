@@ -116,7 +116,7 @@ class GitHubApi:
             "next": None,
             "last": None,
             "first": None,
-            "prev": None,
+            "prev": None
         }
         if link_header is None:
             return result
@@ -319,15 +319,17 @@ class GitHubApi:
         :return: list of page results, potentially flattened
         """
         result = []
-        url = initial_url
-        while url is not None:
-            cursor, page = self.request_page(url, authenticate, headers, query_params, expected_status_codes)
+        current_url = initial_url
+        while current_url is not None:
+            cursor, page = self.request_page(current_url, authenticate, headers, query_params, expected_status_codes)
             if flatten:
                 for element in page:
                     result.append(element)
             else:
                 result.append(page)
-            url = cursor["next"]
+            # Update url with the "next" link, unless we just called the URL indicated as "last".
+            # This is required because a "next" link may returned when requesting the last page.
+            current_url = cursor["next"] if not (current_url == cursor["last"]) else None
         return result
 
     def collect_org_repos(self):
