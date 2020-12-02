@@ -10,14 +10,15 @@ type Props = {
 
 const Contributions = (props: Props) => {
 
-
+  const sortedRepos = props.repos.sort(
+    (a: RepoModel, b: RepoModel) => b.stargazers_count - a.stargazers_count);
 
   return (
     <div className="Contributions">
       <div className="container">
         <h1 className="title">Contributions</h1>
         <TileGrid>
-          {props.repos.map((repo: RepoModel) => <RepoTile key={repo.html_url} repo={repo}/>)}
+          {sortedRepos.map((repo: RepoModel) => <RepoTile key={repo.html_url} repo={repo}/>)}
         </TileGrid>
       </div>
     </div>
