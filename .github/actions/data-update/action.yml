@@ -8,5 +8,7 @@ inputs:
     description: 'Absolute path to the data output directory within the Docker container'
     required: true
 runs:
+  # Run inside a Docker container (image specified by the local Dockerfile), Python doesn't run
+  # natively on GitHub Actions.
   using: 'docker'
   image: 'Dockerfile'
