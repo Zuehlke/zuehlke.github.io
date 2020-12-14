@@ -223,6 +223,9 @@ An Azure subscription already exists for this project:
   `https://api.github.com/repos/Zuehlke/zuehlke.github.io/actions/workflows/update-from-api.yml/dispatches`, using the
   `PAT_REPO` token, or a different PAT with the same permission level (full private repo access).
 
+## Image Source:
+- [header_code.png (Hero Image)](./src/assets/images/wide/header_code.png): [https://zuehlke.templafy.com/images/stock-images](https://zuehlke.templafy.com/images/stock-images)
+
 ## Integration Instructions
 This section is only relevant for integrating the current forked branch into the mainline repository and can be removed
 afterwards. To integrate the revitalization, the following steps are required:
