@@ -138,6 +138,9 @@ different, according to the API specs), alumni are still members, etc.)
 - Show screenshots for token creation (public-only and full private repo access)
 - show screenshots for secrets
 
+## Image Source:
+- [header_code.png (Hero Image)](./src/assets/images/wide/header_code.png): [https://zuehlke.templafy.com/images/stock-images](https://zuehlke.templafy.com/images/stock-images)
+
 ## Integration Instructions
 This section is only relevant for integrating the current forked branch into the mainline repository and can be removed
 afterwards. To integrate the revitalization, the following steps are required:
