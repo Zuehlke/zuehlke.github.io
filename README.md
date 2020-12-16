@@ -51,21 +51,19 @@ count, and a person's GitHub name, full name, bio and avatar.
 The website is mobile-responsive and its design approximates that of the
 [Zühlke corporate page](https://www.zuehlke.com/en).
 
-Hero image source: GettyImages stock photo from
-[https://zuehlke.templafy.com/images/stock-images?search=code](https://zuehlke.templafy.com/images/stock-images?search=code).
+Hero image source: GettyImages stock photo from Zuehlke Templafy.
 
 ## Deployment and Automation
 ### GitHub Pages
 [GitHub Pages](https://pages.github.com/) is a feature offered by GitHub which allows every user or organization to
 serve the contents of one repository as a static website. The name of that repository has to be
 `<user_or_org>.github.io`, which will also be the default URL for the resulting web page. In our case, this is
-`zuehlke.github.io`, and [http://zuehlke.github.io/#/main/contributions](http://zuehlke.github.io/#/main/contributions)
-respectively.
+`zuehlke.github.io`, and [http://zuehlke.github.io](http://zuehlke.github.io) respectively.
 
 In the settings for a GitHub Pages repository, we can specify the branch which should be served as the website. In our
-case, the branch to be served is set to `gh_pages`. It therefore needs to contain the built, static website content,
+case, the branch to be served is set to `gh-pages`. It therefore needs to contain the built, static website content,
 rather than any source code. A GitHub Actions workflow is set up to automatically build the application on every push
-to the `develop` branch and commit the results to the `gh_pages` branch (see _CI/CD_).
+to the `develop` branch and commit the results to the `gh-pages` branch (see _CI/CD_).
 
 ### CI/CD
 On every push to the `develop` branch, the `[push] Build and Deploy` GitHub Actions workflow is triggered, which is
@@ -77,32 +75,102 @@ The `secrets.GITHUB_TOKEN` value used in the `build_and_deploy` job's final step
 automatically provided to every GitHub Actions workflow. This token grants the workflow full permissions on the
 repository it is running for.
 
+This workflow can also be manually triggered in the repository's _Actions_ tab. Make sure to select the branch with the
+most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually the default branch, `develop`).
+
 ### Data Update Automation (Workflow)
-- scheduled job once a day fetches latest people and contributors from API and creates an auto-commit into the
-  develop branch (which triggers another re-deploy). At the core of this workflow is a custom GitHub action (see below).
-- scheduled job always operates (i.e. takes action source from and pushes to) default branch (here: develop)
-- often significantly delayed (up to 30 minutes is realistic)
-- data and last update in src/data
+- `[schedule] Update from API` workflow, defined by
+  [.github/workflows/update-from-api.yml](.github/workflows/update-from-api.yml) (file contains additional
+  documentation).
+- A scheduled workflow which runs once a day.
+  - Note: Scheduled execution is often significantly delayed (can be 30 minutes or more).
+  - Schedule is defined as a cron expression in the `update-from-api.yml` file.
+- Can also be manually triggered in the repository's _Actions_ tab. Make sure to select the branch with the most
+  up-to-date workflow description (i.e. `update-from-api.yml` file) (usually the default branch, `develop`).
+- When triggered by schedule, the relevant workflow definition is the one present on the default branch
+  (here, `develop`).
+- Fetches the latest people and contributors data from API and creates an auto-commit into a working branch.
+- API access and data update is handled by a custom GitHub action (see _Custom Action_ below).
+- Working branch:
+  - Is specified in the `with.ref` field for the workflow's `Checkout` step.
+  - Defines both the source branch for the custom action source code, and the target branch for the automated commit.
+  - Is currently set to `develop`. Hence, the automated push will also trigger a re-build of the application into the
+    `gh-pages` branch.
+- The custom action step takes two inputs: `github_pat` and `data_dir`.
+  - Both are automatically passed as environment variables to the Docker container running the script
+  - Environment variables coming from inputs follow the naming pattern `INPUT_<INPUT_NAME>`. Hence, these two inputs
+    will be become environment variables called `INPUT_GITHUB_PAT` and `INPUT_DATA_DIR` respectively, from the point
+    of view of the custom action Python script.
+  - The `data_dir` input is set to `/github/workspace/src/data`. The `actions/checkout@2` action clones the
+    current repository into a location which is bind-mounted to `/github/workspace/` in the Docker container.
+- This workflow definitions requires two separate GitHub PATs to be defined in the repository's Secrets:
+  - `PAT_PUBLIC`: Has public-only access. Using this PAT for the custom action ensures that API calls won't return
+    private repositories or concealed organization members.
+  - `PAT_PRIVATE`: Used for checking out the current repository. This token needs full access to private Org repos to
+    be able to clone the repository and push to it. Note that this PAT is specifically used in the Checkout step, in
+    lieu of the `secrets.GITHUB_TOKEN` provided to every workflow and used by this action by default. This is due to the
+    fact that a push executed with `secrets.GITHUB_TOKEN` does not trigger any subsequent actions (e.g. building the)
+    web application, nor does it count as "repository activity", which is required to avoid scheduled workflows getting
+    automatically deactivated.
 
 ### Data Update Automation (Custom Action)
-- dockerized python script (Python doesn't run natively on GH actions)
-- any branch settings here?
-- settings in consts
-- discuss action.yml
-- why an action vs. azure
-- Overall architecture
-- Expectations for data coming from GitHub API (only showing non-concealed members (althoug that should theoretically be
-different, according to the API specs), alumni are still members, etc.)
+- A custom GitHub action which retrieves data from the GitHub API and outputs the result into specified files.
+- Located in `.github/actions/data-update`.
+- Implemented as dockerized python script (Python doesn't run natively on GitHub Actions).
+- Inputs: see _Workflow_ documentation above.
+- Entry point: `main.py`.
+- Fetches all public repositories and non-concealed members of the `Zuehlke` GitHub organization.
+
+The script can be configured in code by editing `src/consts.py`. The following parameters are available:
+- `ENV_GITHUB_PAT`: Name of the environment variable which provides the GitHub PAT
+- `ENV_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
+- `API_REQUEST_DELAY_SEC`: Number of seconds to wait before every API request, to avoid flooding the API
+- `RATE_LIMIT_BUFFER_SEC`: Number of seconds to wait after a rate limit is supposed to be lifted, to avoid overlap
+- `RATE_LIMIT_MAX_AGE_SEC`: Maximum number of seconds since the rate limit update before the current rate limit status
+  information is considered stale and has to be updated.
+- `MAX_RETRIES`: The maximum number of retries when a request fails (also applies for failed requests due to rate
+  limitation). After that, the execution fails. **Warning**: This value should be set to `0` when deploying to
+  platforms with usage-based pricing (e.g. GitHub Actions), since waiting for a rate limit to be lifted will result in
+  additional compute time, which can be expensive.
+- `CONTRIBUTIONS_FILENAME`: Name of the contributions output file in the data output directory (file will be created or
+  overwritten).
+- `PEOPLE_FILENAME`: Name of the people output file in the data output directory (file will be created or overwritten).
 
 ### Resources
-- **Bot user**: A GitHub user with read and write permissions to this repository
-- **PAT_PUBLIC**: A _GitHub Personal Access Token_ (PAT) owned by the bot user's account and created with the full `repo`
-  scope. PATs can be created on GitHub under `Settings -> Developer settings -> Personal access tokens`.
-- **PAT_REPO**: TBA
+- **Email account:**
+  - **Address:** zuehlke**@gmail.com
+  - **Password:** (Ask Silas Berger or Sergio Trentini)
+- **Bot GitHub User (ZuehlkeGitHubIO):** A GitHub user with read and write permissions to this repository
+  - **Username:** ZuehlkeGitHubIO
+  - **Email:** zuehlke**@gmail.com
+  - **Password:** (Ask Silas Berger or Sergio Trentini)
+- **PAT_REPO**: A _GitHub Personal Access Token_ (PAT) owned by the bot user's account and created with the full `repo`
+  scope.
+  - Created in ZuehlkeGitHubIO's account, under `Settings -> Developer settings -> Personal access tokens`.
+  - Added as `PAT_REPO` to this repository's _Secrets_.
+- **PAT_PUBLIC**: A _GitHub Personal Access Token_ (PAT) owned by ZuehlkeGitHubIO and created without selecting any
+  scopes, resulting in public-only access to repositories, organization members, etc.
+  - Created in ZuehlkeGitHubIO's account, under `Settings -> Developer settings -> Personal access tokens`.
+  - Added as `PAT_PUBLIC` to this repository's _Secrets_.
+
+### Azure
+The initial plan was to deploy the automation script on Azure, most likely as a Docker container with a cron job which
+automatically executes the script once per day. However, this approach was discarded due to the following reasons:
+- An F1-tier App Service Plan may have rate limits which are too strict for the script to run to completion
+- A B1-tier App Service Plan is expensive, considering our application would be running for only about ~5 minutes / day
+  and would be idling for the rest of the time
+- When using Docker, we would also need to rent a container registry for an additional 5.-/month.
 
 ### Limitations
-- costs in minutes (currently around 2.5 for the udpate + 1.5 for the build)
-- scheduled workflows may get deactivated (would need to use external trigger then)
+- GitHub Actions has a limited monthly quota of Action Minutes per account or organization. For organizations without
+  a premium plan, the free tier currently includes 2000 minutes/month. The update automation and build workflow run for
+  a combined total of approximately 5 minutes/day, ~150 minutes/month. These minutes count against the Zuehlke
+  organization's total quota of 2000 minutes / month. Additional API requests (e.g. due to added organization members or
+  due to additional data to be fetched), the automation's execution time will increase.
+- According to GitHub's policies, scheduled workflows (such as the automation workflow) get automatically deactivated 
+  if a repository has no activity for at least 2 months. This should be remedied in our case by letting the automation
+  script perform automated commits as a regular user (by providing a PAT), but it remains to be seen whether this works
+  long-term.
   
 ## Improvements and Additional Features
 ### Frontend
@@ -122,26 +190,49 @@ different, according to the API specs), alumni are still members, etc.)
 ### Automation
 - Migrate to JavaScript
   - We currently spend about 1 minute per run on a Docker build
-  - Regular GitHub Action environment provides everything we need, except for a Python runtime: if we use JavaScript, we don't need Docker anymore
-  - When not using Docker, make sure to commit all `node_modules` - there is no `npm intall` step. Be careful not to accidentally `.gitignore` some file or directory in the `node_modules` (e.g. some `dist` dir).
+  - The regular GitHub Action environment provides everything we need, except for a Python runtime: if we use
+    JavaScript, we don't need Docker anymore.
+  - There is no inherent reason to implement the automation in Python, rather than JavaScript.
+  - When not using Docker, make sure to commit all `node_modules` - there is no `npm install` step. Be careful not to
+    accidentally `.gitignore` some file or directory in the `node_modules` (e.g. some `dist` dir).
 - Implement commit / push logic, rather than using a third-party action (for security and to reduce dependencies)
-  - Big parts of the logic already exist in Python, up until commit `???`
-  - Note: That code is not up-to-date with the current setup and architecture, many concepts have changed (context, config file, workdir / source dir, etc.)
-  - Need a way to either use a GitHub PAT for pushing, or pass an SSH key into the action
+  - Most of the logic was already implemented in Python, and removed during the migration to GitHub Actions, in commit 
+    [6315e486b3cceafd4918c242819b4727bec0b1ff](https://github.com/SilasBerger/zuehlke.github.io/commit/6315e486b3cceafd4918c242819b4727bec0b1ff)
+    (see [git_wrapper.py](https://github.com/SilasBerger/zuehlke.github.io/blob/2efd08e773c2beac196e85116a30037fcd2bff87/github/git_wrapper.py)).
+  - Note: That code is not up-to-date with the current setup and architecture, many concepts have changed (context,
+    config file, workdir / source dir, etc.)
+  - Needs to be modified to use a GitHub PAT for authentication, rather than the default SSH key available on the
+    system (should be able to use
+    [https://github.com/stefanzweifel/git-auto-commit-action](https://github.com/stefanzweifel/git-auto-commit-action)
+    for reference).
 - Consider other deployment strategies
-  - (Container App or something)
-  - Azure Function
-  - Azure Web App on an F1 or B1 tier App Service Plan (need to either not use Docker, or also pay for a container registry)
-  
-## Doc TODO
-- set retry to 0, because it will wait for rate limit lifting, which costs GitHub action minutes
-- Show screenshots for token creation (public-only and full private repo access)
-- show screenshots for secrets
-
-## Image Source:
-- [header_code.png (Hero Image)](./src/assets/images/wide/header_code.png): [https://zuehlke.templafy.com/images/stock-images](https://zuehlke.templafy.com/images/stock-images)
+  - Azure ContainerInstances
+  - Azure Functions
+  - Azure Web App on an F1 or B1 tier App Service Plan (need to either not use Docker, or also pay for a container
+    registry)
+- In case the scheduled GitHub Action workflow is does not trigger reliably or gets deactivated due to a lack of
+  repository activity, consider changing the `update-from-api.yml` action's trigger to `workflow_dispatch`. The workflow
+  via a `POST` request to
+  `https://api.github.com/repos/Zuehlke/zuehlke.github.io/actions/workflows/update-from-api.yml/dispatches`, using the
+  `PAT_REPO` token, or a different PAT with the same permission level (full private repo access).
 
 ## Integration Instructions
 This section is only relevant for integrating the current forked branch into the mainline repository and can be removed
 afterwards. To integrate the revitalization, the following steps are required:
-
+- In the Zuehlke organization settings, make sure no credit card is added, or a spending limit (e.g. $0/month) is in
+  place for GitHub Actions (safety precautions, in case workflows run significantly longer or more often than expected).
+- Grant read/write access for `Zuehlke/zuehlke.github.io` to the Bot GitHub User.
+- Create a `PAT_PUBLIC` and `PAT_REPO` (see _Resources_) in the Bot GitHub User's account and add them to the
+  `Zuehlke/zuehlke.github.io` repository's _Secrets_, using these exact names.
+- Merge the pull request from `SilasBerger/zuehlke.github.io@revitalize` into `Zuehlke/zuehlke.github.io@develop`.
+- Make sure the _Actions_ tab shows two actions named `[push] Build and Deploy` and `[schedule] Update from API`.
+  - If this is not the case, try committing a minor change to the corresponding `.yml` file (e.g. change the workflow's
+    name, add a comment). This generally gets GitHub Actions to detect the added workflow.
+- Manually execute the `[push] Build and Deploy` workflow on the `develop` branch, to build the application and
+  deploy to the `gh-pages` branch.
+- In the `Zuehlke/zuehlke.github.io` repository settings, set the `gh-pages` branch as the "deployed branch" in the
+  GitHub Pages section.
+- The new page should now be live and available at [http://zuehlke.github.io](http://zuehlke.github.io).
+- After the first scheduled execution of the `[schedule] Update from API` workflow, check the repository's _Actions_
+  tab to verify that the job ran successfully. Keep in mind that a delay between the scheduled and the actual execution
+  time of up to 30 minutes is not unusual.
