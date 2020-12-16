@@ -1,0 +1,36 @@
+/* Font style mixins */
+@mixin font-lato-regular() {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin font-lato-bold() {
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin font-zue-regular() {
+  font-family: "AA Zuehlke OTPS", "Lato", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin font-zue-medium() {
+  font-family: "AA Zuehlke OTPS", "Lato", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+@mixin font-zue-italic() {
+  font-family: "AA Zuehlke OTPS", "Lato", sans-serif;
+  font-weight: normal;
+  font-style: italic;
+}
+
+@mixin font-zue-medium-italic() {
+  font-family: "AA Zuehlke OTPS", "Lato", sans-serif;
+  font-weight: bold;
+  font-style: italic;
+}

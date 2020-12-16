@@ -1,0 +1,69 @@
+@import "../../style/mixins/layout";
+@import "../../style/vars/colors";
+@import "../../style/vars/font-size";
+@import "../../style/vars/spacing";
+
+.Footer {
+  @include center-container-wrapper;
+  background-color: $c-dark-grey-dark;
+
+  & > .content {
+    @include container-responsive-width;
+    @include _flex(row, flex-start, stretch);
+    padding: $pad-rem-lg 0 $pad-rem-xl 0;
+  }
+
+  & .logo {
+    @include flex-col-center-start;
+
+    & img {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  & .links-container {
+    @include flex-col-center-start;
+
+    & > .links-list {
+      margin-top: 0;
+      list-style: none;
+
+      & > li {
+        font-size: $fs-sm;
+        padding-bottom: $pad-rem-sm;
+
+        & > a {
+          color: $c-text-on-dark;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  & .contact-block {
+    @include _flex(column, flex-start, flex-end);
+    margin-left: auto;
+    font-size: $fs-sm;
+    color: $c-softer-text-on-dark;
+
+    & > .label {
+      margin-bottom: $pad-rem-sm;
+    }
+
+    & > .contact-links-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: $pad-rem-xs;
+
+      & > .cell {
+        @include _flex(row, center, center);
+
+        & > a {
+          color: $c-softer-text-on-dark;
+          font-size: $fs-lg;
+        }
+      }
+    }
+  }
+}

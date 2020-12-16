@@ -1,0 +1,41 @@
+// Zühlke colors
+$c-brand:                  rgb(147,95,167);
+$c-primary:                rgb(255,153,0);
+$c-primary-sat-lo:         rgb(255, 204, 128);
+
+$c-primary-darker:         rgb(223,120,0);
+$c-white:                  rgb(255,255,255);
+$c-off-white-lighter:      rgb(245,245,245);
+$c-off-white:              rgb(232,232,232);
+$c-light-grey-medium:      rgb(224,224,224);
+$c-light-grey-dark:        rgb(213,213,213);
+$c-dark-grey:              rgb(126, 136, 147);
+$c-dark-grey-medium:       rgb(87,93,98);
+$c-dark-grey-dark:         rgb(72,78,84);
+$c-dark-grey-darker:       rgb(60,60,60);
+$c-dark-grey-very-dark:    rgb(40,40,40);
+$c-off-black:              rgb(25,25,25);
+
+// Transparency
+$c-gray-opacity-md:        rgba(240,240,240,.75);
+$c-gray-opacity-hg:        rgba(240,240,240,0.9);
+$c-white-opacity-hg:       rgba(255,255,255,0.9);
+
+// Semantic colors
+$c-text-on-light:          $c-off-black;
+$c-softer-text-on-light:   $c-dark-grey-very-dark;
+$c-text-on-dark:           $c-white;
+$c-softer-text-on-dark:    $c-light-grey-medium;
+$c-navigation-bg:          $c-white-opacity-hg;
+$c-navigation-bg-blur:     rgba(255,255,255,0.60);
+
+// Base colors
+$black: 				   rgb(0,0,0);
+$white: 				   rgb(255,255,255);
+
+$red: 					   rgb(255,0,0);
+$green: 				   rgb(0,255,0);
+$blue: 					   rgb(0,0,255);
+$cyan: 					   rgb(0,255,255);
+$magenta: 				   rgb(255,0,255);
+$yellow: 				   rgb(255,255,0);

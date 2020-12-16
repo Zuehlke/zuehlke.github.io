@@ -1,0 +1,13 @@
+/* Global imports */
+@import "style/global/fonts";
+@import "style/global/globals";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}

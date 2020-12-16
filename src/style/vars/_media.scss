@@ -1,0 +1,38 @@
+/*
+Screen sizes:
+  - xlarge: width=[1600px,]
+  - large: width=[1024px, 1599px]
+  - medium: width=[641px, 1023px]
+  - small: width=[,640px]
+ */
+
+/* Max width of a large screen (above that: xlarge) */
+$max-screen-width-large: 1599px;
+
+/* Max width of a medium screen (above that: large) */
+$max-screen-width-medium: 1023px;
+
+/* Max width of a small screen (above that: medium) */
+$max-screen-width-small: 640px;
+
+/* Derived values */
+$min-screen-width-xlarge: $max-screen-width-large + 1;
+$min-screen-width-large: $max-screen-width-medium + 1;
+$min-screen-width-medium: $max-screen-width-small + 1;
+
+/* Width query conditionals */
+/* "at most" matchers */
+$w-am-large: (max-width: $max-screen-width-large);
+$w-am-medium: (max-width: $max-screen-width-medium);
+$w-am-small: (max-width: $max-screen-width-small);
+
+/* "at least" matchers */
+$w-al-xlarge: (min-width: $min-screen-width-xlarge);
+$w-al-large: (min-width: $min-screen-width-large);
+$w-al-medium: (min-width: $min-screen-width-medium);
+
+/* Exact matchers */
+$w-xlarge: #{$w-al-xlarge};
+$w-large: #{$w-al-large} and #{$w-am-large};
+$w-medium: #{$w-al-medium} and #{$w-am-medium};
+$w-small: #{$w-am-small};

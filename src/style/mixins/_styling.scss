@@ -1,0 +1,42 @@
+@import "../vars/transitions";
+@import "../vars/colors";
+@import "../vars/media";
+@import "../vars/spacing";
+
+@mixin _background-hover($target-color) {
+  transition: background-color $transition-fast;
+  &:hover {
+    background-color: $target-color;
+  }
+}
+
+@mixin _grid-cell-top-bar($left) {
+  &::before {
+    $transition-duration: $transition-fast;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: $left;
+    width: 100px;
+    height: 3px;
+    background-color: $c-primary-sat-lo;
+    transition: width $transition-duration,
+                left $transition-duration,
+                color $transition-duration;
+  }
+
+  &:hover {
+    &::before {
+      width: 100%;
+      color: $c-primary;
+      left: 0;
+    }
+  }
+}
+
+@mixin page-title-margin {
+  @media #{$w-am-medium} {
+    margin-left: $pad-rem-md;
+  }
+}
