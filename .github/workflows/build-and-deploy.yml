@@ -2,7 +2,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - revitalize
+      - develop
 
 name: "[push] Build and Deploy"
 
