@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: 'revitalize'
+          ref: 'develop'
           token: ${{ secrets.PAT_REPO }}
 
       # Execute custom action which fetches data from the GitHub API and updates the data files
