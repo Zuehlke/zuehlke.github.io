@@ -174,8 +174,8 @@ automatically executes the script once per day. However, this approach was disca
   
 ## Improvements and Additional Features
 ### Frontend
-- Show stargazers / forks / watchers counts on contribution tiles
-- Allow curated inputs
+- Show stargazers / forks / watchers counts on contribution tiles [Issue #38](https://github.com/Zuehlke/zuehlke.github.io/issues/38)
+- Allow curated inputs [Issue #37](https://github.com/Zuehlke/zuehlke.github.io/issues/37)
   - In an additional JSON file, we can add repo IDs which should be crawled even if they are not owned by the Zühlke org
     (showcase (potentially private) contributions by Zühlke employees)
   - Same for people
@@ -185,7 +185,7 @@ automatically executes the script once per day. However, this approach was disca
 - Is there a way to connect people and repos? Maybe we could click on a person and only get their repos? Note: this
   would require requesting contributor IDs for every repo. For large projects, this could mean having to fetch a large
   number of pages (current limit: 100 results per request).
-- Full-text search, filters, sorting
+- Full-text search, filters, sorting [Issue #39](https://github.com/Zuehlke/zuehlke.github.io/issues/39)
 
 ### Automation
 - Migrate to JavaScript
