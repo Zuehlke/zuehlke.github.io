@@ -77,7 +77,7 @@ class GitHubApi:
         :param repos_list: list of raw repositories, as returned by the GitHub API
         :return: preprocesses list of repositories
         """
-        return [repo for repo in repos_list if not repo["private"]]
+        return [repo for repo in repos_list if not repo["private"] and not repo["fork"]]
 
     def _get_repo_contributors(self, owner, repo):
         """
