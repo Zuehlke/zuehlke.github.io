@@ -31,10 +31,10 @@ class Context:
         Read environment variables and create a new Context.
         :return: newly created Context object
         """
-        output_data_dir_path = Path(Context._read_env_var(consts.ENV_OUTPUT_DATA_DIR))
+        data_dir_path = Path(Context._read_env_var(consts.ENV_DATA_DIR))
         github_pat = Context._read_env_var(consts.ENV_GITHUB_PAT)
-        util.ensure_directory(output_data_dir_path)
-        return Context(output_data_dir_path, github_pat)
+        util.ensure_directory(data_dir_path)
+        return Context(data_dir_path, github_pat)
 
     def get_github_token(self):
         """
