@@ -22,7 +22,7 @@ The `master` branch contains the last build of the old application, which is no 
 
 **Automation**
 - In `.github/actions/data-update`, run `pip install -r requiremets.txt`, preferably in a `virtualenv` environment
-- To execute the script, run `INPUT_GITHUB_PAT=<PAT_PUBLIC> INPUT_DATA_DIR=<some_dir> python src/main.py`
+- To execute the script, run `GITHUB_PAT=<PAT_PUBLIC> OUTPUT_DATA_DIR=<some_dir> python src/main.py`
 
 where
 
@@ -99,7 +99,7 @@ most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually
 - The custom action step takes two inputs: `github_pat` and `data_dir`.
   - Both are automatically passed as environment variables to the Docker container running the script
   - Environment variables coming from inputs follow the naming pattern `INPUT_<INPUT_NAME>`. Hence, these two inputs
-    will be become environment variables called `INPUT_GITHUB_PAT` and `INPUT_DATA_DIR` respectively, from the point
+    will be become environment variables called `GITHUB_PAT` and `OUTPUT_DATA_DIR` respectively, from the point
     of view of the custom action Python script.
   - The `data_dir` input is set to `/github/workspace/src/data`. The `actions/checkout@2` action clones the
     current repository into a location which is bind-mounted to `/github/workspace/` in the Docker container.
@@ -119,11 +119,12 @@ most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually
 - Implemented as dockerized python script (Python doesn't run natively on GitHub Actions).
 - Inputs: see _Workflow_ documentation above.
 - Entry point: `main.py`.
-- Fetches all public repositories and non-concealed members of the `Zuehlke` GitHub organization.
+- Fetches all public repositories and non-concealed members of the `Zuehlke` GitHub organization and all external contributions listed in [external_contributions.csv](.github/actions/data-update/input/external_contributions.csv).
+- External repos are repos of non-concealed members of the Zuehlke GitHub organization which are not owned by the Zuehlke GitHub organization. To update the external contributions modify [external_contributions.csv](.github/actions/data-update/input/external_contributions.csv). 
 
 The script can be configured in code by editing `src/consts.py`. The following parameters are available:
 - `ENV_GITHUB_PAT`: Name of the environment variable which provides the GitHub PAT
-- `ENV_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
+- `ENV_OUTPUT_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
 - `API_REQUEST_DELAY_SEC`: Number of seconds to wait before every API request, to avoid flooding the API
 - `RATE_LIMIT_BUFFER_SEC`: Number of seconds to wait after a rate limit is supposed to be lifted, to avoid overlap
 - `RATE_LIMIT_MAX_AGE_SEC`: Maximum number of seconds since the rate limit update before the current rate limit status

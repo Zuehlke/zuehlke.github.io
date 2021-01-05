@@ -23,7 +23,7 @@ jobs:
         uses: ./.github/actions/data-update
         with:
           github_pat: ${{ secrets.PAT_PUBLIC }}
-          data_dir: /github/workspace/src/data
+          output_data_dir: /github/workspace/src/data
 
       # Commit and push any changes matching the specified pattern. Commit to the checked out branch.
       # The automation action will always change the last_update file. Hence, this step always results

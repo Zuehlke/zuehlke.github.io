@@ -6,6 +6,7 @@ import ZueBanner from "./components/ZueBanner/ZueBanner";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
 import contributions from "./data/contributions.json";
+import externalContributions from "./data/external_contributions.json";
 import people from "./data/people.json";
 
 import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
@@ -26,7 +27,7 @@ function App() {
   const routes = [
     {
       to: "/contributions",
-      component: <Contributions repos={contributions}/>,
+      component: <Contributions repos={contributions} externalRepos={externalContributions}/>,
       display: "Contributions"
     },
     {

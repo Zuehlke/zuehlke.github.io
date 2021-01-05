@@ -1,6 +1,6 @@
 # Env var names
-ENV_GITHUB_PAT = "INPUT_GITHUB_PAT"
-ENV_DATA_DIR = "INPUT_DATA_DIR"
+ENV_GITHUB_PAT = "GITHUB_PAT"
+ENV_OUTPUT_DATA_DIR = "OUTPUT_DATA_DIR"
 
 # API and rate limits
 API_REQUEST_DELAY_SEC = 1
@@ -10,4 +10,5 @@ MAX_RETRIES = 0
 
 # Files
 CONTRIBUTIONS_FILENAME = "contributions.json"
+EXTERNAL_CONTRIBUTIONS_FILENAME = "external_contributions.json"
 PEOPLE_FILENAME = "people.json"

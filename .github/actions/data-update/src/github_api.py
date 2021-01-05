@@ -105,6 +105,20 @@ class GitHubApi:
         url = f"{BASE_URL}/orgs/{ORG}/repos"
         return self.fetch_all_pages(url, flatten=True, query_params={"per_page": 100})
 
+    def _get_repo(self, owner, repo):
+        """
+        Fetch repository identified by owner and repo name.
+        :param owner: owner of the repository
+        :param repo: name of the repository
+        :return: repo as returned by the GitHub API
+        """
+        url = f"{BASE_URL}/repos/{owner}/{repo}"
+        status, data, _ = self.get(url)
+        if (status == 200):
+            return data
+        else:
+            log.warning("GHUB", f"Unexpected status code {status} for request {url}.")
+
     @staticmethod
     def _parse_link_header(link_header):
         """
@@ -295,7 +309,7 @@ class GitHubApi:
         :param headers: custom headers (None)
         :param query_params: query parameters dictionary (None)
         :param expected_status_codes: response codes for which no retry is necessary ([200, 204])
-        :return: result_list, cursor
+        :return: cursor, result_list
         """
         log.info("GHUB", f"Fetching page '{url}'.")
         _, data, cursor = self.get(url, authenticate, headers, query_params, expected_status_codes)
@@ -344,6 +358,26 @@ class GitHubApi:
         result = []
         for repo in parsed_repos:
             result.append(repo)
+        return result
+
+    def collect_external_contributions(self, external_repos):
+        """
+        Get and aggregate all external repositories. External repositories
+        are manually selected public repositories of non-concealed members
+        of the Zühlke org which do not belong to the Zühlke org.
+        :return: id-indexed dictionary containing all aggregated external repos
+        """
+        log.info("GHUB", "Collecting external repos.")
+        raw_repos = []
+        for input in external_repos:
+            data = self._get_repo(input['owner'], input['repo_name'])
+            if data is not None:
+                raw_repos.append(data)
+        preprocessed_repos = self._preprocess_repos(raw_repos)
+        parsed_repos = json_reducer.reduce(REPOS_SCHEMA, preprocessed_repos)
+        result = []
+        for data in parsed_repos:
+            result.append(data)
         return result
 
     def collect_org_members(self):
