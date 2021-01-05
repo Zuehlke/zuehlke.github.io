@@ -32,4 +32,14 @@
       margin: 0 0 $pad-rem-xs 0;
     }
   }
+
+  & > a > .repo-icons {
+    display: flex;
+    justify-content: flex-end;
+
+    & > .repo-icon {
+      margin-right: $pad-rem-sm;
+      margin-bottom: $pad-rem-sm;
+    }
+  }
 }
