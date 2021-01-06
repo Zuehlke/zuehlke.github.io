@@ -27,12 +27,14 @@ function App() {
   const routes = [
     {
       to: "/contributions",
-      component: <Contributions repos={contributions} externalRepos={externalContributions}/>,
+      component: <Contributions repos={contributions}
+                                externalRepos={externalContributions}
+                                displayedRepos={contributions.concat(externalContributions)}/>,
       display: "Contributions"
     },
     {
       to: "/people",
-      component: <People people={people}/>,
+      component: <People people={people} displayedPeople={people}/>,
       display: "People"
     },
   ] as RouteSpec[];

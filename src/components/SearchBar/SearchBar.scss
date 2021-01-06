@@ -1,0 +1,27 @@
+@import "../../style/global/globals";
+@import "../../style/mixins/styling";
+@import "../../style/mixins/layout";
+@import "../../style/vars/colors";
+@import "../../style/vars/spacing";
+@import "../../style/vars/media";
+
+$height: 3em;
+
+.SearchBar {
+
+  margin: $pad-rem-sm 0 $pad-rem-sm 0;
+
+  & input {
+    @include font-zue-medium;
+    font-size: $fs-base;
+    height: $height;
+    width: 100%;
+    padding: 0 $pad-rem-sm 0 $pad-rem-sm;
+    color: $c-off-black;
+    border: 1px solid $c-primary;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
