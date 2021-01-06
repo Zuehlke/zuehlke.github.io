@@ -6,19 +6,20 @@ import {RepoModel} from "../../common/model";
 
 type Props = {
   repos: RepoModel[]
+  externalRepos: RepoModel[];
 }
 
 const Contributions = (props: Props) => {
 
-  const sortedRepos = props.repos.sort(
-    (a: RepoModel, b: RepoModel) => b.stargazers_count - a.stargazers_count);
-
+  const allReposSortedByStargazersCount = props.repos.concat(props.externalRepos).sort(
+      (a: RepoModel, b: RepoModel) => b.stargazers_count - a.stargazers_count
+  );
   return (
     <div className="Contributions">
       <div className="container">
         <h1 className="title">Contributions</h1>
         <TileGrid>
-          {sortedRepos.map((repo: RepoModel) => <RepoTile key={repo.html_url} repo={repo}/>)}
+          {allReposSortedByStargazersCount.map((repo: RepoModel) => <RepoTile key={repo.html_url} repo={repo}/>)}
         </TileGrid>
       </div>
     </div>

@@ -13,6 +13,7 @@ def run_jobs(context, github_api):
     """
     util.log_rate_limit_status("MAIN", github_api)
     jobs.JobCollectOrgRepos.initialize(context, github_api).run()
+    jobs.JobCollectExternalRepos.initialize(context, github_api).run()
     jobs.JobCollectOrgMembers.initialize(context, github_api).run()
     jobs.JobWriteLastUpdate.initialize(context).run()
     util.log_rate_limit_status("MAIN", github_api)

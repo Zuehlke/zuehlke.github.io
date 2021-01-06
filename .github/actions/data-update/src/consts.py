@@ -10,4 +10,5 @@ MAX_RETRIES = 0
 
 # Files
 CONTRIBUTIONS_FILENAME = "contributions.json"
+EXTERNAL_CONTRIBUTIONS_FILENAME = "external_contributions.json"
 PEOPLE_FILENAME = "people.json"

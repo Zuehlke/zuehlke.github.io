@@ -4,6 +4,7 @@ from datetime import datetime
 import consts
 import log
 import util
+from csv import DictReader
 
 
 class Job:
@@ -91,6 +92,40 @@ class JobCollectOrgRepos(Job):
         """
         repos = self._github_api.collect_org_repos()
         self._write_to_json_file(consts.CONTRIBUTIONS_FILENAME, repos)
+
+class JobCollectExternalRepos(Job):
+
+    def __init__(self, context, github_api):
+        """
+        Private constructor.
+        """
+        super().__init__("COLLECT_EXTERNAL_REPOS", context)
+        self._github_api = github_api
+        self._input = self.read_input()
+
+    def read_input(self):
+        filepath = '../input/external_contributions.csv'
+        with open(filepath, 'r') as read_obj:
+            log.info(self._job_name, f"Reading input from {filepath}")
+            reader = DictReader(read_obj)
+            return list(reader)
+
+    @staticmethod
+    def initialize(context, github_api):
+        """
+        Create instance.
+        :param context: application context
+        :param github_api: GitHub API wrapper
+        :return:
+        """
+        return JobCollectExternalRepos(context, github_api)
+
+    def _execute_task(self):
+        """
+        Override - define tasks of this job.
+        """
+        repos = self._github_api.collect_external_contributions(self._input)
+        self._write_to_json_file(consts.EXTERNAL_CONTRIBUTIONS_FILENAME, repos)
 
 
 class JobCollectOrgMembers(Job):

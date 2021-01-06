@@ -1,0 +1,70 @@
+[
+  {
+    "id": 10269178,
+    "name": "scenarioo",
+    "owner": {
+      "login": "scenarioo",
+      "id": 5864297
+    },
+    "description": "Scenarioo Docu Viewer for Automated Documentation using UI/E2E-Tests",
+    "html_url": "https://github.com/scenarioo/scenarioo",
+    "created_at": "2013-05-24T15:19:52Z",
+    "updated_at": "2020-12-09T16:23:12Z",
+    "stargazers_count": 58,
+    "watchers_count": 58,
+    "forks_count": 19,
+    "fork": false,
+    "language": "Java"
+  },
+  {
+    "id": 12154453,
+    "name": "linus-kitchen",
+    "owner": {
+      "login": "tknerr",
+      "id": 365744
+    },
+    "description": "An Ubuntu-based developer VM for hacking with Chef, Vagrant, Docker & Co",
+    "html_url": "https://github.com/tknerr/linus-kitchen",
+    "created_at": "2013-08-16T08:38:46Z",
+    "updated_at": "2020-10-27T05:51:21Z",
+    "stargazers_count": 15,
+    "watchers_count": 15,
+    "forks_count": 11,
+    "fork": false,
+    "language": "Ruby"
+  },
+  {
+    "id": 39197270,
+    "name": "propcheck",
+    "owner": {
+      "login": "alfert",
+      "id": 1159524
+    },
+    "description": "Property based Testing for Elixir (based upon PropEr)",
+    "html_url": "https://github.com/alfert/propcheck",
+    "created_at": "2015-07-16T13:07:05Z",
+    "updated_at": "2021-01-05T02:24:25Z",
+    "stargazers_count": 267,
+    "watchers_count": 267,
+    "forks_count": 34,
+    "fork": false,
+    "language": "Elixir"
+  },
+  {
+    "id": 19642139,
+    "name": "coverex",
+    "owner": {
+      "login": "alfert",
+      "id": 1159524
+    },
+    "description": "Coverage Reports for Elixir",
+    "html_url": "https://github.com/alfert/coverex",
+    "created_at": "2014-05-10T13:32:48Z",
+    "updated_at": "2020-10-10T17:37:01Z",
+    "stargazers_count": 95,
+    "watchers_count": 95,
+    "forks_count": 26,
+    "fork": false,
+    "language": "JavaScript"
+  }
+]
