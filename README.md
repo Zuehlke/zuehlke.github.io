@@ -124,6 +124,7 @@ most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually
 The script can be configured in code by editing `src/consts.py`. The following parameters are available:
 - `ENV_GITHUB_PAT`: Name of the environment variable which provides the GitHub PAT
 - `ENV_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
+- `ENV_EXTERNAL_CONTRIBUTIONS_FILE`: Name of the environment variable which provides the full path to the csv file with external contributions (name and repo) which should be shown as part of Zuehlkes contributions but are not owned by the Zuehlke org
 - `API_REQUEST_DELAY_SEC`: Number of seconds to wait before every API request, to avoid flooding the API
 - `RATE_LIMIT_BUFFER_SEC`: Number of seconds to wait after a rate limit is supposed to be lifted, to avoid overlap
 - `RATE_LIMIT_MAX_AGE_SEC`: Maximum number of seconds since the rate limit update before the current rate limit status
