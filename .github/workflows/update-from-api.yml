@@ -24,6 +24,7 @@ jobs:
         with:
           github_pat: ${{ secrets.PAT_PUBLIC }}
           data_dir: /github/workspace/src/data
+          external_contributions_file: /github/workspace/input/external_contributions.csv
 
       # Commit and push any changes matching the specified pattern. Commit to the checked out branch.
       # The automation action will always change the last_update file. Hence, this step always results
