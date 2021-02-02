@@ -7,6 +7,9 @@ inputs:
   data_dir:
     description: 'Absolute path to the data output directory within the Docker container'
     required: true
+  external_contributions_file:
+    description: 'Name of the environment variable which provides the full path to the csv file with external contributions (name and repo) which should be shown as part of Zuehlkes contributions but are not owned by the Zuehlke org'
+    required: true
 runs:
   # Run inside a Docker container (image specified by the local Dockerfile), Python doesn't run
   # natively on GitHub Actions.
