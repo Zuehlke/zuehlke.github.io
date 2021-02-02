@@ -10,27 +10,38 @@ jobs:
     runs-on: ubuntu-latest
     name: Update data from API
     steps:
-      # Check out the specified branch of the current repository.
+      # Check out the specified branch of the current repository into a location which is bind-mounted to `/github/workspace/` in the Docker container.
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: 'develop'
           token: ${{ secrets.PAT_REPO }}
 
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.x'
+          # Optional - x64 or x86 architecture, defaults to x64
+          architecture: 'x64'
+      # You can test your matrix by printing the current Python version
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
       # Execute custom action which fetches data from the GitHub API and updates the data files
       # in the checked-out repository.
-      - name: Update data from API
-        uses: ./.github/actions/data-update
-        with:
-          github_pat: ${{ secrets.PAT_PUBLIC }}
-          data_dir: /github/workspace/src/data
-          external_contributions_file: /github/workspace/input/external_contributions.csv
+#      - name: Update data from API
+#        uses: ./.github/actions/data-update
+#        with:
+#          github_pat: ${{ secrets.PAT_PUBLIC }}
+#          data_dir: /github/workspace/src/data
+#          external_contributions_file: /github/workspace/input/external_contributions.csv
 
       # Commit and push any changes matching the specified pattern. Commit to the checked out branch.
       # The automation action will always change the last_update file. Hence, this step always results
       # in a commit.
-      - name: Commit & push
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "[AUTO] Update data."
-          file_pattern: "src/data/*.json src/data/last_update"
+#      - name: Commit & push
+#        uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: "[AUTO] Update data."
+#          file_pattern: "src/data/*.json src/data/last_update"
