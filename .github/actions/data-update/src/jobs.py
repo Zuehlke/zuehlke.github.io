@@ -104,7 +104,7 @@ class JobCollectExternalRepos(Job):
         self._input = self.read_input()
 
     def read_input(self):
-        filepath = self._context.get_external_contributions_file()
+        filepath = '../input/external_contributions.csv'
         with open(filepath, 'r') as read_obj:
             log.info(self._job_name, f"Reading input from {filepath}")
             reader = DictReader(read_obj)
