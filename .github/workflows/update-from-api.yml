@@ -28,6 +28,7 @@ jobs:
       - name: Update data from API
         env:
           GITHUB_PAT: ${{ secrets.PAT_PUBLIC }}
+          EXTERNAL_CONTRIBUTIONS_FILE: .github/actions/data-update/input/external_contributions.csv
           OUTPUT_DATA_DIR: ./src/data
         run: |
           python .github/actions/data-update/src/main.py

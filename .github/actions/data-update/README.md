@@ -6,7 +6,7 @@
 
 ### Example Usage
 ```
-GITHUB_PAT=<PAT_PUBLIC> OUTPUT_DATA_DIR=<some_dir> python3 src/main.py
+GITHUB_PAT=<PAT_PUBLIC> OUTPUT_DATA_DIR=<some_dir> EXTERNAL_CONTRIBUTIONS_FILE=<path_to_external_contributions.csv> python3 src/main.py
 ```
 
 ## JSON Reducer DSL
