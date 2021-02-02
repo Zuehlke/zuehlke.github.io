@@ -22,7 +22,7 @@ The `master` branch contains the last build of the old application, which is no 
 
 **Automation**
 - In `.github/actions/data-update`, run `pip install -r requiremets.txt`, preferably in a `virtualenv` environment
-- To execute the script, run `INPUT_GITHUB_PAT=<PAT_PUBLIC> INPUT_DATA_DIR=<some_dir> python src/main.py`
+- To execute the script, run `GITHUB_PAT=<PAT_PUBLIC> OUTPUT_DATA_DIR=<some_dir> python src/main.py`
 
 where
 
@@ -82,27 +82,38 @@ most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually
 - `[schedule] Update from API` workflow, defined by
   [.github/workflows/update-from-api.yml](.github/workflows/update-from-api.yml) (file contains additional
   documentation).
-- A scheduled workflow which runs once a day.
+- A scheduled workflow which runs once a day and retrieves data from the GitHub API and outputs the result into specified files.
   - Note: Scheduled execution is often significantly delayed (can be 30 minutes or more).
   - Schedule is defined as a cron expression in the `update-from-api.yml` file.
-- Can also be manually triggered in the repository's _Actions_ tab. Make sure to select the branch with the most
-  up-to-date workflow description (i.e. `update-from-api.yml` file) (usually the default branch, `develop`).
+- Implemented as python script, the entry point is [main.py](.github/actions/data-update/src/main.py)
+- The script can be configured in code by editing `src/consts.py`. The following parameters are available:
+  - `ENV_GITHUB_PAT`: Name of the environment variable which provides the GitHub PAT
+  - `ENV_OUTPUT_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
+  - `API_REQUEST_DELAY_SEC`: Number of seconds to wait before every API request, to avoid flooding the API
+  - `RATE_LIMIT_BUFFER_SEC`: Number of seconds to wait after a rate limit is supposed to be lifted, to avoid overlap
+  - `RATE_LIMIT_MAX_AGE_SEC`: Maximum number of seconds since the rate limit update before the current rate limit status information is
+    considered stale and has to be updated.
+  - `MAX_RETRIES`: The maximum number of retries when a request fails (also applies for failed requests due to rate limitation). After 
+    that, the execution fails. 
+    - **Warning**: This value should be set to `0` when deploying to platforms with usage-based pricing (e.g. GitHub Actions), since 
+      waiting for a rate limit to be lifted will result in additional compute time, which can be expensive.
+  - `CONTRIBUTIONS_FILENAME`: Name of the contributions output file in the data output directory (file will be created or overwritten).
+  - `EXTERNAL_CONTRIBUTIONS_FILENAME`: Name of the external contributions output file in the data output directory (file will be
+    created or overwritten).
+  - `PEOPLE_FILENAME`: Name of the people output file in the data output directory (file will be created or overwritten). 
+  - Can also be manually triggered in the repository's _Actions_ tab. Make sure to select the branch with the most up-to-date workflow 
+    description (i.e. `update-from-api.yml` file) (usually the default branch, `develop`).
 - When triggered by schedule, the relevant workflow definition is the one present on the default branch
   (here, `develop`).
 - Fetches the latest people and contributors data from API and creates an auto-commit into a working branch.
-- API access and data update is handled by a custom GitHub action (see _Custom Action_ below).
+- API access and data update is handled by the [update workflow](.github/workflows/update-from-api.yml).
 - Working branch:
   - Is specified in the `with.ref` field for the workflow's `Checkout` step.
   - Defines both the source branch for the custom action source code, and the target branch for the automated commit.
   - Is currently set to `develop`. Hence, the automated push will also trigger a re-build of the application into the
     `gh-pages` branch.
-- The custom action step takes two inputs: `github_pat` and `data_dir`.
-  - Both are automatically passed as environment variables to the Docker container running the script
-  - Environment variables coming from inputs follow the naming pattern `INPUT_<INPUT_NAME>`. Hence, these two inputs
-    will be become environment variables called `INPUT_GITHUB_PAT` and `INPUT_DATA_DIR` respectively, from the point
-    of view of the custom action Python script.
-  - The `data_dir` input is set to `/github/workspace/src/data`. The `actions/checkout@2` action clones the
-    current repository into a location which is bind-mounted to `/github/workspace/` in the Docker container.
+- The update workflow relies on two environment variables: `GITHUB_PAT` and `OUTPUT_DATA_DIR`.
+  - The `OUTPUT_DATA_DIR` input is set to [./src/data](./src/data). This is the folder where the workflow writes the updated data to. It is also the location where the frontend reads the displayed data from.
 - This workflow definitions requires two separate GitHub PATs to be defined in the repository's Secrets:
   - `PAT_PUBLIC`: Has public-only access. Using this PAT for the custom action ensures that API calls won't return
     private repositories or concealed organization members.
@@ -112,30 +123,6 @@ most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually
     fact that a push executed with `secrets.GITHUB_TOKEN` does not trigger any subsequent actions (e.g. building the)
     web application, nor does it count as "repository activity", which is required to avoid scheduled workflows getting
     automatically deactivated.
-
-### Data Update Automation (Custom Action)
-- A custom GitHub action which retrieves data from the GitHub API and outputs the result into specified files.
-- Located in `.github/actions/data-update`.
-- Implemented as dockerized python script (Python doesn't run natively on GitHub Actions).
-- Inputs: see _Workflow_ documentation above.
-- Entry point: `main.py`.
-- Fetches all public repositories and non-concealed members of the `Zuehlke` GitHub organization.
-
-The script can be configured in code by editing `src/consts.py`. The following parameters are available:
-- `ENV_GITHUB_PAT`: Name of the environment variable which provides the GitHub PAT
-- `ENV_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
-- `ENV_EXTERNAL_CONTRIBUTIONS_FILE`: Name of the environment variable which provides the full path to the csv file with external contributions (name and repo) which should be shown as part of Zuehlkes contributions but are not owned by the Zuehlke org
-- `API_REQUEST_DELAY_SEC`: Number of seconds to wait before every API request, to avoid flooding the API
-- `RATE_LIMIT_BUFFER_SEC`: Number of seconds to wait after a rate limit is supposed to be lifted, to avoid overlap
-- `RATE_LIMIT_MAX_AGE_SEC`: Maximum number of seconds since the rate limit update before the current rate limit status
-  information is considered stale and has to be updated.
-- `MAX_RETRIES`: The maximum number of retries when a request fails (also applies for failed requests due to rate
-  limitation). After that, the execution fails. **Warning**: This value should be set to `0` when deploying to
-  platforms with usage-based pricing (e.g. GitHub Actions), since waiting for a rate limit to be lifted will result in
-  additional compute time, which can be expensive.
-- `CONTRIBUTIONS_FILENAME`: Name of the contributions output file in the data output directory (file will be created or
-  overwritten).
-- `PEOPLE_FILENAME`: Name of the people output file in the data output directory (file will be created or overwritten).
 
 ### Resources
 - **Email account:**
@@ -189,13 +176,6 @@ automatically executes the script once per day. However, this approach was disca
 - Full-text search, filters, sorting [Issue #39](https://github.com/Zuehlke/zuehlke.github.io/issues/39)
 
 ### Automation
-- Migrate to JavaScript
-  - We currently spend about 1 minute per run on a Docker build
-  - The regular GitHub Action environment provides everything we need, except for a Python runtime: if we use
-    JavaScript, we don't need Docker anymore.
-  - There is no inherent reason to implement the automation in Python, rather than JavaScript.
-  - When not using Docker, make sure to commit all `node_modules` - there is no `npm install` step. Be careful not to
-    accidentally `.gitignore` some file or directory in the `node_modules` (e.g. some `dist` dir).
 - Implement commit / push logic, rather than using a third-party action (for security and to reduce dependencies)
   - Most of the logic was already implemented in Python, and removed during the migration to GitHub Actions, in commit 
     [6315e486b3cceafd4918c242819b4727bec0b1ff](https://github.com/SilasBerger/zuehlke.github.io/commit/6315e486b3cceafd4918c242819b4727bec0b1ff)
