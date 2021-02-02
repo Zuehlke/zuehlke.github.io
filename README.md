@@ -22,7 +22,8 @@ The `master` branch contains the last build of the old application, which is no 
 
 **Automation**
 - In `.github/actions/data-update`, run `pip install -r requiremets.txt`, preferably in a `virtualenv` environment
-- To execute the script, run `GITHUB_PAT=<PAT_PUBLIC> OUTPUT_DATA_DIR=<some_dir> python src/main.py`
+- To execute the script, run 
+  `GITHUB_PAT=<PAT_PUBLIC> OUTPUT_DATA_DIR=<some_dir> EXTERNAL_CONTRIBUTIONS_FILE=<path_to_external_contributions.csv> python src/main.py`
 
 where
 
@@ -89,6 +90,8 @@ most up-to-date workflow description (i.e. `build-and-deploy.yml` file) (usually
 - The script can be configured in code by editing `src/consts.py`. The following parameters are available:
   - `ENV_GITHUB_PAT`: Name of the environment variable which provides the GitHub PAT
   - `ENV_OUTPUT_DATA_DIR`: Name of the environment variable which provides the full path to the data output directory
+  - `ENV_EXTERNAL_CONTRIBUTIONS_FILE`: Name of the environment variable which provides the full path to the csv file with external 
+    contributions (name and repo)
   - `API_REQUEST_DELAY_SEC`: Number of seconds to wait before every API request, to avoid flooding the API
   - `RATE_LIMIT_BUFFER_SEC`: Number of seconds to wait after a rate limit is supposed to be lifted, to avoid overlap
   - `RATE_LIMIT_MAX_AGE_SEC`: Maximum number of seconds since the rate limit update before the current rate limit status information is
