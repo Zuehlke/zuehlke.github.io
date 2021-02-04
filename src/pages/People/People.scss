@@ -10,5 +10,13 @@
     & > .title {
       @include page-title-margin;
     }
+
+    & > .search-bar-container {
+      @include _flex(row, center, flex-end);
+
+      & > .search-bar {
+        width: 300px;
+      }
+    }
   }
 }
