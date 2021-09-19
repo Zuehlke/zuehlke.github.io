@@ -213,7 +213,7 @@
     "description": "Z\u00fchlke Github Page",
     "html_url": "https://github.com/Zuehlke/zuehlke.github.io",
     "created_at": "2016-01-15T14:58:44Z",
-    "updated_at": "2021-09-16T00:38:32Z",
+    "updated_at": "2021-09-17T00:41:01Z",
     "stargazers_count": 5,
     "watchers_count": 5,
     "forks_count": 2,
@@ -247,9 +247,9 @@
     "description": "Distributed Planning Poker",
     "html_url": "https://github.com/Zuehlke/poinz",
     "created_at": "2016-02-25T14:08:35Z",
-    "updated_at": "2021-09-04T08:14:14Z",
-    "stargazers_count": 61,
-    "watchers_count": 61,
+    "updated_at": "2021-09-17T16:48:35Z",
+    "stargazers_count": 62,
+    "watchers_count": 62,
     "forks_count": 40,
     "fork": false,
     "language": "JavaScript"
@@ -1086,5 +1086,22 @@
     "forks_count": 1,
     "fork": false,
     "language": "CMake"
+  },
+  {
+    "id": 406247752,
+    "name": "WebSecurityWorkshop",
+    "owner": {
+      "login": "Zuehlke",
+      "id": 10219568
+    },
+    "description": null,
+    "html_url": "https://github.com/Zuehlke/WebSecurityWorkshop",
+    "created_at": "2021-09-14T06:16:15Z",
+    "updated_at": "2021-09-17T07:46:52Z",
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 0,
+    "fork": false,
+    "language": "HTML"
   }
 ]
