@@ -808,9 +808,9 @@
     "description": "Get rid of text formatting in the clipboard",
     "html_url": "https://github.com/Zuehlke/Clipboard_Cleaner",
     "created_at": "2018-12-10T13:01:59Z",
-    "updated_at": "2021-11-27T11:16:42Z",
-    "stargazers_count": 12,
-    "watchers_count": 12,
+    "updated_at": "2022-01-15T00:51:41Z",
+    "stargazers_count": 13,
+    "watchers_count": 13,
     "forks_count": 0,
     "fork": false,
     "language": "C#"
