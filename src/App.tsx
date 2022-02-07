@@ -1,19 +1,22 @@
 import React, {useRef, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import './App.scss';
+import initFaLibrary from './common/faLibrary';
+
 import Hero from "./components/Hero/Hero";
 import ZueBanner from "./components/ZueBanner/ZueBanner";
 import Navigation from "./components/Navigation/Navigation";
 import Footer from "./components/Footer/Footer";
+import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import contributions from "./data/contributions.json";
 import externalContributions from "./data/external_contributions.json";
 import people from "./data/people.json";
-
-import SidebarNavigation from "./components/SideNavigation/SidebarNavigation";
 import {MetaLinkSpec, RouteSpec} from "./common/types";
 import OverlayStateContext, {OverlayState} from "./context/overlayState";
 import Contributions from "./pages/Contributions/Contributions";
 import People from "./pages/People/People";
+import './App.scss';
+
+initFaLibrary();// Font Awesome library
 
 function App() {
 

@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import initFaLibrary from './common/faLibrary';
-
-// Font Awesome library
-initFaLibrary();
 
 ReactDOM.render(
   <React.StrictMode>
