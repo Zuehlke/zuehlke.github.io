@@ -29,7 +29,7 @@ function App() {
             to: "/contributions",
             component: <Contributions repos={contributions}
                                       externalRepos={externalContributions}
-                                      displayedRepos={contributions.concat(externalContributions)}/>,
+            />,
             display: "Contributions"
         },
         {
@@ -85,7 +85,8 @@ function App() {
                     { /* Main routable page content */}
                     <div ref={pageContentRef}>
                         <Routes>
-                            {routes.map(route => <Route key={route.display} path={route.to} element={route.component}/>)}
+                            {routes.map(route => <Route key={route.display} path={route.to}
+                                                        element={route.component}/>)}
                             <Route path="/" element={defaultRoute.component}/>
                         </Routes>
                     </div>

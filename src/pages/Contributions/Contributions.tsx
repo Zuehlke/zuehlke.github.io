@@ -8,7 +8,6 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 type Props = {
     repos: RepoModel[]
     externalRepos: RepoModel[];
-    displayedRepos: RepoModel[];
 }
 
 const byText = (text: string) => (repo: RepoModel) => text ? repo.name.toUpperCase().includes(text.toUpperCase())
@@ -18,7 +17,7 @@ const byStargazersCount = (a: RepoModel, b: RepoModel) => b.stargazers_count - a
 
 const Contributions = (props: Props) => {
 
-    const [displayedRepos, setDisplayedRepos] = useState(props.displayedRepos);
+    const [displayedRepos, setDisplayedRepos] = useState<RepoModel[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
@@ -27,7 +26,7 @@ const Contributions = (props: Props) => {
                 .filter(byText(searchQuery))
                 .sort(byStargazersCount)
         );
-    }, [props.displayedRepos, searchQuery]);
+    }, [props.repos, props.externalRepos, searchQuery]);
 
     return (
         <div className="Contributions">
