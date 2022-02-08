@@ -978,9 +978,9 @@
     "description": "Basic skeleton for an Ubuntu 20.04 LTS Developer VM set up via Ansible",
     "html_url": "https://github.com/Zuehlke/linux-developer-vm-with-ansible",
     "created_at": "2020-04-16T08:56:41Z",
-    "updated_at": "2022-01-28T09:35:23Z",
-    "stargazers_count": 3,
-    "watchers_count": 3,
+    "updated_at": "2022-02-07T12:02:09Z",
+    "stargazers_count": 4,
+    "watchers_count": 4,
     "forks_count": 4,
     "fork": false,
     "language": "Python"
