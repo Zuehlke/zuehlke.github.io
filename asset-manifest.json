@@ -1,25 +1,35 @@
 {
   "files": {
-    "main.css": "/static/css/main.7a7e1d71.chunk.css",
-    "main.js": "/static/js/main.d4acddce.chunk.js",
-    "main.js.map": "/static/js/main.d4acddce.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.b3e352a6.js",
-    "runtime-main.js.map": "/static/js/runtime-main.b3e352a6.js.map",
-    "static/js/2.b4d9de2e.chunk.js": "/static/js/2.b4d9de2e.chunk.js",
-    "static/js/2.b4d9de2e.chunk.js.map": "/static/js/2.b4d9de2e.chunk.js.map",
-    "static/js/3.ee169848.chunk.js": "/static/js/3.ee169848.chunk.js",
-    "static/js/3.ee169848.chunk.js.map": "/static/js/3.ee169848.chunk.js.map",
+    "main.css": "/static/css/main.c0eac885.css",
+    "main.js": "/static/js/main.986b5de6.js",
+    "static/media/header_code.jpg": "/static/media/header_code.3b8810d13ff0af89f275.jpg",
+    "static/media/aazumiotp_30.12.13-webfont.svg": "/static/media/aazumiotp_30.12.13-webfont.8947431afe81d574cacf.svg",
+    "static/media/aazuriotps_30.12.13-webfont.svg": "/static/media/aazuriotps_30.12.13-webfont.fcfa38ae1dc684e93a0e.svg",
+    "static/media/aazumotp_30.12.13-webfont.svg": "/static/media/aazumotp_30.12.13-webfont.d23234019f202e2273de.svg",
+    "static/media/aazuotps_30.12.13-webfont.svg": "/static/media/aazuotps_30.12.13-webfont.97512cf3a99762bcc8dc.svg",
+    "static/media/aazuriotps_30.12.13-webfont.ttf": "/static/media/aazuriotps_30.12.13-webfont.60ad14d28d4111348aa8.ttf",
+    "static/media/aazumiotp_30.12.13-webfont.ttf": "/static/media/aazumiotp_30.12.13-webfont.0168b223e0994f297e41.ttf",
+    "static/media/aazuotps_30.12.13-webfont.ttf": "/static/media/aazuotps_30.12.13-webfont.ac365a595501a5724483.ttf",
+    "static/media/aazumotp_30.12.13-webfont.ttf": "/static/media/aazumotp_30.12.13-webfont.90a4598d23881fcaca07.ttf",
+    "static/media/aazuriotps_30.12.13-webfont.woff": "/static/media/aazuriotps_30.12.13-webfont.1d1b62b139cceda67820.woff",
+    "static/media/aazumiotp_30.12.13-webfont.woff": "/static/media/aazumiotp_30.12.13-webfont.0f28d0ce379aa2b7b656.woff",
+    "static/media/aazuotps_30.12.13-webfont.woff": "/static/media/aazuotps_30.12.13-webfont.6123903722377e559f86.woff",
+    "static/media/aazuriotps_30.12.13-webfont.eot": "/static/media/aazuriotps_30.12.13-webfont.ef939aea39a5315e066c.eot",
+    "static/media/aazumotp_30.12.13-webfont.woff": "/static/media/aazumotp_30.12.13-webfont.ca6da5004d9b72340cc2.woff",
+    "static/media/aazumiotp_30.12.13-webfont.eot": "/static/media/aazumiotp_30.12.13-webfont.d3b7b1d1d32d38567aa3.eot",
+    "static/media/aazuriotps_30.12.13-webfont.woff2": "/static/media/aazuriotps_30.12.13-webfont.059831f57a09dd466d69.woff2",
+    "static/media/aazuotps_30.12.13-webfont.eot": "/static/media/aazuotps_30.12.13-webfont.969ecaf46c85ea2a4315.eot",
+    "static/media/aazumotp_30.12.13-webfont.eot": "/static/media/aazumotp_30.12.13-webfont.e971dd7fba7bcc749689.eot",
+    "static/media/aazumiotp_30.12.13-webfont.woff2": "/static/media/aazumiotp_30.12.13-webfont.e5bac024d37156520dd7.woff2",
+    "static/media/aazuotps_30.12.13-webfont.woff2": "/static/media/aazuotps_30.12.13-webfont.b65bb43f5e5a4072a2b6.woff2",
+    "static/media/aazumotp_30.12.13-webfont.woff2": "/static/media/aazumotp_30.12.13-webfont.73d1807db15809117d16.woff2",
+    "static/media/logo-zuehlke-big.png": "/static/media/logo-zuehlke-big.558e71de265e53e8cb13.png",
     "index.html": "/index.html",
-    "static/css/main.7a7e1d71.chunk.css.map": "/static/css/main.7a7e1d71.chunk.css.map",
-    "static/js/2.b4d9de2e.chunk.js.LICENSE.txt": "/static/js/2.b4d9de2e.chunk.js.LICENSE.txt",
-    "static/media/index.scss": "/static/media/aazuriotps_30.12.13-webfont.fcfa38ae.svg",
-    "static/media/Hero.scss": "/static/media/header_code.3b8810d1.jpg",
-    "static/media/Navigation.scss": "/static/media/logo-zuehlke-big.558e71de.png"
+    "main.c0eac885.css.map": "/static/css/main.c0eac885.css.map",
+    "main.986b5de6.js.map": "/static/js/main.986b5de6.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.b3e352a6.js",
-    "static/js/2.b4d9de2e.chunk.js",
-    "static/css/main.7a7e1d71.chunk.css",
-    "static/js/main.d4acddce.chunk.js"
+    "static/css/main.c0eac885.css",
+    "static/js/main.986b5de6.js"
   ]
 }
