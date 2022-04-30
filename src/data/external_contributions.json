@@ -26,9 +26,9 @@
     "description": "An Ubuntu-based developer VM for hacking with Chef, Vagrant, Docker & Co",
     "html_url": "https://github.com/tknerr/linus-kitchen",
     "created_at": "2013-08-16T08:38:46Z",
-    "updated_at": "2020-10-27T05:51:21Z",
-    "stargazers_count": 15,
-    "watchers_count": 15,
+    "updated_at": "2022-04-29T14:10:25Z",
+    "stargazers_count": 16,
+    "watchers_count": 16,
     "forks_count": 10,
     "fork": false,
     "language": "Ruby"
