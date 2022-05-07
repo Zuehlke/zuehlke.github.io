@@ -247,9 +247,9 @@
     "description": "Distributed Planning Poker",
     "html_url": "https://github.com/Zuehlke/poinz",
     "created_at": "2016-02-25T14:08:35Z",
-    "updated_at": "2022-04-22T02:14:05Z",
-    "stargazers_count": 89,
-    "watchers_count": 89,
+    "updated_at": "2022-05-06T15:11:31Z",
+    "stargazers_count": 90,
+    "watchers_count": 90,
     "forks_count": 50,
     "fork": false,
     "language": "JavaScript"
@@ -1100,7 +1100,7 @@
     "updated_at": "2022-03-07T08:35:00Z",
     "stargazers_count": 2,
     "watchers_count": 2,
-    "forks_count": 1,
+    "forks_count": 2,
     "fork": false,
     "language": "Shell"
   },
