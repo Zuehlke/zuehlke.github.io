@@ -247,9 +247,9 @@
     "description": "Distributed Planning Poker",
     "html_url": "https://github.com/Zuehlke/poinz",
     "created_at": "2016-02-25T14:08:35Z",
-    "updated_at": "2022-07-17T16:45:51Z",
-    "stargazers_count": 99,
-    "watchers_count": 99,
+    "updated_at": "2022-08-05T21:22:29Z",
+    "stargazers_count": 100,
+    "watchers_count": 100,
     "forks_count": 51,
     "fork": false,
     "language": "JavaScript"
@@ -485,9 +485,9 @@
     "description": "Open Source Book about practicaly proven concepts, best practices, cultural philosophies and great ideas that we use in our daily work in projects at Z\u00fchlke",
     "html_url": "https://github.com/Zuehlke/machines-code-people",
     "created_at": "2017-01-04T11:30:47Z",
-    "updated_at": "2022-07-02T00:40:55Z",
-    "stargazers_count": 32,
-    "watchers_count": 32,
+    "updated_at": "2022-08-05T00:46:19Z",
+    "stargazers_count": 33,
+    "watchers_count": 33,
     "forks_count": 37,
     "fork": false,
     "language": "HTML"
@@ -1032,7 +1032,7 @@
     "updated_at": "2022-04-27T01:18:18Z",
     "stargazers_count": 2,
     "watchers_count": 2,
-    "forks_count": 0,
+    "forks_count": 1,
     "fork": false,
     "language": null
   },
@@ -1199,11 +1199,11 @@
     "description": "This repo contains items required to hold the docker workshop",
     "html_url": "https://github.com/Zuehlke/gdc-docker-workshop",
     "created_at": "2022-08-01T08:59:06Z",
-    "updated_at": "2022-08-02T15:48:04Z",
+    "updated_at": "2022-08-05T13:43:25Z",
     "stargazers_count": 0,
     "watchers_count": 0,
     "forks_count": 0,
     "fork": false,
-    "language": null
+    "language": "Java"
   }
 ]
