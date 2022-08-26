@@ -1216,11 +1216,11 @@
     "description": "Guides for easy accessibility review of a software/website including best practices and useful tools.",
     "html_url": "https://github.com/Zuehlke/accessibility-guide",
     "created_at": "2022-08-24T11:01:46Z",
-    "updated_at": "2022-08-24T14:21:29Z",
+    "updated_at": "2022-08-25T12:57:01Z",
     "stargazers_count": 1,
     "watchers_count": 1,
     "forks_count": 0,
     "fork": false,
-    "language": null
+    "language": "JavaScript"
   }
 ]
