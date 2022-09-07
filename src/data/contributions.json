@@ -1199,12 +1199,12 @@
     "description": "This repo contains items required to hold the docker workshop",
     "html_url": "https://github.com/Zuehlke/gdc-docker-workshop",
     "created_at": "2022-08-01T08:59:06Z",
-    "updated_at": "2022-08-05T13:43:25Z",
+    "updated_at": "2022-09-06T03:53:40Z",
     "stargazers_count": 0,
     "watchers_count": 0,
     "forks_count": 0,
     "fork": false,
-    "language": "Java"
+    "language": "TypeScript"
   },
   {
     "id": 528384107,
