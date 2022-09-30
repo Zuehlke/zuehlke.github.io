@@ -1173,6 +1173,23 @@
     "language": "C#"
   },
   {
+    "id": 482774698,
+    "name": "zuehlke-reveal-package",
+    "owner": {
+      "login": "Zuehlke",
+      "id": 10219568
+    },
+    "description": null,
+    "html_url": "https://github.com/Zuehlke/zuehlke-reveal-package",
+    "created_at": "2022-04-18T08:37:51Z",
+    "updated_at": "2022-09-29T14:49:54Z",
+    "stargazers_count": 1,
+    "watchers_count": 1,
+    "forks_count": 3,
+    "fork": false,
+    "language": "CSS"
+  },
+  {
     "id": 491485674,
     "name": "grow-together",
     "owner": {
@@ -1236,6 +1253,23 @@
     "updated_at": "2022-09-18T19:21:04Z",
     "stargazers_count": 2,
     "watchers_count": 2,
+    "forks_count": 0,
+    "fork": false,
+    "language": null
+  },
+  {
+    "id": 543002816,
+    "name": "clean-code-workshop-cpp",
+    "owner": {
+      "login": "Zuehlke",
+      "id": 10219568
+    },
+    "description": null,
+    "html_url": "https://github.com/Zuehlke/clean-code-workshop-cpp",
+    "created_at": "2022-09-29T08:22:44Z",
+    "updated_at": "2022-09-29T08:22:44Z",
+    "stargazers_count": 0,
+    "watchers_count": 0,
     "forks_count": 0,
     "fork": false,
     "language": null
