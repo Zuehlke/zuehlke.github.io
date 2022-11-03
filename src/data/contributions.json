@@ -250,7 +250,7 @@
     "updated_at": "2022-09-12T12:52:29Z",
     "stargazers_count": 101,
     "watchers_count": 101,
-    "forks_count": 55,
+    "forks_count": 54,
     "fork": false,
     "language": "JavaScript"
   },
@@ -1097,9 +1097,9 @@
     "description": null,
     "html_url": "https://github.com/Zuehlke/WebSecurityWorkshop",
     "created_at": "2021-09-14T06:16:15Z",
-    "updated_at": "2022-10-25T12:08:09Z",
-    "stargazers_count": 4,
-    "watchers_count": 4,
+    "updated_at": "2022-11-02T09:50:38Z",
+    "stargazers_count": 5,
+    "watchers_count": 5,
     "forks_count": 2,
     "fork": false,
     "language": "Shell"
