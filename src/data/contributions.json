@@ -493,23 +493,6 @@
     "language": "HTML"
   },
   {
-    "id": 78522113,
-    "name": "fhnw-mobile-workshop",
-    "owner": {
-      "login": "Zuehlke",
-      "id": 10219568
-    },
-    "description": "FHNW Workshop 6 (WS6C) \u2013 Mobile App Development",
-    "html_url": "https://github.com/Zuehlke/fhnw-mobile-workshop",
-    "created_at": "2017-01-10T10:17:44Z",
-    "updated_at": "2020-05-18T15:47:04Z",
-    "stargazers_count": 15,
-    "watchers_count": 15,
-    "forks_count": 12,
-    "fork": false,
-    "language": "Swift"
-  },
-  {
     "id": 79461224,
     "name": "springboot-sec-tutor",
     "owner": {
@@ -1131,9 +1114,9 @@
     "description": "ConfZ is a configuration management library for Python based on pydantic.",
     "html_url": "https://github.com/Zuehlke/ConfZ",
     "created_at": "2021-10-18T05:58:24Z",
-    "updated_at": "2023-02-13T15:01:32Z",
-    "stargazers_count": 177,
-    "watchers_count": 177,
+    "updated_at": "2023-02-14T01:09:37Z",
+    "stargazers_count": 178,
+    "watchers_count": 178,
     "forks_count": 9,
     "fork": false,
     "language": "Python"
@@ -1182,9 +1165,9 @@
     "description": "Z\u00fchlke branded reveal.js slidedeck library",
     "html_url": "https://github.com/Zuehlke/zuehlke-reveal-package",
     "created_at": "2022-04-18T08:37:51Z",
-    "updated_at": "2023-01-17T08:09:29Z",
-    "stargazers_count": 7,
-    "watchers_count": 7,
+    "updated_at": "2023-02-14T19:26:43Z",
+    "stargazers_count": 8,
+    "watchers_count": 8,
     "forks_count": 4,
     "fork": false,
     "language": "CSS"
