@@ -1,22 +1,5 @@
 [
   {
-    "id": 32076730,
-    "name": "quickstarts-angular",
-    "owner": {
-      "login": "Zuehlke",
-      "id": 10219568
-    },
-    "description": "Collection of best practice and specific solutions within the context of Angularjs applications for educational purposes.",
-    "html_url": "https://github.com/Zuehlke/quickstarts-angular",
-    "created_at": "2015-03-12T12:51:11Z",
-    "updated_at": "2018-10-22T15:04:39Z",
-    "stargazers_count": 1,
-    "watchers_count": 1,
-    "forks_count": 1,
-    "fork": false,
-    "language": "JavaScript"
-  },
-  {
     "id": 34514050,
     "name": "cookbook-windev",
     "owner": {
