@@ -233,7 +233,7 @@
     "updated_at": "2023-03-30T19:10:32Z",
     "stargazers_count": 112,
     "watchers_count": 112,
-    "forks_count": 57,
+    "forks_count": 58,
     "fork": false,
     "language": "JavaScript"
   },
@@ -1046,12 +1046,12 @@
     "description": null,
     "html_url": "https://github.com/Zuehlke/cpp_example_project",
     "created_at": "2021-07-02T13:28:47Z",
-    "updated_at": "2022-05-05T19:01:25Z",
+    "updated_at": "2023-04-14T12:22:06Z",
     "stargazers_count": 2,
     "watchers_count": 2,
     "forks_count": 1,
     "fork": false,
-    "language": "C++"
+    "language": "CMake"
   },
   {
     "id": 406247752,
