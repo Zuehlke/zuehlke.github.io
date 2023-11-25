@@ -1097,9 +1097,9 @@
     "description": "ConfZ is a configuration management library for Python based on pydantic.",
     "html_url": "https://github.com/Zuehlke/ConfZ",
     "created_at": "2021-10-18T05:58:24Z",
-    "updated_at": "2023-11-06T06:25:39Z",
-    "stargazers_count": 205,
-    "watchers_count": 205,
+    "updated_at": "2023-11-24T20:19:15Z",
+    "stargazers_count": 204,
+    "watchers_count": 204,
     "forks_count": 10,
     "fork": false,
     "language": "Python"
