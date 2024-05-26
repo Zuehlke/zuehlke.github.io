@@ -43,9 +43,9 @@
     "description": "Property based Testing for Elixir (based upon PropEr)",
     "html_url": "https://github.com/alfert/propcheck",
     "created_at": "2015-07-16T13:07:05Z",
-    "updated_at": "2024-05-22T16:24:16Z",
-    "stargazers_count": 360,
-    "watchers_count": 360,
+    "updated_at": "2024-05-25T19:47:45Z",
+    "stargazers_count": 361,
+    "watchers_count": 361,
     "forks_count": 42,
     "fork": false,
     "language": "Elixir"
