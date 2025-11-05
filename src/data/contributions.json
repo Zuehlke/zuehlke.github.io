@@ -196,7 +196,7 @@
     "description": "Z\u00fchlke Github Page",
     "html_url": "https://github.com/Zuehlke/zuehlke.github.io",
     "created_at": "2016-01-15T14:58:44Z",
-    "updated_at": "2025-11-03T00:16:29Z",
+    "updated_at": "2025-11-04T00:15:30Z",
     "stargazers_count": 10,
     "watchers_count": 10,
     "forks_count": 2,
@@ -230,9 +230,9 @@
     "description": "Distributed Planning Poker",
     "html_url": "https://github.com/Zuehlke/poinz",
     "created_at": "2016-02-25T14:08:35Z",
-    "updated_at": "2025-10-10T13:38:57Z",
-    "stargazers_count": 158,
-    "watchers_count": 158,
+    "updated_at": "2025-11-04T04:41:33Z",
+    "stargazers_count": 159,
+    "watchers_count": 159,
     "forks_count": 76,
     "fork": false,
     "language": "JavaScript"
@@ -1335,12 +1335,12 @@
     "description": null,
     "html_url": "https://github.com/Zuehlke/archetypes",
     "created_at": "2025-05-02T15:50:35Z",
-    "updated_at": "2025-09-03T08:20:14Z",
+    "updated_at": "2025-11-04T16:05:47Z",
     "stargazers_count": 5,
     "watchers_count": 5,
     "forks_count": 3,
     "fork": false,
-    "language": "Just"
+    "language": "Python"
   },
   {
     "id": 983579292,
