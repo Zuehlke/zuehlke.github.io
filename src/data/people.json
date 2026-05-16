@@ -88,14 +88,6 @@
     "html_url": "https://github.com/edgarholleis"
   },
   {
-    "id": 11920943,
-    "login": "felixmokross",
-    "name": "Felix Mokross",
-    "bio": "I build high-quality web applications with a pragmatic, user-first approach.",
-    "avatar_url": "https://avatars.githubusercontent.com/u/11920943?v=4",
-    "html_url": "https://github.com/felixmokross"
-  },
-  {
     "id": 198941,
     "login": "fhars",
     "name": "Florian Hars",
@@ -118,6 +110,14 @@
     "bio": null,
     "avatar_url": "https://avatars.githubusercontent.com/u/1752063?v=4",
     "html_url": "https://github.com/foofighter75"
+  },
+  {
+    "id": 11920943,
+    "login": "fxmkdev",
+    "name": "Felix Mokross",
+    "bio": "I build high-quality web applications with a pragmatic, user-first approach.",
+    "avatar_url": "https://avatars.githubusercontent.com/u/11920943?v=4",
+    "html_url": "https://github.com/fxmkdev"
   },
   {
     "id": 20921075,
